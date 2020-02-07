@@ -4,15 +4,15 @@ import * as Constants from "../../Utils/Constants";
 export function Header() {
   const onTitleClick = () => {
     console.log("onTitleClick");
-	};
-	
-	const onExploreClick = () => {
-		console.log("onExploreClick");
-	}
+  };
 
-	const onRecClick = () => {
-		console.log("onRecClick");
-	}
+  const onExploreClick = () => {
+    console.log("onExploreClick");
+  };
+
+  const onRecClick = () => {
+    console.log("onRecClick");
+  };
 
   return (
     <div style={headerStyle}>
@@ -22,8 +22,12 @@ export function Header() {
       <div
         style={{ display: "flex", flexDirection: "row", paddingRight: "30px" }}
       >
-        <h5 style={exploreStyle} onClick={onExploreClick}>Explore</h5>
-        <h5 style={recStyle} onClick={onRecClick}>Recommended For You</h5>
+        <h5 style={exploreStyle} onClick={onExploreClick}>
+          Explore
+        </h5>
+        <h5 style={recStyle} onClick={onRecClick}>
+          Recommended For You
+        </h5>
       </div>
     </div>
   );

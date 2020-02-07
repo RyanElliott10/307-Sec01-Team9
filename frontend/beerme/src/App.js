@@ -1,6 +1,6 @@
-import React from 'react';
-import Explore from './Components/Explore';
-import Header from './Components/Layout/Header';
+import React from "react";
+import Explore from "./Components/Explore";
+import Header from "./Components/Layout/Header";
 
 function App() {
   return (

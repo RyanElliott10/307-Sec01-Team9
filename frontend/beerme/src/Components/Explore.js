@@ -5,18 +5,16 @@ import PropTypes from "prop-types";
 export class Explore extends Component {
   onPreviousClick = () => {
     console.log("Previous");
-	};
-	
-	_renderHeader() {
-		
-	}
+  };
+
+  _renderHeader() {}
 
   render() {
     return (
       <div>
-				{this._renderHeader()}
+        {this._renderHeader()}
         <h1>Explore</h1>
-				<ExploreButton onClick={this.onPreviousClick} title={"<-- Previous"} />
+        <ExploreButton onClick={this.onPreviousClick} title={"<-- Previous"} />
       </div>
     );
   }
