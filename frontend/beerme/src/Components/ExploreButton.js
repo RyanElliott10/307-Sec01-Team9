@@ -14,7 +14,7 @@ export class ExploreButton extends Component {
 
 ExploreButton.propTypes = {
   onClick: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
 };
 
 const btnStyle = {

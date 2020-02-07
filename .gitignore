@@ -3,6 +3,13 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+*.xd
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
 # User-specific files
 *.rsuser
 *.suo
