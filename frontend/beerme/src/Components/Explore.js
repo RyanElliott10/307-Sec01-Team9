@@ -29,7 +29,7 @@ export class Explore extends Component {
     console.log(selections);
   };
 
-  _onCheckboxClick = id => {
+  _onCheckboxClick = (id) => {
     this.setState({
       data: this.state.contacts.map(option => {
         if (option.id === id) {
@@ -67,7 +67,7 @@ export class Explore extends Component {
 
   _renderSelBoxTopText() {
     return (
-      <div style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ justifyContent: "center", display: "flex" }}>
         <h2>Preferred Notes</h2>
         <h5>This is where the explanation of what a note is in beer lives.</h5>
       </div>
@@ -75,24 +75,37 @@ export class Explore extends Component {
   }
 
   _renderSelections() {
-    if (this.state.contacts) {
-      return (
-        <React.Fragment>
-          {this.state.contacts.map(data => this._renderChecboxOption(data))}
-        </React.Fragment>
-      );
+    if (!this.state.contacts) {
+      return null;
     }
-    return null;
+
+    let firstHalf = this.state.contacts;
+    let secondHalf = null;
+    if (this.state.contacts.length > 10) {
+      firstHalf = this.state.contacts.slice(0, 10);
+      secondHalf = this.state.contacts.slice(10, this.state.contacts.length);
+    }
+
+    return (
+      <div style={{ flex: 1, flexDirection: "column", width: "50%" }}>
+        {this._renderChecks(firstHalf)}
+        {secondHalf ? this._renderChecks(secondHalf) : null}
+      </div>
+    );
+  }
+
+  _renderChecks(arr) {
+    return arr.map(data => this._renderChecboxOption(data));
   }
 
   _renderChecboxOption(data) {
     return (
-      <div key={data.id}>
+      <div key={data.id} style={{ margin: "10px", backgroundColor: "clear" }}>
         <input
           type="checkbox"
           onClick={this._onCheckboxClick.bind(this, data.id)}
         />
-        {data.title}
+        {data.title.charAt(0).toUpperCase() + data.title.slice(1)}
       </div>
     );
   }
@@ -103,12 +116,12 @@ export class Explore extends Component {
         <ExploreButton
           style={{ paddingTop: "10px" }}
           onClick={this.onPreviousClick}
-          title={"<-- Previous"}
+          title={"< Previous"}
         />
         <ExploreButton
           style={{ paddingTop: "10px" }}
           onClick={this.onNextClick}
-          title={"Next -->"}
+          title={"Next >"}
         />
       </div>
     );
@@ -135,7 +148,8 @@ const descStyle = {};
 const selectionBoxStyle = {
   justifyContent: "center",
   alignItems: "center",
-  background: "#F4F4F4"
+  background: "#F4F4F4",
+  flexDirection: "row"
 };
 
 const btnsStyle = {
