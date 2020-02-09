@@ -5,9 +5,11 @@ import * as Constants from "../Utils/Constants";
 export class ExploreButton extends Component {
   render() {
     return (
-      <button style={btnStyle} onClick={this.props.onClick}>
-        {this.props.title}
-      </button>
+      <div style={this.props.style}>
+        <button style={btnStyle} onClick={this.props.onClick}>
+          {this.props.title}
+        </button>
+      </div>
     );
   }
 }
