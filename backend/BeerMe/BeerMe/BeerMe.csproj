@@ -103,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -126,6 +127,8 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>BeerMeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserLoginDetails.cs" />
+    <Compile Include="Models\UsersCustom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
