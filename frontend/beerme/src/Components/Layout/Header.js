@@ -1,5 +1,6 @@
 import React from "react";
 import * as Constants from "../../Utils/Constants";
+import { Link } from "react-router-dom";
 
 export function Header() {
   const onMouseOver = event => {
@@ -14,8 +15,9 @@ export function Header() {
         break;
       case 2:
         color = "#000";
-				break;
-			default:
+        break;
+      default:
+				color = "#000";
 				break;
     }
     event.target.style.color = color;
@@ -35,33 +37,36 @@ export function Header() {
 
   return (
     <div style={headerStyle}>
-      <h1
-        style={titleStyle}
-        onClick={onTitleClick}
-        onMouseEnter={event => onMouseOver(event)}
-        onMouseOut={event => onMouseOut(event, 1)}
-      >
-        BeerMe
-      </h1>
+      <Link to="/" style={titleStyle}>
+        <h1
+          onClick={onTitleClick}
+          onMouseEnter={event => onMouseOver(event)}
+          onMouseOut={event => onMouseOut(event, 1)}
+        >
+          BeerMe
+        </h1>
+      </Link>
       <div
         style={{ display: "flex", flexDirection: "row", paddingRight: "30px" }}
       >
-        <h5
-          style={exploreStyle}
-          onClick={onExploreClick}
-          onMouseEnter={event => onMouseOver(event)}
-          onMouseOut={event => onMouseOut(event, 2)}
-        >
-          Explore
-        </h5>
-        <h5
-          style={recStyle}
-          onClick={onRecClick}
-          onMouseEnter={event => onMouseOver(event)}
-          onMouseOut={event => onMouseOut(event, 2)}
-        >
-          Recommended For You
-        </h5>
+        <Link to="/explore" style={exploreStyle}>
+          <h4
+            onClick={onExploreClick}
+            onMouseEnter={event => onMouseOver(event)}
+            onMouseOut={event => onMouseOut(event, 2)}
+          >
+            Explore
+          </h4>
+        </Link>
+        <Link to="/recommended" style={recStyle}>
+          <h4
+            onClick={onRecClick}
+            onMouseEnter={event => onMouseOver(event)}
+            onMouseOut={event => onMouseOut(event, 2)}
+          >
+            Recommended For You
+          </h4>
+        </Link>
       </div>
     </div>
   );
@@ -80,16 +85,19 @@ const headerStyle = {
 
 const titleStyle = {
   color: Constants.ORANGE_COLOR,
+  textDecoration: "none",
   paddingRight: "10px",
   cursor: "pointer"
 };
 
 const exploreStyle = {
+  textDecoration: "none",
   paddingRight: "10px",
-  cursor: "pointer"
+	cursor: "pointer",
 };
 
 const recStyle = {
+  textDecoration: "none",
   paddingLeft: "10px",
   cursor: "pointer"
 };

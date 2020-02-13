@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import ExploreButton from "./ExploreButton";
-import Header from "./Layout/Header";
 
 export class Explore extends Component {
   constructor(props) {
@@ -29,7 +28,7 @@ export class Explore extends Component {
     console.log(selections);
   };
 
-  _onCheckboxClick = (id) => {
+  _onCheckboxClick = id => {
     this.setState({
       data: this.state.contacts.map(option => {
         if (option.id === id) {
@@ -40,18 +39,14 @@ export class Explore extends Component {
     });
   };
 
-  _renderHeader() {
-    return <Header />;
-  }
-
   _renderTopBlurb() {
     return (
       <React.Fragment>
         <h1 style={titleStyle}>Explore</h1>
-        <h5 style={descStyle}>
+        <h4 style={descStyle}>
           Use our unique beer exploration tool to find new and interesting beers
           for you!
-        </h5>
+        </h4>
       </React.Fragment>
     );
   }
@@ -67,9 +62,11 @@ export class Explore extends Component {
 
   _renderSelBoxTopText() {
     return (
-      <div style={{ justifyContent: "center", display: "flex" }}>
-        <h2>Preferred Notes</h2>
-        <h5>This is where the explanation of what a note is in beer lives.</h5>
+      <div style={selectionBoxTopTextStyle}>
+        <h2 style={{ backgroundColor: "#ff0" }}>Preferred Notes</h2>
+        <h4 style={{ backgroundColor: "#ff0" }}>
+          This is where the explanation of what a note is in beer lives.
+        </h4>
       </div>
     );
   }
@@ -130,7 +127,6 @@ export class Explore extends Component {
   render() {
     return (
       <div>
-        {this._renderHeader()}
         <div style={{ marginLeft: "200px", marginRight: "200px" }}>
           {this._renderTopBlurb()}
           {this._renderSelectionBox()}
@@ -146,10 +142,14 @@ const titleStyle = {};
 const descStyle = {};
 
 const selectionBoxStyle = {
-  justifyContent: "center",
-  alignItems: "center",
   background: "#F4F4F4",
   flexDirection: "row"
+};
+
+const selectionBoxTopTextStyle = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center"
 };
 
 const btnsStyle = {

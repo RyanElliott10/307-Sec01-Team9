@@ -1,10 +1,12 @@
 import React from "react";
-import Explore from "./Components/Explore.js";
+import Main from "./Components/Main";
+import Header from "./Components/Layout/Header";
 
 function App() {
   return (
     <div className="BeerMe">
-      <Explore />
+      <Header />
+      <Main />
     </div>
   );
 }
