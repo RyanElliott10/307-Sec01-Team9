@@ -1,6 +1,6 @@
 import React from "react";
-import * as Constants from "../../Utils/Constants";
 import { Link } from "react-router-dom";
+import * as Constants from "../../Utils/Constants";
 
 export function Header() {
   const onMouseOver = event => {
@@ -17,8 +17,8 @@ export function Header() {
         color = "#000";
         break;
       default:
-				color = "#000";
-				break;
+        color = "#000";
+        break;
     }
     event.target.style.color = color;
   };
@@ -64,7 +64,16 @@ export function Header() {
             onMouseEnter={event => onMouseOver(event)}
             onMouseOut={event => onMouseOut(event, 2)}
           >
-            Recommended For You
+            Recommended
+          </h4>
+        </Link>
+        <Link to="/account-entry" style={recStyle}>
+          <h4
+            onClick={onRecClick}
+            onMouseEnter={event => onMouseOver(event)}
+            onMouseOut={event => onMouseOut(event, 2)}
+          >
+            Account
           </h4>
         </Link>
       </div>
@@ -93,13 +102,15 @@ const titleStyle = {
 const exploreStyle = {
   textDecoration: "none",
   paddingRight: "10px",
-	cursor: "pointer",
+  cursor: "pointer",
+  color: "#000"
 };
 
 const recStyle = {
   textDecoration: "none",
   paddingLeft: "10px",
-  cursor: "pointer"
+  cursor: "pointer",
+  color: "#000"
 };
 
 export default Header;
