@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button, ButtonToolbar, Row, Col } from "react-bootstrap";
+import * as Constants from "../Utils/Constants";
 
 export class Explore extends Component {
   constructor(props) {
@@ -122,8 +123,8 @@ export class Explore extends Component {
   _renderProgressionButtons() {
     return (
       <ButtonToolbar style={btnsStyle}>
-        <Button variant="primary">Previous</Button>
-        <Button variant="primary">Next</Button>
+        <Button variant="secondary">Previous</Button>
+        <Button variant="secondary" style={{backgroundColor: Constants.ORANGE_COLOR, outline: "none"}}>Next</Button>
       </ButtonToolbar>
     );
   }
@@ -159,7 +160,8 @@ const selectionBoxTopTextStyle = {
 
 const btnsStyle = {
   display: "flex",
-  justifyContent: "space-between"
+  justifyContent: "space-between",
+  paddingTop: "10px"
 };
 
 export default Explore;
