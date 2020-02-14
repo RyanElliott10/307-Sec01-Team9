@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Button, ButtonToolbar } from "react-bootstrap";
+import { Form, Button, ButtonToolbar, Row, Col } from "react-bootstrap";
 
 export class Explore extends Component {
   constructor(props) {
@@ -42,8 +42,8 @@ export class Explore extends Component {
   _renderTopBlurb() {
     return (
       <React.Fragment>
-        <h1 style={titleStyle}>Explore</h1>
-        <h5 style={descStyle}>
+        <h1>Explore</h1>
+        <h5>
           Use our unique beer exploration tool to find new and interesting beers
           for you!
         </h5>
@@ -86,19 +86,21 @@ export class Explore extends Component {
     return (
       <div
         style={{
-          flex: 1,
-          flexDirection: "column",
-          width: "50%",
-          paddingLeft: "10px"
+          flexDirection: "row",
+          paddingLeft: "10px",
+          paddingTop: "25px"
         }}
       >
-        {this._renderChecks(firstHalf)}
-        {secondHalf ? this._renderChecks(secondHalf) : null}
+        <Row>
+          <Col>{this._renderChecks(firstHalf)}</Col>
+          <Col>{secondHalf ? this._renderChecks(secondHalf) : null}</Col>
+        </Row>
       </div>
     );
   }
 
   _renderChecks(arr) {
+    console.log("YA YEET");
     return arr.map(data => this._renderChecboxOption(data));
   }
 
@@ -143,10 +145,6 @@ export class Explore extends Component {
     );
   }
 }
-
-const titleStyle = {};
-
-const descStyle = {};
 
 const selectionBoxStyle = {
   background: "#F4F4F4",
