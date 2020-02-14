@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ExploreButton from "./ExploreButton";
+import { Form, Button, ButtonToolbar } from "react-bootstrap";
 
 export class Explore extends Component {
   constructor(props) {
@@ -43,10 +44,10 @@ export class Explore extends Component {
     return (
       <React.Fragment>
         <h1 style={titleStyle}>Explore</h1>
-        <h4 style={descStyle}>
+        <h5 style={descStyle}>
           Use our unique beer exploration tool to find new and interesting beers
           for you!
-        </h4>
+        </h5>
       </React.Fragment>
     );
   }
@@ -63,10 +64,10 @@ export class Explore extends Component {
   _renderSelBoxTopText() {
     return (
       <div style={selectionBoxTopTextStyle}>
-        <h2 style={{ backgroundColor: "#ff0" }}>Preferred Notes</h2>
-        <h4 style={{ backgroundColor: "#ff0" }}>
+        <h2>Preferred Notes</h2>
+        <h6 style={{ color: "#696969" }}>
           This is where the explanation of what a note is in beer lives.
-        </h4>
+        </h6>
       </div>
     );
   }
@@ -84,7 +85,7 @@ export class Explore extends Component {
     }
 
     return (
-      <div style={{ flex: 1, flexDirection: "column", width: "50%" }}>
+      <div style={{ flex: 1, flexDirection: "column", width: "50%", paddingLeft: "10px" }}>
         {this._renderChecks(firstHalf)}
         {secondHalf ? this._renderChecks(secondHalf) : null}
       </div>
@@ -97,30 +98,26 @@ export class Explore extends Component {
 
   _renderChecboxOption(data) {
     return (
-      <div key={data.id} style={{ margin: "10px", backgroundColor: "clear" }}>
-        <input
-          type="checkbox"
-          onClick={this._onCheckboxClick.bind(this, data.id)}
-        />
-        {data.title.charAt(0).toUpperCase() + data.title.slice(1)}
-      </div>
+      <Form key={data.id}>
+        <div className="mb-3">
+          <Form.Check
+            custom
+            id={data.id}
+            label={`${data.title.charAt(0).toUpperCase() +
+              data.title.slice(1)}`}
+            onClick={this._onCheckboxClick.bind(this, data.id)}
+          />
+        </div>
+      </Form>
     );
   }
 
   _renderProgressionButtons() {
     return (
-      <div style={btnsStyle}>
-        <ExploreButton
-          style={{ paddingTop: "10px" }}
-          onClick={this.onPreviousClick}
-          title={"< Previous"}
-        />
-        <ExploreButton
-          style={{ paddingTop: "10px" }}
-          onClick={this.onNextClick}
-          title={"Next >"}
-        />
-      </div>
+      <ButtonToolbar style={btnsStyle}>
+        <Button variant="primary">Previous</Button>
+        <Button variant="primary">Next</Button>
+      </ButtonToolbar>
     );
   }
 
