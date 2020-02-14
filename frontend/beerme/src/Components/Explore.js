@@ -100,7 +100,6 @@ export class Explore extends Component {
   }
 
   _renderChecks(arr) {
-    console.log("YA YEET");
     return arr.map(data => this._renderChecboxOption(data));
   }
 
