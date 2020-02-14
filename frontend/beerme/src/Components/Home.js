@@ -9,7 +9,7 @@ export class Home extends Component {
   render() {
     return (
       <div>
-        <text>Home</text>
+        <h1>Home</h1>
       </div>
     );
   }

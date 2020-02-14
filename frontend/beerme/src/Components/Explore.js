@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ExploreButton from "./ExploreButton";
 import { Form, Button, ButtonToolbar } from "react-bootstrap";
 
 export class Explore extends Component {
@@ -85,7 +84,14 @@ export class Explore extends Component {
     }
 
     return (
-      <div style={{ flex: 1, flexDirection: "column", width: "50%", paddingLeft: "10px" }}>
+      <div
+        style={{
+          flex: 1,
+          flexDirection: "column",
+          width: "50%",
+          paddingLeft: "10px"
+        }}
+      >
         {this._renderChecks(firstHalf)}
         {secondHalf ? this._renderChecks(secondHalf) : null}
       </div>
@@ -123,12 +129,16 @@ export class Explore extends Component {
 
   render() {
     return (
-      <div>
-        <div style={{ marginLeft: "200px", marginRight: "200px" }}>
-          {this._renderTopBlurb()}
-          {this._renderSelectionBox()}
-          {this._renderProgressionButtons()}
-        </div>
+      <div
+        style={{
+          marginLeft: "200px",
+          marginRight: "200px",
+          paddingBottom: "150px"
+        }}
+      >
+        {this._renderTopBlurb()}
+        {this._renderSelectionBox()}
+        {this._renderProgressionButtons()}
       </div>
     );
   }
@@ -140,7 +150,8 @@ const descStyle = {};
 
 const selectionBoxStyle = {
   background: "#F4F4F4",
-  flexDirection: "row"
+  flexDirection: "row",
+  marginTop: "25px"
 };
 
 const selectionBoxTopTextStyle = {
