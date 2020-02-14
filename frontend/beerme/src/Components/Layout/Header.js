@@ -50,31 +50,31 @@ export function Header() {
         style={{ display: "flex", flexDirection: "row", paddingRight: "30px" }}
       >
         <Link to="/explore" style={exploreStyle}>
-          <h4
+          <h6
             onClick={onExploreClick}
             onMouseEnter={event => onMouseOver(event)}
             onMouseOut={event => onMouseOut(event, 2)}
           >
             Explore
-          </h4>
+          </h6>
         </Link>
         <Link to="/recommended" style={recStyle}>
-          <h4
+          <h6
             onClick={onRecClick}
             onMouseEnter={event => onMouseOver(event)}
             onMouseOut={event => onMouseOut(event, 2)}
           >
             Recommended
-          </h4>
+          </h6>
         </Link>
         <Link to="/account-entry" style={recStyle}>
-          <h4
+          <h6
             onClick={onRecClick}
             onMouseEnter={event => onMouseOver(event)}
             onMouseOut={event => onMouseOut(event, 2)}
           >
             Account
-          </h4>
+          </h6>
         </Link>
       </div>
     </div>
