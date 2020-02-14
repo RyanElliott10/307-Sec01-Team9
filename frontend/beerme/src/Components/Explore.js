@@ -118,18 +118,6 @@ export class Explore extends Component {
         <Button variant="primary">Previous</Button>
         <Button variant="primary">Next</Button>
       </ButtonToolbar>
-      // <div style={btnsStyle}>
-      //   <ExploreButton
-      //     style={{ paddingTop: "10px" }}
-      //     onClick={this.onPreviousClick}
-      //     title={"< Previous"}
-      //   />
-      //   <ExploreButton
-      //     style={{ paddingTop: "10px" }}
-      //     onClick={this.onNextClick}
-      //     title={"Next >"}
-      //   />
-      // </div>
     );
   }
 
