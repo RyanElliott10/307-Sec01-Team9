@@ -103,11 +103,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BeerStylesController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BeerCategory.cs">
+      <DependentUpon>BeerMeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BeerMeModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -123,6 +127,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BeerMeModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BeerStyle.cs">
+      <DependentUpon>BeerMeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>BeerMeModel.tt</DependentUpon>
