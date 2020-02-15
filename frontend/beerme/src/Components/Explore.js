@@ -21,8 +21,7 @@ export class Explore extends Component {
           element.selected = false;
         });
         this.setState({ checkboxDescriptions: data.slice(0, 20) });
-      })
-      .catch(console.log);
+      });
   }
 
   onPreviousClick = () => {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, ButtonToolbar, Form, Col } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
-import MainController from "../Controllers/MainController.ts";
+import MainController from "../Controllers/MainController";
 
 export class AccountEntry extends Component {
   constructor(props) {
