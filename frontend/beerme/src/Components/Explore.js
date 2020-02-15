@@ -9,6 +9,7 @@ export class Explore extends Component {
     this.state = {
       slideTitle: "",
       slideDescription: "",
+      // https://stackoverflow.com/questions/49574285/how-to-cache-fetched-data-in-react-without-redux
       checkboxDescriptions: localStorage.getItem("appState") ? JSON.parse(localStorage.getItem("appState")) : []
     };
   }
