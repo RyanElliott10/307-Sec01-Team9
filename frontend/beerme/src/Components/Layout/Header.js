@@ -89,7 +89,8 @@ const headerStyle = {
   flexDirection: "row",
   justifyContent: "space-between",
   paddingLeft: "30px",
-  alignItems: "center"
+  alignItems: "center",
+  marginBottom: "20px"
 };
 
 const titleStyle = {
