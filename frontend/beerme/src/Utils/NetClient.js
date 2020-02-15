@@ -14,11 +14,11 @@
  */
 
 class NetClient {
-  static async get(url: string) {
+  static async get(url) {
     return await fetch(url);
   }
 
-  static async post(url: string, data: Object) {
+  static async post(url, data) {
     return await fetch(url, {
       method: "POST",
       body: JSON.stringify(data),
@@ -26,6 +26,11 @@ class NetClient {
         "Content-Type": "application/json"
       }
     }).catch(console.log);
+  }
+
+  static async dummyGetData() {
+    // "localhost:44300/api/beerstyles"
+    // "localhost:44300/api/beercategories"
   }
 }
 

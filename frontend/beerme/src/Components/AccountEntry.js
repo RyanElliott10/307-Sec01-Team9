@@ -1,19 +1,21 @@
 import React, { Component } from "react";
-import { Button, ButtonToolbar, Form, Col } from "react-bootstrap";
+import { Button, ButtonToolbar, Form, Col, Row } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
-import MainController from "../Controllers/MainController";
+import MainController from "../Controllers/UserController";
 
 export class AccountEntry extends Component {
   constructor(props) {
     super(props);
     this.state = {
       signedIn: MainController.getCurrentUser(),
+      isBusiness: false,
       createAccountData: {
         firstName: "",
         lastName: "",
         email: "",
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
+        businessName: ""
       },
       signInData: {
         email: "",
@@ -31,12 +33,13 @@ export class AccountEntry extends Component {
   }
 
   _validateAccountCreationForm() {
+    const busVal = this.state.isBusiness ? this.state.createAccountData.businessName.length > 0 : true;
     return (
       this.state.createAccountData.confirmPassword.length > 0 &&
       this.state.createAccountData.password.length > 0 &&
       this.state.createAccountData.email.length > 0 &&
       this.state.createAccountData.firstName.length > 0 &&
-      this.state.createAccountData.lastName.length > 0
+      this.state.createAccountData.lastName.length > 0 && busVal
     );
   }
 
@@ -67,11 +70,32 @@ export class AccountEntry extends Component {
     }
   };
 
+  _renderBusinessField() {
+    return (
+      <Form.Row>
+        <Form.Group as={Col} controlId="formBusinessName">
+          <Form.Label>Business Name</Form.Label>
+          <Form.Control
+            type="name"
+            placeholder="BeerMe"
+            onChange={e => {
+              const newCreateAccountData = this.state.createAccountData;
+              newCreateAccountData.businessName = e.target.value;
+              this.setState({
+                businessName: newCreateAccountData
+              });
+            }}
+          />
+        </Form.Group>
+      </Form.Row>
+    );
+  }
+
   _renderCreateAccount() {
     return (
       <Form onSubmit={this._handleCreateAccountSubmit}>
         <Form.Row>
-          <Form.Group as={Col} controlId="formGridName">
+          <Form.Group as={Col} controlId="formGridFirstName">
             <Form.Label>First Name</Form.Label>
             <Form.Control
               type="name"
@@ -85,7 +109,7 @@ export class AccountEntry extends Component {
               }}
             />
           </Form.Group>
-          <Form.Group as={Col} controlId="formGridName">
+          <Form.Group as={Col} controlId="formGridLastName">
             <Form.Label>Last Name</Form.Label>
             <Form.Control
               type="name"
@@ -134,7 +158,7 @@ export class AccountEntry extends Component {
             />
           </Form.Group>
 
-          <Form.Group as={Col} controlId="formGridPassword">
+          <Form.Group as={Col} controlId="formGridConfirmPassword">
             <Form.Label>Confirm Password</Form.Label>
             <Form.Control
               type="password"
@@ -149,6 +173,21 @@ export class AccountEntry extends Component {
             />
           </Form.Group>
         </Form.Row>
+
+        <Form>
+          <div className="mb-3">
+            <Form.Check
+              custom
+              id="isBusiness"
+              label={"Are you a business?"}
+              onClick={() =>
+                this.setState({ isBusiness: !this.state.isBusiness })
+              }
+            />
+          </div>
+        </Form>
+
+        {this.state.isBusiness ? this._renderBusinessField() : null}
 
         <ButtonToolbar style={{ justifyContent: "space-between" }}>
           <Button
