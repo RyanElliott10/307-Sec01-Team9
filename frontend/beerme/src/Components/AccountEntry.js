@@ -21,12 +21,22 @@ export class AccountEntry extends Component {
     this.input = null;
   }
 
-  validateForm = () => {
+  validateForm() {
     return (
       this.state.signInData.email.length > 0 &&
       this.state.signInData.password.length > 0
     );
-  };
+  }
+
+  _validateAccountCreation() {
+    return (
+      this.state.createAccountData.confirmPassword.length > 0 &&
+      this.state.createAccountData.password.length > 0 &&
+      this.state.createAccountData.email.length > 0 && 
+      this.state.createAccountData.firstName.length > 0 &&
+      this.state.createAccountData.lastName.length > 0
+    );
+  }
 
   _handleSignInSubmit = event => {
     event.preventDefault();
@@ -129,7 +139,7 @@ export class AccountEntry extends Component {
         </Form.Row>
 
         <ButtonToolbar style={{ justifyContent: "space-between" }}>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" disabled={!this._validateAccountCreation()} >
             Submit
           </Button>
           <Button
