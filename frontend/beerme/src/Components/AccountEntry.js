@@ -21,14 +21,14 @@ export class AccountEntry extends Component {
     this.input = null;
   }
 
-  validateForm() {
+  _validateLoginForm() {
     return (
       this.state.signInData.email.length > 0 &&
       this.state.signInData.password.length > 0
     );
   }
 
-  _validateAccountCreation() {
+  _validateAccountCreationForm() {
     return (
       this.state.createAccountData.confirmPassword.length > 0 &&
       this.state.createAccountData.password.length > 0 &&
@@ -139,7 +139,7 @@ export class AccountEntry extends Component {
         </Form.Row>
 
         <ButtonToolbar style={{ justifyContent: "space-between" }}>
-          <Button variant="primary" type="submit" disabled={!this._validateAccountCreation()} >
+          <Button variant="primary" type="submit" disabled={!this._validateAccountCreationForm()} >
             Submit
           </Button>
           <Button
@@ -186,7 +186,7 @@ export class AccountEntry extends Component {
           />
         </Form.Group>
         <ButtonToolbar style={{ justifyContent: "space-between" }}>
-          <Button disabled={!this.validateForm()} type="submit">
+          <Button disabled={!this._validateLoginForm()} type="submit">
             Login
           </Button>
           <Button
