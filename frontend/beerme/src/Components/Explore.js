@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, Button, ButtonToolbar, Row, Col } from "react-bootstrap";
 import * as Constants from "../Utils/Constants";
+import NetClient from "../Utils/NetClient";
 
 export class Explore extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ export class Explore extends Component {
   }
 
   componentDidMount() {
-    fetch("http://jsonplaceholder.typicode.com/todos")
+    NetClient.get("http://jsonplaceholder.typicode.com/todos")
       .then(res => res.json())
       .then(data => {
         data.forEach(element => {
