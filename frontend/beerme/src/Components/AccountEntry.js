@@ -43,11 +43,11 @@ export class AccountEntry extends Component {
     );
   }
 
-  _handleSignInSubmit = event => {
+  _handleSignInSubmit = async event => {
     event.preventDefault();
     console.log(this.state);
     if (
-      MainController.login(
+      await MainController.login(
         this.state.signInData.email,
         this.state.signInData.password
       )

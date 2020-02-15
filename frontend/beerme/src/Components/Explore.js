@@ -9,7 +9,7 @@ export class Explore extends Component {
     this.state = {
       slideTitle: "",
       slideDescription: "",
-      checkboxDescriptions: []
+      checkboxDescriptions: localStorage.getItem("appState") ? JSON.parse(localStorage.getItem("appState")) : []
     };
   }
 
@@ -21,6 +21,7 @@ export class Explore extends Component {
           element.selected = false;
         });
         this.setState({ checkboxDescriptions: data.slice(0, 20) });
+        localStorage.setItem("appState", JSON.stringify(data.slice(0, 20)));
       });
   }
 
