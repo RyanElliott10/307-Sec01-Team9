@@ -14,7 +14,8 @@ namespace BeerMe.Controllers
         private BeerMeEntities db = new BeerMeEntities();
         public IHttpActionResult LoginValidation(UserLoginDetails details)
         {
-            bool isLoginSuccessful = Users.Login(details);
+            User dbUser = db.Users.Where(user => user.Email.Equals(details.email)).FirstOrDefault();
+            bool isLoginSuccessful = Models.User.Login(details, dbUser);
             return Ok(isLoginSuccessful);
         }
     }
