@@ -5,7 +5,11 @@ import * as Constants from "../Utils/Constants";
 export class Explore extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      slideTitle: "",
+      slideDescription: "",
+      checkboxDescriptions: []
+    };
   }
 
   componentDidMount() {
@@ -15,7 +19,7 @@ export class Explore extends Component {
         data.forEach(element => {
           element.selected = false;
         });
-        this.setState({ contacts: data.slice(0, 20) });
+        this.setState({ checkboxDescriptions: data.slice(0, 20) });
       })
       .catch(console.log);
   }
@@ -25,13 +29,13 @@ export class Explore extends Component {
   };
 
   onNextClick = () => {
-    const selections = this.state.contacts.filter(data => data.selected);
+    const selections = this.state.checkboxDescriptions.filter(data => data.selected);
     console.log(selections);
   };
 
   _onCheckboxClick = id => {
     this.setState({
-      data: this.state.contacts.map(option => {
+      data: this.state.checkboxDescriptions.map(option => {
         if (option.id === id) {
           option.selected = !option.selected;
         }
@@ -73,15 +77,15 @@ export class Explore extends Component {
   }
 
   _renderSelections() {
-    if (!this.state.contacts) {
+    if (!this.state.checkboxDescriptions) {
       return null;
     }
 
-    let firstHalf = this.state.contacts;
+    let firstHalf = this.state.checkboxDescriptions;
     let secondHalf = null;
-    if (this.state.contacts.length > 10) {
-      firstHalf = this.state.contacts.slice(0, 10);
-      secondHalf = this.state.contacts.slice(10, this.state.contacts.length);
+    if (this.state.checkboxDescriptions.length > 10) {
+      firstHalf = this.state.checkboxDescriptions.slice(0, 10);
+      secondHalf = this.state.checkboxDescriptions.slice(10, this.state.checkboxDescriptions.length);
     }
 
     return (
@@ -123,8 +127,8 @@ export class Explore extends Component {
   _renderProgressionButtons() {
     return (
       <ButtonToolbar style={btnsStyle}>
-        <Button variant="secondary">Previous</Button>
-        <Button variant="secondary" style={{backgroundColor: Constants.ORANGE_COLOR, outline: "none"}}>Next</Button>
+        <Button variant="secondary" onClick={this.onPreviousClick}>Previous</Button>
+        <Button variant="secondary" style={{backgroundColor: Constants.ORANGE_COLOR, outline: "none"}} onClick={this.onNextClick}>Next</Button>
       </ButtonToolbar>
     );
   }
@@ -149,13 +153,14 @@ export class Explore extends Component {
 const selectionBoxStyle = {
   background: "#F4F4F4",
   flexDirection: "row",
-  marginTop: "25px"
+  marginTop: "15px"
 };
 
 const selectionBoxTopTextStyle = {
   display: "flex",
   flexDirection: "column",
-  alignItems: "center"
+  alignItems: "center",
+  paddingTop: "15px"
 };
 
 const btnsStyle = {
