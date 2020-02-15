@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Button, ButtonToolbar, Row, Col } from "react-bootstrap";
 import * as Constants from "../Utils/Constants";
-import NetClient from "../Utils/NetClient.ts";
+import NetClient from "../Utils/NetClient";
 
 export class Explore extends Component {
   constructor(props) {

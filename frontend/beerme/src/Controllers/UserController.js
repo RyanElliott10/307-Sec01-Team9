@@ -5,7 +5,7 @@ class MainController {
   static email = "";
   static password = "";
 
-  static async login(email: string, password: string) {
+  static async login(email, password) {
     console.log("MainController login");
     this.email = email;
     this.password = password;
