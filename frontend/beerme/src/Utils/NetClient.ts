@@ -14,11 +14,11 @@
  */
 
 class NetClient {
-  static async get(url) {
+  static async get(url: string) {
     return await fetch(url);
   }
 
-  static async post(url, data) {
+  static async post(url: string, data: Object) {
     return await fetch(url, {
       method: "POST",
       body: JSON.stringify(data)

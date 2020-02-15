@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import * as Constants from "../../Utils/Constants";
-import MainController from "../../Controllers/MainController";
+import MainController from "../../Controllers/MainController.ts";
 
 export function Header() {
   const onMouseOver = event => {
