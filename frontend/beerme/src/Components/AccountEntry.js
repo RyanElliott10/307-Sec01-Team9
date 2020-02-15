@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import { Button, ButtonToolbar, Form, Col } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
+import MainController from "../Controllers/MainController";
+import Main from "./Main";
 
 export class AccountEntry extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      signedIn: MainController.getCurrentUser(),
       createAccountData: {
         firstName: "",
         lastName: "",
@@ -18,7 +22,6 @@ export class AccountEntry extends Component {
         isCreateAccount: false
       }
     };
-    this.input = null;
   }
 
   _validateLoginForm() {
@@ -32,7 +35,7 @@ export class AccountEntry extends Component {
     return (
       this.state.createAccountData.confirmPassword.length > 0 &&
       this.state.createAccountData.password.length > 0 &&
-      this.state.createAccountData.email.length > 0 && 
+      this.state.createAccountData.email.length > 0 &&
       this.state.createAccountData.firstName.length > 0 &&
       this.state.createAccountData.lastName.length > 0
     );
@@ -41,6 +44,16 @@ export class AccountEntry extends Component {
   _handleSignInSubmit = event => {
     event.preventDefault();
     console.log(this.state);
+    if (
+      MainController.login(
+        this.state.signInData.email,
+        this.state.signInData.password
+      )
+    ) {
+      this.setState({
+        signedIn: true
+      });
+    }
   };
 
   _handleCreateAccountSubmit = event => {
@@ -50,7 +63,7 @@ export class AccountEntry extends Component {
       this.state.createAccountData.password !==
       this.state.createAccountData.confirmPassword
     ) {
-      alert("Please make sure your passwords match");
+      alert("Please make sure your passwords match.");
       return;
     }
   };
@@ -139,7 +152,11 @@ export class AccountEntry extends Component {
         </Form.Row>
 
         <ButtonToolbar style={{ justifyContent: "space-between" }}>
-          <Button variant="primary" type="submit" disabled={!this._validateAccountCreationForm()} >
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={!this._validateAccountCreationForm()}
+          >
             Submit
           </Button>
           <Button
@@ -209,6 +226,9 @@ export class AccountEntry extends Component {
   }
 
   render() {
+    if (this.state.signedIn) {
+      return <Redirect to="/account" />;
+    }
     return (
       <div className="Login" style={broadStyle}>
         {this._renderBody()}

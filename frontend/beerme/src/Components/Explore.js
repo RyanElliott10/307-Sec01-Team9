@@ -29,7 +29,9 @@ export class Explore extends Component {
   };
 
   onNextClick = () => {
-    const selections = this.state.checkboxDescriptions.filter(data => data.selected);
+    const selections = this.state.checkboxDescriptions.filter(
+      data => data.selected
+    );
     console.log(selections);
   };
 
@@ -85,7 +87,10 @@ export class Explore extends Component {
     let secondHalf = null;
     if (this.state.checkboxDescriptions.length > 10) {
       firstHalf = this.state.checkboxDescriptions.slice(0, 10);
-      secondHalf = this.state.checkboxDescriptions.slice(10, this.state.checkboxDescriptions.length);
+      secondHalf = this.state.checkboxDescriptions.slice(
+        10,
+        this.state.checkboxDescriptions.length
+      );
     }
 
     return (
@@ -127,8 +132,16 @@ export class Explore extends Component {
   _renderProgressionButtons() {
     return (
       <ButtonToolbar style={btnsStyle}>
-        <Button variant="secondary" onClick={this.onPreviousClick}>Previous</Button>
-        <Button variant="secondary" style={{backgroundColor: Constants.ORANGE_COLOR, outline: "none"}} onClick={this.onNextClick}>Next</Button>
+        <Button variant="secondary" onClick={this.onPreviousClick}>
+          Previous
+        </Button>
+        <Button
+          variant="secondary"
+          style={{ backgroundColor: Constants.ORANGE_COLOR, outline: "none" }}
+          onClick={this.onNextClick}
+        >
+          Next
+        </Button>
       </ButtonToolbar>
     );
   }
