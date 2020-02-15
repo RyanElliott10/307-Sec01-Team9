@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import * as Constants from "../../Utils/Constants";
+import MainController from "../../Controllers/MainController";
 
 export function Header() {
   const onMouseOver = event => {
@@ -67,7 +68,10 @@ export function Header() {
             Recommended
           </h6>
         </Link>
-        <Link to="/account-entry" style={recStyle}>
+        <Link
+          to={MainController.getCurrentUser() ? "/account" : "/account-entry"}
+          style={recStyle}
+        >
           <h6
             onClick={onRecClick}
             onMouseEnter={event => onMouseOver(event)}
