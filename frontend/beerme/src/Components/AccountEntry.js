@@ -33,13 +33,16 @@ export class AccountEntry extends Component {
   }
 
   _validateAccountCreationForm() {
-    const busVal = this.state.isBusiness ? this.state.createAccountData.businessName.length > 0 : true;
+    const busVal = this.state.isBusiness
+      ? this.state.createAccountData.businessName.length > 0
+      : true;
     return (
       this.state.createAccountData.confirmPassword.length > 0 &&
       this.state.createAccountData.password.length > 0 &&
       this.state.createAccountData.email.length > 0 &&
       this.state.createAccountData.firstName.length > 0 &&
-      this.state.createAccountData.lastName.length > 0 && busVal
+      this.state.createAccountData.lastName.length > 0 &&
+      busVal
     );
   }
 
@@ -75,19 +78,21 @@ export class AccountEntry extends Component {
       <Form.Row>
         <Form.Group as={Col} controlId="formBusinessName">
           <Form.Label>Business Name</Form.Label>
-          <Form.Control
-            type="name"
-            placeholder="BeerMe"
-            onChange={e => {
-              const newCreateAccountData = this.state.createAccountData;
-              newCreateAccountData.businessName = e.target.value;
-              this.setState({
-                businessName: newCreateAccountData
-              });
-            }}
-          />
+          {this._renderControl("name", "BeerMe", e => {
+            const newCreateAccountData = this.state.createAccountData;
+            newCreateAccountData.businessName = e.target.value;
+            this.setState({
+              businessName: newCreateAccountData
+            });
+          })}
         </Form.Group>
       </Form.Row>
+    );
+  }
+
+  _renderControl(type, placeholder, onChange) {
+    return (
+      <Form.Control type={type} placeholder={placeholder} onChange={onChange} />
     );
   }
 
@@ -97,80 +102,60 @@ export class AccountEntry extends Component {
         <Form.Row>
           <Form.Group as={Col} controlId="formGridFirstName">
             <Form.Label>First Name</Form.Label>
-            <Form.Control
-              type="name"
-              placeholder="Mark"
-              onChange={e => {
-                const newCreateAccountData = this.state.createAccountData;
-                newCreateAccountData.firstName = e.target.value;
-                this.setState({
-                  createAccountData: newCreateAccountData
-                });
-              }}
-            />
+            {this._renderControl("name", "Mark", e => {
+              const newCreateAccountData = this.state.createAccountData;
+              newCreateAccountData.firstName = e.target.value;
+              this.setState({
+                createAccountData: newCreateAccountData
+              });
+            })}
           </Form.Group>
           <Form.Group as={Col} controlId="formGridLastName">
             <Form.Label>Last Name</Form.Label>
-            <Form.Control
-              type="name"
-              placeholder="Johnson"
-              onChange={e => {
-                const newCreateAccountData = this.state.createAccountData;
-                newCreateAccountData.lastName = e.target.value;
-                this.setState({
-                  createAccountData: newCreateAccountData
-                });
-              }}
-            />
+            {this._renderControl("name", "Johnson", e => {
+              const newCreateAccountData = this.state.createAccountData;
+              newCreateAccountData.lastName = e.target.value;
+              this.setState({
+                createAccountData: newCreateAccountData
+              });
+            })}
           </Form.Group>
         </Form.Row>
 
         <Form.Row>
           <Form.Group as={Col} controlId="formGridEmail">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              onChange={e => {
-                const newCreateAccountData = this.state.createAccountData;
-                newCreateAccountData.email = e.target.value;
-                this.setState({
-                  createAccountData: newCreateAccountData
-                });
-              }}
-            />
+            <Form.Label>Email Address</Form.Label>
+            {this._renderControl("email", "Email", e => {
+              const newCreateAccountData = this.state.createAccountData;
+              newCreateAccountData.email = e.target.value;
+              this.setState({
+                createAccountData: newCreateAccountData
+              });
+            })}
           </Form.Group>
         </Form.Row>
 
         <Form.Row>
           <Form.Group as={Col} controlId="formGridPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              onChange={e => {
-                const newCreateAccountData = this.state.createAccountData;
-                newCreateAccountData.password = e.target.value;
-                this.setState({
-                  createAccountData: newCreateAccountData
-                });
-              }}
-            />
+            {this._renderControl("password", "Password", e => {
+              const newCreateAccountData = this.state.createAccountData;
+              newCreateAccountData.password = e.target.value;
+              this.setState({
+                createAccountData: newCreateAccountData
+              });
+            })}
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridConfirmPassword">
             <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Confirm Password"
-              onChange={e => {
-                const newCreateAccountData = this.state.createAccountData;
-                newCreateAccountData.confirmPassword = e.target.value;
-                this.setState({
-                  createAccountData: newCreateAccountData
-                });
-              }}
-            />
+            {this._renderControl("password", "Confirm Password", e => {
+              const newCreateAccountData = this.state.createAccountData;
+              newCreateAccountData.confirmPassword = e.target.value;
+              this.setState({
+                createAccountData: newCreateAccountData
+              });
+            })}
           </Form.Group>
         </Form.Row>
 
@@ -213,32 +198,24 @@ export class AccountEntry extends Component {
     return (
       <Form onSubmit={this._handleSignInSubmit}>
         <Form.Group controlId="formGroupEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            onChange={e => {
-              const newSignInData = this.state.signInData;
-              newSignInData.email = e.target.value;
-              this.setState({
-                signInData: newSignInData
-              });
-            }}
-          />
+          <Form.Label>Email Address</Form.Label>
+          {this._renderControl("email", "Email", e => {
+            const newSignInData = this.state.signInData;
+            newSignInData.email = e.target.value;
+            this.setState({
+              signInData: newSignInData
+            });
+          })}
         </Form.Group>
         <Form.Group controlId="formGroupPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            onChange={e => {
-              const newSignInData = this.state.signInData;
-              newSignInData.password = e.target.value;
-              this.setState({
-                signInData: newSignInData
-              });
-            }}
-          />
+          {this._renderControl("password", "Password", e => {
+            const newSignInData = this.state.signInData;
+            newSignInData.password = e.target.value;
+            this.setState({
+              signInData: newSignInData
+            });
+          })}
         </Form.Group>
         <ButtonToolbar style={{ justifyContent: "space-between" }}>
           <Button disabled={!this._validateLoginForm()} type="submit">

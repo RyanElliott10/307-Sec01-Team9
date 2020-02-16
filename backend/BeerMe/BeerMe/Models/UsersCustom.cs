@@ -5,10 +5,10 @@ using System.Web;
 
 namespace BeerMe.Models
 {
-    public partial class Users
+    public partial class User
     {
         private static BeerMeEntities db = new BeerMeEntities();
-        public static bool Login(UserLoginDetails details)
+        public static bool Login(UserLoginDetails details,User dbUser)
         {
             if(details.email.Length == 0 || details.password.Length == 0)
             {
@@ -16,7 +16,6 @@ namespace BeerMe.Models
             }
             else
             {
-                User dbUser = db.Users.Where(user => user.Email.Equals(details.email)).FirstOrDefault();
                 if(dbUser == null)
                 {
                     return false;
