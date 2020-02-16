@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Form, Button, ButtonToolbar, Row, Col } from "react-bootstrap";
 import * as Constants from "../Utils/Constants";
 import NetClient from "../Utils/NetClient";
+import ExploreSelections from "../Models/ExploreSelections";
 
 export class Explore extends Component {
   constructor(props) {
@@ -36,6 +37,10 @@ export class Explore extends Component {
     );
     console.log(selections);
   };
+
+  _onFinalSubmit = () => {
+    new ExploreSelections();
+  }
 
   _onCheckboxClick = id => {
     this.setState({
