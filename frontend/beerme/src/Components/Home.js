@@ -7,9 +7,6 @@ import NetClient from "../Utils/NetClient";
 export class Home extends Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   topTen: ["1. Pilsner", "2. IPA", "3. Ale", "4. Lager"]
-    // };
     this.state = {};
   }
 
