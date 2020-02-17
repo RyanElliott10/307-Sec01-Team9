@@ -1,5 +1,3 @@
-import Explore from "../Components/Explore";
-
 class ExploreSelections {
   constructor() {
     this.notes = [];

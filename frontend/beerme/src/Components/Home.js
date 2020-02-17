@@ -1,17 +1,26 @@
 import React, { Component } from "react";
 import BOTD_Photo from "./BOTD_photo.png";
 import Separator from "./Sep_Img.png";
-import Logo from "./BeerMe_Logo.png"; // Tell Webpack this JS file uses this image
+import Logo from "./BeerMe_Logo.png";
+import NetClient from "../Utils/NetClient";
 
 export class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      topTen: ["1. Pilsner", "2. IPA", "3. Ale", "4. Lager"]
-    };
+    // this.state = {
+    //   topTen: ["1. Pilsner", "2. IPA", "3. Ale", "4. Lager"]
+    // };
+    this.state = {};
   }
 
-  renderTopTen() {
+  componentDidMount() {
+    NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
+      this.setState({ topTen: data.slice(0, 10) });
+      localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
+    });
+  }
+
+  renderBody() {
     return (
       <div style={styles.inRowStyle}>
         {this.renderBOTD()}
@@ -19,7 +28,7 @@ export class Home extends Component {
         <div style={styles.inColumnStyle}>
           <h2>Top Ten Beer Styles</h2>
           {this.state.topTen.map(beer => (
-            <h4>{beer}</h4>
+            <h4 key={beer.id}>{beer.title}</h4>
           ))}
         </div>
       </div>
@@ -61,7 +70,7 @@ export class Home extends Component {
           }}
         >
           {this.renderLogo()}
-          {this.renderTopTen()}
+          {this.state.topTen ? this.renderBody() : null}
         </div>
       </div>
     );
