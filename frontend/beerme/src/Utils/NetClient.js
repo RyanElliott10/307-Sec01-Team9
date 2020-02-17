@@ -15,7 +15,7 @@
 
 class NetClient {
   static async get(url) {
-    return await fetch(url);
+    return await fetch(url).then(res => res.json());
   }
 
   static async post(url, data) {
@@ -25,7 +25,9 @@ class NetClient {
       headers: {
         "Content-Type": "application/json"
       }
-    }).catch(console.log);
+    })
+      .then(res => res.json())
+      .catch(console.log);
   }
 
   static async dummyGetData() {
