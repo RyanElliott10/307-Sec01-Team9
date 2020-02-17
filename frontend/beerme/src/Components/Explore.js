@@ -1,22 +1,30 @@
 import React, { Component } from "react";
-import ExploreButton from "./ExploreButton";
+import { Form, Button, ButtonToolbar, Row, Col } from "react-bootstrap";
+import * as Constants from "../Utils/Constants";
+import NetClient from "../Utils/NetClient";
+import ExploreSelections from "../Models/ExploreSelections";
 
 export class Explore extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      slideTitle: "",
+      slideDescription: "",
+      // https://stackoverflow.com/questions/49574285/how-to-cache-fetched-data-in-react-without-redux
+      checkboxDescriptions: localStorage.getItem("appState") ? JSON.parse(localStorage.getItem("appState")) : []
+    };
   }
 
   componentDidMount() {
-    fetch("http://jsonplaceholder.typicode.com/todos")
+    NetClient.get("http://jsonplaceholder.typicode.com/todos")
       .then(res => res.json())
       .then(data => {
         data.forEach(element => {
           element.selected = false;
         });
-        this.setState({ contacts: data.slice(0, 20) });
-      })
-      .catch(console.log);
+        this.setState({ checkboxDescriptions: data.slice(0, 20) });
+        localStorage.setItem("appState", JSON.stringify(data.slice(0, 20)));
+      });
   }
 
   onPreviousClick = () => {
@@ -24,13 +32,19 @@ export class Explore extends Component {
   };
 
   onNextClick = () => {
-    const selections = this.state.contacts.filter(data => data.selected);
+    const selections = this.state.checkboxDescriptions.filter(
+      data => data.selected
+    );
     console.log(selections);
   };
 
+  _onFinalSubmit = () => {
+    new ExploreSelections();
+  }
+
   _onCheckboxClick = id => {
     this.setState({
-      data: this.state.contacts.map(option => {
+      data: this.state.checkboxDescriptions.map(option => {
         if (option.id === id) {
           option.selected = !option.selected;
         }
@@ -42,11 +56,11 @@ export class Explore extends Component {
   _renderTopBlurb() {
     return (
       <React.Fragment>
-        <h1 style={titleStyle}>Explore</h1>
-        <h4 style={descStyle}>
+        <h1>Explore</h1>
+        <h5>
           Use our unique beer exploration tool to find new and interesting beers
           for you!
-        </h4>
+        </h5>
       </React.Fragment>
     );
   }
@@ -63,30 +77,41 @@ export class Explore extends Component {
   _renderSelBoxTopText() {
     return (
       <div style={selectionBoxTopTextStyle}>
-        <h2 style={{ backgroundColor: "#ff0" }}>Preferred Notes</h2>
-        <h4 style={{ backgroundColor: "#ff0" }}>
+        <h2>Preferred Notes</h2>
+        <h6 style={{ color: "#696969" }}>
           This is where the explanation of what a note is in beer lives.
-        </h4>
+        </h6>
       </div>
     );
   }
 
   _renderSelections() {
-    if (!this.state.contacts) {
+    if (!this.state.checkboxDescriptions) {
       return null;
     }
 
-    let firstHalf = this.state.contacts;
+    let firstHalf = this.state.checkboxDescriptions;
     let secondHalf = null;
-    if (this.state.contacts.length > 10) {
-      firstHalf = this.state.contacts.slice(0, 10);
-      secondHalf = this.state.contacts.slice(10, this.state.contacts.length);
+    if (this.state.checkboxDescriptions.length > 10) {
+      firstHalf = this.state.checkboxDescriptions.slice(0, 10);
+      secondHalf = this.state.checkboxDescriptions.slice(
+        10,
+        this.state.checkboxDescriptions.length
+      );
     }
 
     return (
-      <div style={{ flex: 1, flexDirection: "column", width: "50%" }}>
-        {this._renderChecks(firstHalf)}
-        {secondHalf ? this._renderChecks(secondHalf) : null}
+      <div
+        style={{
+          flexDirection: "row",
+          paddingLeft: "10px",
+          paddingTop: "25px"
+        }}
+      >
+        <Row>
+          <Col>{this._renderChecks(firstHalf)}</Col>
+          <Col>{secondHalf ? this._renderChecks(secondHalf) : null}</Col>
+        </Row>
       </div>
     );
   }
@@ -97,64 +122,71 @@ export class Explore extends Component {
 
   _renderChecboxOption(data) {
     return (
-      <div key={data.id} style={{ margin: "10px", backgroundColor: "clear" }}>
-        <input
-          type="checkbox"
-          onClick={this._onCheckboxClick.bind(this, data.id)}
-        />
-        {data.title.charAt(0).toUpperCase() + data.title.slice(1)}
-      </div>
+      <Form key={data.id}>
+        <div className="mb-3">
+          <Form.Check
+            custom
+            id={data.id}
+            label={`${data.title.charAt(0).toUpperCase() +
+              data.title.slice(1)}`}
+            onClick={this._onCheckboxClick.bind(this, data.id)}
+          />
+        </div>
+      </Form>
     );
   }
 
   _renderProgressionButtons() {
     return (
-      <div style={btnsStyle}>
-        <ExploreButton
-          style={{ paddingTop: "10px" }}
-          onClick={this.onPreviousClick}
-          title={"< Previous"}
-        />
-        <ExploreButton
-          style={{ paddingTop: "10px" }}
+      <ButtonToolbar style={btnsStyle}>
+        <Button variant="secondary" onClick={this.onPreviousClick}>
+          Previous
+        </Button>
+        <Button
+          variant="secondary"
+          style={{ backgroundColor: Constants.ORANGE_COLOR, outline: "none" }}
           onClick={this.onNextClick}
-          title={"Next >"}
-        />
-      </div>
+        >
+          Next
+        </Button>
+      </ButtonToolbar>
     );
   }
 
   render() {
     return (
-      <div>
-        <div style={{ marginLeft: "200px", marginRight: "200px" }}>
-          {this._renderTopBlurb()}
-          {this._renderSelectionBox()}
-          {this._renderProgressionButtons()}
-        </div>
+      <div
+        style={{
+          marginLeft: "200px",
+          marginRight: "200px",
+          paddingBottom: "150px"
+        }}
+      >
+        {this._renderTopBlurb()}
+        {this._renderSelectionBox()}
+        {this._renderProgressionButtons()}
       </div>
     );
   }
 }
 
-const titleStyle = {};
-
-const descStyle = {};
-
 const selectionBoxStyle = {
   background: "#F4F4F4",
-  flexDirection: "row"
+  flexDirection: "row",
+  marginTop: "15px"
 };
 
 const selectionBoxTopTextStyle = {
   display: "flex",
   flexDirection: "column",
-  alignItems: "center"
+  alignItems: "center",
+  paddingTop: "15px"
 };
 
 const btnsStyle = {
   display: "flex",
-  justifyContent: "space-between"
+  justifyContent: "space-between",
+  paddingTop: "10px"
 };
 
 export default Explore;

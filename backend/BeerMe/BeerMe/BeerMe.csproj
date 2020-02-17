@@ -53,6 +53,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.7\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -62,6 +65,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.7\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -103,10 +109,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BeerCategoriesController.cs" />
+    <Compile Include="Controllers\BeerStylesController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BeerCategory.cs">
+      <DependentUpon>BeerMeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BeerMeModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -123,9 +135,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BeerMeModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\BeerStyle.cs">
+      <DependentUpon>BeerMeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>BeerMeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserLoginDetails.cs" />
+    <Compile Include="Models\UsersCustom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
