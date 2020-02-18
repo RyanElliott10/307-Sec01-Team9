@@ -10,21 +10,20 @@ export class Explore extends Component {
     this.state = {
       slideTitle: "",
       slideDescription: "",
-      // https://stackoverflow.com/questions/49574285/how-to-cache-fetched-data-in-react-without-redux
-      checkboxDescriptions: localStorage.getItem("appState") ? JSON.parse(localStorage.getItem("appState")) : []
+      checkboxDescriptions: localStorage.getItem("appState")
+        ? JSON.parse(localStorage.getItem("appState"))
+        : []
     };
   }
 
   componentDidMount() {
-    NetClient.get("http://jsonplaceholder.typicode.com/todos")
-      .then(res => res.json())
-      .then(data => {
-        data.forEach(element => {
-          element.selected = false;
-        });
-        this.setState({ checkboxDescriptions: data.slice(0, 20) });
-        localStorage.setItem("appState", JSON.stringify(data.slice(0, 20)));
+    NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
+      data.forEach(element => {
+        element.selected = false;
       });
+      this.setState({ checkboxDescriptions: data.slice(0, 20) });
+      localStorage.setItem("appState", JSON.stringify(data.slice(0, 20)));
+    });
   }
 
   onPreviousClick = () => {
@@ -40,7 +39,7 @@ export class Explore extends Component {
 
   _onFinalSubmit = () => {
     new ExploreSelections();
-  }
+  };
 
   _onCheckboxClick = id => {
     this.setState({
