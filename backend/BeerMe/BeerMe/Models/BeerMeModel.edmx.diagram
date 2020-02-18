@@ -6,6 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="097ad61bb77141ea8475fb921cb25ed9" Name="Diagram1">
         <EntityTypeShape EntityType="BeerMeModel.User" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BeerMeModel.BeerCategory" Width="1.5" PointX="3.375" PointY="1" />
+        <EntityTypeShape EntityType="BeerMeModel.BeerStyle" Width="1.5" PointX="5.625" PointY="0.875" />
+        <AssociationConnector Association="BeerMeModel.FK_BeerStyles_BeerCategories" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -5,6 +5,21 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="BeerMeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BeerCategories">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BeerStyles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Style" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="Id" />
@@ -16,8 +31,26 @@
           <Property Name="IsBusiness" Type="bit" Nullable="false" />
           <Property Name="BusinessName" Type="varchar" MaxLength="100" />
         </EntityType>
+        <Association Name="FK_BeerStyles_BeerCategories">
+          <End Role="BeerCategories" Type="Self.BeerCategories" Multiplicity="1" />
+          <End Role="BeerStyles" Type="Self.BeerStyles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BeerCategories">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="BeerStyles">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BeerMeModelStoreContainer">
+          <EntitySet Name="BeerCategories" EntityType="Self.BeerCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BeerStyles" EntityType="Self.BeerStyles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BeerStyles_BeerCategories" Association="Self.FK_BeerStyles_BeerCategories">
+            <End Role="BeerCategories" EntitySet="BeerCategories" />
+            <End Role="BeerStyles" EntitySet="BeerStyles" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -25,6 +58,12 @@
       <Schema Namespace="BeerMeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="BeerMeEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="BeerMeModel.User" />
+          <EntitySet Name="BeerCategories" EntityType="BeerMeModel.BeerCategory" />
+          <EntitySet Name="BeerStyles" EntityType="BeerMeModel.BeerStyle" />
+          <AssociationSet Name="FK_BeerStyles_BeerCategories" Association="BeerMeModel.FK_BeerStyles_BeerCategories">
+            <End Role="BeerCategory" EntitySet="BeerCategories" />
+            <End Role="BeerStyle" EntitySet="BeerStyles" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -37,6 +76,35 @@
           <Property Name="IsBusiness" Type="Boolean" Nullable="false" />
           <Property Name="BusinessName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="BeerCategory">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BeerStyles" Relationship="BeerMeModel.FK_BeerStyles_BeerCategories" FromRole="BeerCategory" ToRole="BeerStyle" />
+        </EntityType>
+        <EntityType Name="BeerStyle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Style" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BeerCategory" Relationship="BeerMeModel.FK_BeerStyles_BeerCategories" FromRole="BeerStyle" ToRole="BeerCategory" />
+        </EntityType>
+        <Association Name="FK_BeerStyles_BeerCategories">
+          <End Type="BeerMeModel.BeerCategory" Role="BeerCategory" Multiplicity="1" />
+          <End Type="BeerMeModel.BeerStyle" Role="BeerStyle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BeerCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="BeerStyle">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -51,6 +119,23 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BeerCategories">
+            <EntityTypeMapping TypeName="BeerMeModel.BeerCategory">
+              <MappingFragment StoreEntitySet="BeerCategories">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BeerStyles">
+            <EntityTypeMapping TypeName="BeerMeModel.BeerStyle">
+              <MappingFragment StoreEntitySet="BeerStyles">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Style" ColumnName="Style" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

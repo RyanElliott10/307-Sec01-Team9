@@ -9,7 +9,7 @@ export class Recommended extends Component {
   render() {
     return (
       <div>
-        <text>Recommended</text>
+        <h1>Recommended</h1>
       </div>
     );
   }
