@@ -69,7 +69,7 @@ export class Explore extends Component {
       this.state.currentPageIndex
     ].checkboxes.filter(data => data.isChecked);
 
-    console.log(selections);
+    console.log("Selected boxes:", selections);
     const nextPage =
       this.state.currentPageIndex === this.pages.length - 1
         ? this.state.currentPageIndex
@@ -89,6 +89,7 @@ export class Explore extends Component {
         data.isChecked = !data.isChecked;
       }
     });
+    this.forceUpdate();
   };
 
   // MARK: Render
@@ -152,6 +153,10 @@ export class Explore extends Component {
   }
 
   _renderChecboxOption(data) {
+    let value = this.pages[this.state.currentPageIndex].checkboxes.filter(
+      d => d.id === data.id
+    )[0].isChecked;
+
     return (
       <Form key={data.id}>
         <div className="mb-3">
@@ -159,12 +164,8 @@ export class Explore extends Component {
             custom
             id={data.id}
             label={data.option}
-            checked={
-              this.pages[this.state.currentPageIndex].checkboxes.filter(
-                d => {console.log(d); return d.id === data.id;}
-              ).isChecked
-            }
-            onClick={this._onCheckboxClick.bind(this, data.id)}
+            checked={value}
+            onChange={this._onCheckboxClick.bind(this, data.id)}
           />
         </div>
       </Form>
@@ -182,7 +183,9 @@ export class Explore extends Component {
           style={{ backgroundColor: Constants.ORANGE_COLOR, outline: "none" }}
           onClick={this.onNextClick}
         >
-          Next
+          {this.state.currentPageIndex === this.pages.length - 1
+            ? "Submit"
+            : "Next"}
         </Button>
       </ButtonToolbar>
     );
