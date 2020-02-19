@@ -1,7 +1,7 @@
 import * as Constants from "../Utils/Constants";
 import NetClient from "../Utils/NetClient";
 
-class MainController {
+class UserController {
   static email = "";
   static password = "";
 
@@ -27,7 +27,6 @@ class MainController {
   }
 
   static getCurrentUser() {
-    console.log("getCurrentUser");
     return (
       this.email === Constants.DUMMY_LOGIN_EMAIL &&
       this.password === Constants.DUMMY_LOGIN_PASSWORD
@@ -35,4 +34,4 @@ class MainController {
   }
 }
 
-export default MainController;
+export default UserController;
