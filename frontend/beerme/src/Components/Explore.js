@@ -3,31 +3,39 @@ import { Form, Button, ButtonToolbar, Row, Col } from "react-bootstrap";
 import * as Constants from "../Utils/Constants";
 import NetClient from "../Utils/NetClient";
 import ExploreSelections from "../Models/ExploreSelections";
+import ExploreController from "../Controllers/ExploreController";
 
 export class Explore extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      slideTitle: "",
-      slideDescription: "",
+      currentPageIndex: null,
       checkboxDescriptions: localStorage.getItem("appState")
         ? JSON.parse(localStorage.getItem("appState"))
         : []
     };
+    this.pages = ExploreController.getPages();
+    this.fetchData();
   }
 
-  componentDidMount() {
+  fetchData() {
     NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
       data.forEach(element => {
         element.selected = false;
       });
-      this.setState({ checkboxDescriptions: data.slice(0, 20) });
+      this.pages.forEach(obj => (obj.checkboxes = data.slice(0, 20)));
       localStorage.setItem("appState", JSON.stringify(data.slice(0, 20)));
+      this.setState({
+        currentPageIndex: 0
+      });
     });
   }
 
   onPreviousClick = () => {
-    console.log("onPreviousClick");
+    this.setState({
+      currentPageIndex:
+        this.state.currentPageIndex === 0 ? 0 : this.state.currentPageIndex - 1
+    });
   };
 
   onNextClick = () => {
@@ -35,6 +43,12 @@ export class Explore extends Component {
       data => data.selected
     );
     console.log(selections);
+    this.setState({
+      currentPageIndex:
+        this.state.currentPageIndex === this.pages.length - 1
+          ? this.state.currentPageIndex
+          : this.state.currentPageIndex + 1
+    });
   };
 
   _onFinalSubmit = () => {
@@ -76,27 +90,20 @@ export class Explore extends Component {
   _renderSelBoxTopText() {
     return (
       <div style={selectionBoxTopTextStyle}>
-        <h2>Preferred Notes</h2>
+        <h2>{this.pages[this.state.currentPageIndex].title}</h2>
         <h6 style={{ color: "#696969" }}>
-          This is where the explanation of what a note is in beer lives.
+          {this.pages[this.state.currentPageIndex].description}
         </h6>
       </div>
     );
   }
 
   _renderSelections() {
-    if (!this.state.checkboxDescriptions) {
-      return null;
-    }
-
-    let firstHalf = this.state.checkboxDescriptions;
+    let firstHalf = this.pages[this.state.currentPageIndex].checkboxes;
     let secondHalf = null;
-    if (this.state.checkboxDescriptions.length > 10) {
-      firstHalf = this.state.checkboxDescriptions.slice(0, 10);
-      secondHalf = this.state.checkboxDescriptions.slice(
-        10,
-        this.state.checkboxDescriptions.length
-      );
+    if (firstHalf.length > 10) {
+      secondHalf = firstHalf.slice(10, firstHalf.length);
+      firstHalf = firstHalf.slice(0, 10);
     }
 
     return (
@@ -153,6 +160,9 @@ export class Explore extends Component {
   }
 
   render() {
+    if (this.state.currentPageIndex === null) {
+      return null;
+    }
     return (
       <div
         style={{

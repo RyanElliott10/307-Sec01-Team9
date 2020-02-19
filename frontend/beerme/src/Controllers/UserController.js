@@ -6,7 +6,7 @@ class UserController {
   static password = "";
 
   static async login(email, password) {
-    console.log(`MainController: login ${email} ${password}`);
+    console.log(`UserController: login ${email} ${password}`);
     this.email = email;
     this.password = password;
 
@@ -25,6 +25,8 @@ class UserController {
       password === Constants.DUMMY_LOGIN_PASSWORD;
     return retValue;
   }
+
+  // static async createAccount(fistName, lastName, )
 
   static getCurrentUser() {
     return (
