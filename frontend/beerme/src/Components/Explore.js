@@ -52,6 +52,8 @@ export class Explore extends Component {
     });
   };
 
+  // MARK: Render
+
   _renderTopBlurb() {
     return (
       <React.Fragment>
@@ -66,7 +68,7 @@ export class Explore extends Component {
 
   _renderSelectionBox() {
     return (
-      <div style={selectionBoxStyle}>
+      <div style={styles.selectionBoxStyle}>
         {this._renderSelBoxTopText()}
         {this._renderSelections()}
       </div>
@@ -75,7 +77,7 @@ export class Explore extends Component {
 
   _renderSelBoxTopText() {
     return (
-      <div style={selectionBoxTopTextStyle}>
+      <div style={styles.selectionBoxTopTextStyle}>
         <h2>Preferred Notes</h2>
         <h6 style={{ color: "#696969" }}>
           This is where the explanation of what a note is in beer lives.
@@ -137,7 +139,7 @@ export class Explore extends Component {
 
   _renderProgressionButtons() {
     return (
-      <ButtonToolbar style={btnsStyle}>
+      <ButtonToolbar style={styles.btnsStyle}>
         <Button variant="secondary" onClick={this.onPreviousClick}>
           Previous
         </Button>
@@ -169,23 +171,23 @@ export class Explore extends Component {
   }
 }
 
-const selectionBoxStyle = {
-  background: "#F4F4F4",
-  flexDirection: "row",
-  marginTop: "15px"
-};
-
-const selectionBoxTopTextStyle = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  paddingTop: "15px"
-};
-
-const btnsStyle = {
-  display: "flex",
-  justifyContent: "space-between",
-  paddingTop: "10px"
-};
+const styles = {
+  selectionBoxStyle: {
+    background: "#F4F4F4",
+    flexDirection: "row",
+    marginTop: "15px"
+  },
+  selectionBoxTopTextStyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    paddingTop: "15px"
+  },
+  btnsStyle = {
+    display: "flex",
+    justifyContent: "space-between",
+    paddingTop: "10px"
+  }
+}
 
 export default Explore;
