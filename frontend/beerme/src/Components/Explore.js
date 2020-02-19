@@ -3,16 +3,41 @@ import { Form, Button, ButtonToolbar, Row, Col } from "react-bootstrap";
 import * as Constants from "../Utils/Constants";
 import NetClient from "../Utils/NetClient";
 import ExploreSelections from "../Models/ExploreSelections";
+import ExplorePageData from "../Models/ExplorePageData";
+
+const ExploreSpoofData = [
+  {
+    title: "Notes",
+    description: "This is where the preferred notes description lives.",
+    checkboxes: [
+      { id: 1, option: "notes_test1", isChecked: false },
+      { id: 2, option: "notes_test2", isChecked: false }
+    ]
+  },
+  {
+    title: "Colors",
+    description: "This is where the preferred colors description lives.",
+    checkboxes: [
+      { id: 1, option: "color_test1", isChecked: false },
+      { id: 2, option: "color_test2", isChecked: false }
+    ]
+  },
+  {
+    title: "Hints",
+    description: "This is where the preferred hints description lives.",
+    checkboxes: [
+      { id: 1, option: "hints_test1", isChecked: false },
+      { id: 2, option: "hints_test2", isChecked: false }
+    ]
+  }
+];
 
 export class Explore extends Component {
   constructor(props) {
     super(props);
+    this.pages = [];
     this.state = {
-      slideTitle: "",
-      slideDescription: "",
-      checkboxDescriptions: localStorage.getItem("appState")
-        ? JSON.parse(localStorage.getItem("appState"))
-        : []
+      currentPageIndex: null
     };
   }
 
@@ -21,20 +46,37 @@ export class Explore extends Component {
       data.forEach(element => {
         element.selected = false;
       });
-      this.setState({ checkboxDescriptions: data.slice(0, 20) });
-      localStorage.setItem("appState", JSON.stringify(data.slice(0, 20)));
+      this._spoofData(ExploreSpoofData);
+      this.setState({ currentPageIndex: 0 });
     });
   }
 
+  // Temporary function to spoof the data handling process
+  _spoofData(data) {
+    this.pages = data;
+  }
+
   onPreviousClick = () => {
-    console.log("onPreviousClick");
+    const prevPage =
+      this.state.currentPageIndex === 0 ? 0 : this.state.currentPageIndex - 1;
+    this.setState({
+      currentPageIndex: prevPage
+    });
   };
 
   onNextClick = () => {
-    const selections = this.state.checkboxDescriptions.filter(
-      data => data.selected
-    );
+    const selections = this.pages[
+      this.state.currentPageIndex
+    ].checkboxes.filter(data => data.isChecked);
+
     console.log(selections);
+    const nextPage =
+      this.state.currentPageIndex === this.pages.length - 1
+        ? this.state.currentPageIndex
+        : this.state.currentPageIndex + 1;
+    this.setState({
+      currentPageIndex: nextPage
+    });
   };
 
   _onFinalSubmit = () => {
@@ -42,13 +84,10 @@ export class Explore extends Component {
   };
 
   _onCheckboxClick = id => {
-    this.setState({
-      data: this.state.checkboxDescriptions.map(option => {
-        if (option.id === id) {
-          option.selected = !option.selected;
-        }
-        return option;
-      })
+    this.pages[this.state.currentPageIndex].checkboxes.map(data => {
+      if (data.id === id) {
+        data.isChecked = !data.isChecked;
+      }
     });
   };
 
@@ -67,6 +106,10 @@ export class Explore extends Component {
   }
 
   _renderSelectionBox() {
+    if (this.state.currentPageIndex === null) {
+      return null;
+    }
+
     return (
       <div style={styles.selectionBoxStyle}>
         {this._renderSelBoxTopText()}
@@ -78,37 +121,24 @@ export class Explore extends Component {
   _renderSelBoxTopText() {
     return (
       <div style={styles.selectionBoxTopTextStyle}>
-        <h2>Preferred Notes</h2>
+        <h2>{this.pages[this.state.currentPageIndex].title}</h2>
         <h6 style={{ color: "#696969" }}>
-          This is where the explanation of what a note is in beer lives.
+          {this.pages[this.state.currentPageIndex].description}
         </h6>
       </div>
     );
   }
 
   _renderSelections() {
-    if (!this.state.checkboxDescriptions) {
-      return null;
-    }
-
-    let firstHalf = this.state.checkboxDescriptions;
+    let firstHalf = this.pages[this.state.currentPageIndex].checkboxes;
     let secondHalf = null;
-    if (this.state.checkboxDescriptions.length > 10) {
-      firstHalf = this.state.checkboxDescriptions.slice(0, 10);
-      secondHalf = this.state.checkboxDescriptions.slice(
-        10,
-        this.state.checkboxDescriptions.length
-      );
+    if (firstHalf.length > 10) {
+      secondHalf = firstHalf.slice(10, firstHalf.length);
+      firstHalf = firstHalf.slice(0, 10);
     }
 
     return (
-      <div
-        style={{
-          flexDirection: "row",
-          paddingLeft: "10px",
-          paddingTop: "25px"
-        }}
-      >
+      <div style={styles.selectionStyle}>
         <Row>
           <Col>{this._renderChecks(firstHalf)}</Col>
           <Col>{secondHalf ? this._renderChecks(secondHalf) : null}</Col>
@@ -128,8 +158,12 @@ export class Explore extends Component {
           <Form.Check
             custom
             id={data.id}
-            label={`${data.title.charAt(0).toUpperCase() +
-              data.title.slice(1)}`}
+            label={data.option}
+            checked={
+              this.pages[this.state.currentPageIndex].checkboxes.filter(
+                d => {console.log(d); return d.id === data.id;}
+              ).isChecked
+            }
             onClick={this._onCheckboxClick.bind(this, data.id)}
           />
         </div>
@@ -156,13 +190,7 @@ export class Explore extends Component {
 
   render() {
     return (
-      <div
-        style={{
-          marginLeft: "200px",
-          marginRight: "200px",
-          paddingBottom: "150px"
-        }}
-      >
+      <div style={styles.mainStyle}>
         {this._renderTopBlurb()}
         {this._renderSelectionBox()}
         {this._renderProgressionButtons()}
@@ -172,22 +200,32 @@ export class Explore extends Component {
 }
 
 const styles = {
+  mainStyle: {
+    marginLeft: "200px",
+    marginRight: "200px",
+    paddingBottom: "150px"
+  },
+  selectionStyle: {
+    flexDirection: "row",
+    paddingLeft: "10px",
+    paddingTop: "25px"
+  },
   selectionBoxStyle: {
     background: "#F4F4F4",
     flexDirection: "row",
     marginTop: "15px"
   },
-  selectionBoxTopTextStyle = {
+  selectionBoxTopTextStyle: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     paddingTop: "15px"
   },
-  btnsStyle = {
+  btnsStyle: {
     display: "flex",
     justifyContent: "space-between",
     paddingTop: "10px"
   }
-}
+};
 
 export default Explore;
