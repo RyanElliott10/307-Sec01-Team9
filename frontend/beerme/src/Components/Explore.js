@@ -66,7 +66,7 @@ export class Explore extends Component {
   _submitSelections() {
     const selections = this._getAllSelections().map(data => {
       const tmp = data;
-      delete data["isChecked"];
+      delete tmp["isChecked"];
       return tmp;
     });
 
