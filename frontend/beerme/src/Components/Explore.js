@@ -1,33 +1,34 @@
 import React, { Component } from "react";
 import { Form, Button, ButtonToolbar, Row, Col } from "react-bootstrap";
+import Dots from "react-carousel-dots";
+
 import * as Constants from "../Utils/Constants";
-import NetClient from "../Utils/NetClient";
 import ExploreSelections from "../Models/ExploreSelections";
-import ExplorePageData from "../Models/ExplorePageData";
+import NetClient from "../Utils/NetClient";
 
 const ExploreSpoofData = [
   {
     title: "Notes",
     description: "This is where the preferred notes description lives.",
     checkboxes: [
-      { id: 1, option: "notes_test1", isChecked: false },
-      { id: 2, option: "notes_test2", isChecked: false }
+      { id: 1, type: "notes", option: "notes_test1", isChecked: false },
+      { id: 2, type: "notes", option: "notes_test2", isChecked: false }
     ]
   },
   {
     title: "Colors",
     description: "This is where the preferred colors description lives.",
     checkboxes: [
-      { id: 1, option: "color_test1", isChecked: false },
-      { id: 2, option: "color_test2", isChecked: false }
+      { id: 1, type: "colors", option: "color_test1", isChecked: false },
+      { id: 2, type: "colors", option: "color_test2", isChecked: false }
     ]
   },
   {
     title: "Hints",
     description: "This is where the preferred hints description lives.",
     checkboxes: [
-      { id: 1, option: "hints_test1", isChecked: false },
-      { id: 2, option: "hints_test2", isChecked: false }
+      { id: 1, type: "hints", option: "hints_test1", isChecked: false },
+      { id: 2, type: "hints", option: "hints_test2", isChecked: false }
     ]
   }
 ];
@@ -56,7 +57,27 @@ export class Explore extends Component {
     this.pages = data;
   }
 
-  onPreviousClick = () => {
+  _getAllSelections() {
+    return this.pages
+      .map(page => page.checkboxes.filter(data => data.isChecked))
+      .flat();
+  }
+
+  _submitSelections() {
+    const selections = this._getAllSelections().map(data => {
+      const tmp = data;
+      delete data["isChecked"];
+      return tmp;
+    });
+
+    NetClient.post("http://httpbin.org/post", selections).then(data =>
+      console.log(data)
+    );
+  }
+
+  // MARK: OnClicks
+
+  _onPreviousClick = () => {
     const prevPage =
       this.state.currentPageIndex === 0 ? 0 : this.state.currentPageIndex - 1;
     this.setState({
@@ -64,19 +85,18 @@ export class Explore extends Component {
     });
   };
 
-  onNextClick = () => {
+  _onNextClick = () => {
     const selections = this.pages[
       this.state.currentPageIndex
     ].checkboxes.filter(data => data.isChecked);
 
-    console.log("Selected boxes:", selections);
-    const nextPage =
-      this.state.currentPageIndex === this.pages.length - 1
-        ? this.state.currentPageIndex
-        : this.state.currentPageIndex + 1;
-    this.setState({
-      currentPageIndex: nextPage
-    });
+    if (this.state.currentPageIndex === this.pages.length - 1) {
+      this._submitSelections();
+    } else {
+      this.setState({
+        currentPageIndex: this.state.currentPageIndex + 1
+      });
+    }
   };
 
   _onFinalSubmit = () => {
@@ -175,13 +195,18 @@ export class Explore extends Component {
   _renderProgressionButtons() {
     return (
       <ButtonToolbar style={styles.btnsStyle}>
-        <Button variant="secondary" onClick={this.onPreviousClick}>
+        <Button variant="secondary" onClick={this._onPreviousClick}>
           Previous
         </Button>
+        <Dots
+          length={this.pages.length}
+          active={this.state.currentPageIndex}
+          size={10}
+        />
         <Button
           variant="secondary"
           style={{ backgroundColor: Constants.ORANGE_COLOR, outline: "none" }}
-          onClick={this.onNextClick}
+          onClick={this._onNextClick}
         >
           {this.state.currentPageIndex === this.pages.length - 1
             ? "Submit"
