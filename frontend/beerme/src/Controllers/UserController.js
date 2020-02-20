@@ -16,9 +16,39 @@ class UserController {
     };
 
     let retValue = null;
-    NetClient.post("http://httpbin.org/post", data)
-      .then(res => res.json())
-      .then(data => console.log(data));
+    NetClient.post("http://httpbin.org/post", data).then(data =>
+      console.log(data)
+    );
+
+    retValue =
+      email === Constants.DUMMY_LOGIN_EMAIL &&
+      password === Constants.DUMMY_LOGIN_PASSWORD;
+    return retValue;
+  }
+
+  static async createAccount(
+    firstName,
+    lastName,
+    email,
+    password,
+    isBusiness = false,
+    businessName = ""
+  ) {
+    this.email = email;
+    this.password = password;
+
+    const data = {
+      name: `${firstName} ${lastName}`,
+      email: email,
+      password: password,
+      isBusiness: isBusiness,
+      businessName: businessName
+    };
+
+    let retValue = null;
+    NetClient.post("http://httpbin.org/post", data).then(data =>
+      console.log(data)
+    );
 
     retValue =
       email === Constants.DUMMY_LOGIN_EMAIL &&
