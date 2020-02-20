@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, ButtonToolbar, Form, Col } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
+
 import MainController from "../Controllers/UserController";
 
 export class AccountEntry extends Component {
@@ -61,7 +62,7 @@ export class AccountEntry extends Component {
     }
   };
 
-  _handleCreateAccountSubmit = event => {
+  _handleCreateAccountSubmit = async event => {
     event.preventDefault();
     console.log(this.state);
     if (
@@ -70,6 +71,21 @@ export class AccountEntry extends Component {
     ) {
       alert("Please make sure your passwords match.");
       return;
+    }
+
+    if (
+      await MainController.createAccount(
+        this.state.createAccountData.firstName,
+        this.state.createAccountData.lastName,
+        this.state.createAccountData.email,
+        this.state.createAccountData.password,
+        this.state.isBusiness,
+        this.state.createAccountData.businessName
+      )
+    ) {
+      this.setState({
+        signedIn: true
+      });
     }
   };
 

@@ -1,7 +1,7 @@
 import * as Constants from "../Utils/Constants";
 import NetClient from "../Utils/NetClient";
 
-class MainController {
+class UserController {
   static email = "";
   static password = "";
 
@@ -16,9 +16,39 @@ class MainController {
     };
 
     let retValue = null;
-    NetClient.post("http://httpbin.org/post", data)
-      .then(res => res.json())
-      .then(data => console.log(data));
+    NetClient.post("http://httpbin.org/post", data).then(data =>
+      console.log(data)
+    );
+
+    retValue =
+      email === Constants.DUMMY_LOGIN_EMAIL &&
+      password === Constants.DUMMY_LOGIN_PASSWORD;
+    return retValue;
+  }
+
+  static async createAccount(
+    firstName,
+    lastName,
+    email,
+    password,
+    isBusiness = false,
+    businessName = ""
+  ) {
+    this.email = email;
+    this.password = password;
+
+    const data = {
+      name: `${firstName} ${lastName}`,
+      email: email,
+      password: password,
+      isBusiness: isBusiness,
+      businessName: businessName
+    };
+
+    let retValue = null;
+    NetClient.post("http://httpbin.org/post", data).then(data =>
+      console.log(data)
+    );
 
     retValue =
       email === Constants.DUMMY_LOGIN_EMAIL &&
@@ -27,7 +57,6 @@ class MainController {
   }
 
   static getCurrentUser() {
-    console.log("getCurrentUser");
     return (
       this.email === Constants.DUMMY_LOGIN_EMAIL &&
       this.password === Constants.DUMMY_LOGIN_PASSWORD
@@ -35,4 +64,4 @@ class MainController {
   }
 }
 
-export default MainController;
+export default UserController;

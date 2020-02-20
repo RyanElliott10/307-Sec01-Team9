@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import BOTD_Photo from "./BOTD_photo.png";
-import Separator from "./Sep_Img.png";
-import Logo from "./BeerMe_Logo.png";
+
+import BOTD_Photo from "../img/BOTD_photo.png";
+import Logo from "../img/BeerMe_Logo.png";
 import NetClient from "../Utils/NetClient";
+import Separator from "../img/Sep_Img.png";
 
 export class Home extends Component {
   constructor(props) {
