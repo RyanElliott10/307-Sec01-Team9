@@ -1,15 +1,8 @@
 import React, { Component } from "react";
-<<<<<<< HEAD
-import Logo from './BeerMe_Logo.png'; // Tell Webpack this JS file uses this image
-import BOTD_Photo from './BOTD_photo.png';
-import Separator from './Sep_Img.png';
-import Header from "./Layout/Header";
-=======
 import BOTD_Photo from "./BOTD_photo.png";
 import Separator from "./Sep_Img.png";
 import Logo from "./BeerMe_Logo.png";
 import NetClient from "../Utils/NetClient";
->>>>>>> 181d335381dad32423b7e7978b15afe37f5fa38a
 
 export class Home extends Component {
   constructor(props) {
@@ -32,7 +25,7 @@ export class Home extends Component {
         <div style={styles.inColumnStyle}>
           <h2>Top Ten Beer Styles</h2>
           {this.state.topTen.map(beer => (
-            <h4 key={beer.id}>{beer.title}</h4>
+            <p key={beer.id}>{beer.title}</p>
           ))}
         </div>
       </div>
@@ -65,10 +58,6 @@ export class Home extends Component {
   render() {
     return (
       <div>
-<<<<<<< HEAD
-        <img src = {Logo} alt = "Logo"/>
-        <div style={{ marginLeft: "200px", marginRight: "200px", marginTop: "45px", alignContent: "center"}}>
-=======
         <div
           style={{
             marginLeft: "200px",
@@ -77,7 +66,6 @@ export class Home extends Component {
             alignContent: "center"
           }}
         >
->>>>>>> 181d335381dad32423b7e7978b15afe37f5fa38a
           {this.renderLogo()}
           {this.state.topTen ? this.renderBody() : null}
         </div>
