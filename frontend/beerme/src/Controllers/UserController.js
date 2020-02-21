@@ -46,7 +46,7 @@ class UserController {
     };
 
     let retValue = null;
-    NetClient.post("http://httpbin.org/post", data).then(data =>
+    NetClient.post("https://localhost:44300/api/users", data).then(data =>
       console.log(data)
     );
 
