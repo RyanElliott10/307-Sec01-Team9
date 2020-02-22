@@ -17,22 +17,28 @@ namespace BeerMe.Controllers
         private BeerMeEntities db = new BeerMeEntities();
 
         // GET: api/BeerCategories
-        public IQueryable<BeerCategory> GetBeerCategories()
+        public IHttpActionResult GetBeerCategories()
         {
-            return db.BeerCategories;
+            var allCategories = db.BeerCategories.Select(category => new {
+                Id = category.CategoryId,
+                CategoryName = category.CategoryName
+            }).ToList();
+            return Ok(allCategories);
         }
 
         // GET: api/BeerCategories/5
         [ResponseType(typeof(BeerCategory))]
         public IHttpActionResult GetBeerCategory(int id)
         {
-            BeerCategory beerCategory = db.BeerCategories.Find(id);
-            if (beerCategory == null)
+            var categoryById = db.BeerCategories.Where(category => category.CategoryId == id).Select(category => new {
+                Id = category.CategoryId,
+                CategoryName = category.CategoryName
+            }).FirstOrDefault();
+            if (categoryById == null)
             {
                 return NotFound();
             }
-
-            return Ok(beerCategory);
+            return Ok(categoryById);
         }
 
         // PUT: api/BeerCategories/5
