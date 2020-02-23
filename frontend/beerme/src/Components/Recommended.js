@@ -10,7 +10,7 @@ export class Recommended extends Component {
   componentDidMount() {
     NetClient.get(`https://jsonplaceholder.typicode.com/photos/`)
     .then(res => {
-      const pics = res.slice(0, 5).map(data => data.thumbnailUrl);
+      const pics = res.slice(0, 10).map(data => data.thumbnailUrl);
       this.setState({
         photos: pics,
         loading: false,
@@ -24,6 +24,14 @@ export class Recommended extends Component {
          recBeers: data.slice(0, 10)
       });
       localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
+    })
+
+    NetClient.get("http://jsonplaceholder.typicode.com/todos")
+    .then(data => {
+      this.setState({
+         recDesc: data.slice(20, 30)
+      });
+      localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
     });
   }
 
@@ -35,7 +43,7 @@ export class Recommended extends Component {
     return (
       <div style={styles.inColumnStyle}>
         {this.state.photos.map(image => (  
-          <img style={styles.inColumnStyle} src= {image}/>
+          <img src= {image}/>
         ))}
       </div>
     );
@@ -49,18 +57,27 @@ export class Recommended extends Component {
         ))}
       </div>
     )  
-}
+  }
 
-  
+  renderDescriptions() {
+    return (
+      <div style={styles.inColStyle}>
+        {this.state.recDesc.map(beer => (
+          <p key={beer.id}>{beer.title}</p>
+        ))}
+      </div>
+    )  
+  }
 
   render() {
     return (
-      <div style = {styles.inColStyle}>
+      <div style = {styles.inTitleStyle}>
         <h1>Recommended For You</h1>
         <h5>Here is our personalized recommendation for new beer styles based off people with similar tastes!</h5>
         <div style = {styles.inRowStyle}>
           {this.state.photos ? this.renderPhotos() : null}
-          {this.state.topTen ? this.renderRecBeers() : null}
+          {this.state.recBeers ? this.renderRecBeers() : null}
+          {this.state.recDesc ? this.renderDescriptions() : null}
         </div>
       </div>
     );
@@ -70,12 +87,17 @@ const styles = {
   inColStyle: {
     display: "flex",
     flexDirection: "column",
+  },
+  inTitleStyle: {
+    display: "flex",
+    flexDirection: "column",
     marginLeft: "200px",
+    marginRight: "200px",
   },
   inRowStyle: {
     display: "flex",
     flexDirection: "row",
-    marginLeft: "200px",
+    marginTop: "50px",
   }
 }
 
