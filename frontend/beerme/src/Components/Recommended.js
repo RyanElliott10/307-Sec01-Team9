@@ -8,29 +8,77 @@ export class Recommended extends Component {
   }
 
   componentDidMount() {
-    NetClient.get("http://jsonplaceholder.typicode.com/photos").then(data => {
-      this.setState({ photos : data.slice(0, 10) });
-      localStorage.setItem("appState", data.slice(0, 10));
+    NetClient.get(`https://jsonplaceholder.typicode.com/photos/`)
+    .then(res => {
+      const pics = res.slice(0, 10).map(data => data.thumbnailUrl);
+      this.setState({
+        photos: pics,
+        loading: false,
+        error: null
+      });
+    })
+
+    NetClient.get("http://jsonplaceholder.typicode.com/todos")
+    .then(data => {
+      this.setState({
+         recBeers: data.slice(0, 10)
+      });
+      localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
+    })
+
+    NetClient.get("http://jsonplaceholder.typicode.com/todos")
+    .then(data => {
+      this.setState({
+         recDesc: data.slice(20, 30)
+      });
+      localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
     });
   }
 
-  renderBody() {
+
+  renderPhotos() {
+    if (this.state.photos === null) {
+      return null;
+    }
     return (
-      <div style={styles.inColumnStyle}>
-        <h2>Recommendations:</h2>
-        {this.state.photos.map(beer => (
-          <p key={beer.id}>{beer.title}</p>
+      <div style={styles.inColStyle}>
+        {this.state.photos.map(image => (  
+          <img src= {image}/>
         ))}
       </div>
     );
   }
 
+  renderRecBeers() {
+    return (
+      <div style={styles.inColStyle}>
+        {this.state.recBeers.map(beer => (
+          <p key={beer.id}>{beer.title}</p>
+        ))}
+      </div>
+    )  
+  }
+
+  renderDescriptions() {
+    return (
+      <div style={styles.inColStyle}>
+        {this.state.recDesc.map(beer => (
+          <p key={beer.id}>{beer.title}</p>
+        ))}
+      </div>
+    )  
+  }
+
   render() {
     return (
-      <div style = {styles.inColStyle}>
+      <div style = {styles.inTitleStyle}>
         <h1>Recommended For You</h1>
         <h5>Here is our personalized recommendation for new beer styles based off people with similar tastes!</h5>
-        {this.state.photos ? this.renderBody() : null}
+        <div style = {styles.inRowStyle}>
+          {this.state.photos ? this.renderPhotos() : null}
+          {this.state.recBeers ? this.renderRecBeers() : null}
+          {this.state.recDesc ? this.renderDescriptions() : null}
+        </div>
       </div>
     );
   }
@@ -38,9 +86,20 @@ export class Recommended extends Component {
 const styles = {
   inColStyle: {
     display: "flex",
-    flex: 1,
+    flexDirection: "column",
+    justifyContent: "space-around",
+    marginRight: "30px",
+  },
+  inTitleStyle: {
+    display: "flex",
     flexDirection: "column",
     marginLeft: "200px",
+    marginRight: "200px",
+  },
+  inRowStyle: {
+    display: "flex",
+    flexDirection: "row",
+    marginTop: "50px",
   }
 }
 
