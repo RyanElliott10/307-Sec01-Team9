@@ -26,7 +26,7 @@ export class Home extends Component {
         <div style={styles.inColumnStyle}>
           <h2>Top Ten Beer Styles</h2>
           {this.state.topTen.map(beer => (
-            <h4 key={beer.id}>{beer.title}</h4>
+            <p key={beer.id}>{beer.title}</p>
           ))}
         </div>
       </div>
