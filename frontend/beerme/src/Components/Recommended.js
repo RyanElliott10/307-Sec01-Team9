@@ -41,7 +41,7 @@ export class Recommended extends Component {
       return null;
     }
     return (
-      <div style={styles.inColumnStyle}>
+      <div style={styles.inColStyle}>
         {this.state.photos.map(image => (  
           <img src= {image}/>
         ))}
@@ -87,6 +87,8 @@ const styles = {
   inColStyle: {
     display: "flex",
     flexDirection: "column",
+    justifyContent: "space-around",
+    marginRight: "30px",
   },
   inTitleStyle: {
     display: "flex",
