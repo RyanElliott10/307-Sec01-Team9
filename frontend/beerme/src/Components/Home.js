@@ -32,7 +32,7 @@ export class Home extends Component {
   renderBody() {
     return (
       <div style={styles.inRowStyle}>
-        <img src={BOTD_Photo} alt="BOTD_Photo" style={{ width: 150, height: 220, marginRight: "20px" }} />
+        <img src={BOTD_Photo} alt="BOTD_Photo" style={{ width: 110, height: 180, marginRight: "20px" }} />
         {this.renderBOTD()}
         <img src={Separator} alt="Separator" />
         {this.renderTopTen()}
