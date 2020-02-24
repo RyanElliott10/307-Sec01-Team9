@@ -25,7 +25,7 @@ export class Home extends Component {
           {this.state.topTen.map(beer => (
             <p key={beer.id}>{beer.title}</p>
           ))}
-        </div>
+      </div>
     )
   }
 
