@@ -28,5 +28,8 @@ namespace BeerMe.Models
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<BeerCategory> BeerCategories { get; set; }
         public virtual DbSet<BeerStyle> BeerStyles { get; set; }
+        public virtual DbSet<BeerABV> BeerABVs { get; set; }
+        public virtual DbSet<BeerColor> BeerColors { get; set; }
+        public virtual DbSet<BeerIBU> BeerIBUs { get; set; }
     }
 }

@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="BeerMeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BeerABV">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ABVLevel" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ABV" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="BeerCategories">
           <Key>
             <PropertyRef Name="CategoryId" />
@@ -12,12 +20,28 @@
           <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="CategoryName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="BeerColors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ColorName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ColorValue" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BeerIBU">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="BitternessLevel" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IBU" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="BeerStyles">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Style" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Style" Type="varchar(max)" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
@@ -44,7 +68,10 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="BeerMeModelStoreContainer">
+          <EntitySet Name="BeerABV" EntityType="Self.BeerABV" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BeerCategories" EntityType="Self.BeerCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BeerColors" EntityType="Self.BeerColors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BeerIBU" EntityType="Self.BeerIBU" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BeerStyles" EntityType="Self.BeerStyles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_BeerStyles_BeerCategories" Association="Self.FK_BeerStyles_BeerCategories">
@@ -64,6 +91,9 @@
             <End Role="BeerCategory" EntitySet="BeerCategories" />
             <End Role="BeerStyle" EntitySet="BeerStyles" />
           </AssociationSet>
+          <EntitySet Name="BeerABVs" EntityType="BeerMeModel.BeerABV" />
+          <EntitySet Name="BeerColors" EntityType="BeerMeModel.BeerColor" />
+          <EntitySet Name="BeerIBUs" EntityType="BeerMeModel.BeerIBU" />
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -89,7 +119,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Style" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Style" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="BeerCategory" Relationship="BeerMeModel.FK_BeerStyles_BeerCategories" FromRole="BeerStyle" ToRole="BeerCategory" />
         </EntityType>
@@ -105,6 +135,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="BeerABV">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ABVLevel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ABV" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BeerColor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ColorName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ColorValue" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BeerIBU">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="BitternessLevel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IBU" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -136,6 +190,33 @@
               <MappingFragment StoreEntitySet="BeerStyles">
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="Style" ColumnName="Style" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BeerABVs">
+            <EntityTypeMapping TypeName="BeerMeModel.BeerABV">
+              <MappingFragment StoreEntitySet="BeerABV">
+                <ScalarProperty Name="ABV" ColumnName="ABV" />
+                <ScalarProperty Name="ABVLevel" ColumnName="ABVLevel" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BeerColors">
+            <EntityTypeMapping TypeName="BeerMeModel.BeerColor">
+              <MappingFragment StoreEntitySet="BeerColors">
+                <ScalarProperty Name="ColorValue" ColumnName="ColorValue" />
+                <ScalarProperty Name="ColorName" ColumnName="ColorName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BeerIBUs">
+            <EntityTypeMapping TypeName="BeerMeModel.BeerIBU">
+              <MappingFragment StoreEntitySet="BeerIBU">
+                <ScalarProperty Name="IBU" ColumnName="IBU" />
+                <ScalarProperty Name="BitternessLevel" ColumnName="BitternessLevel" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

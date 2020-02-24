@@ -117,7 +117,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BeerABV.cs">
+      <DependentUpon>BeerMeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BeerCategory.cs">
+      <DependentUpon>BeerMeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BeerColor.cs">
+      <DependentUpon>BeerMeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BeerIBU.cs">
       <DependentUpon>BeerMeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BeerMeModel.Context.cs">
