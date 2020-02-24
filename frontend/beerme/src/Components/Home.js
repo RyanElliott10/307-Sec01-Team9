@@ -18,32 +18,33 @@ export class Home extends Component {
     });
   }
 
-  renderBody() {
+  renderTopTen() {
     return (
-      <div style={styles.inRowStyle}>
-        {this.renderBOTD()}
-        <img src={Separator} alt="Separator" />
-        <div style={styles.inListStyle}>
+      <div style={styles.inListStyle}>
           <h2>Top Ten Beer Styles</h2>
           {this.state.topTen.map(beer => (
             <p key={beer.id}>{beer.title}</p>
           ))}
-        </div>
+      </div>
+    )
+  }
+
+  renderBody() {
+    return (
+      <div style={styles.inRowStyle}>
+        <img src={BOTD_Photo} alt="BOTD_Photo" style={{ width: 110, height: 180, marginRight: "20px" }} />
+        {this.renderBOTD()}
+        <img src={Separator} alt="Separator" />
+        {this.renderTopTen()}
       </div>
     );
   }
 
   renderBOTD() {
-    return (
-      <div style={styles.inRowStyle}>
-        <img src={BOTD_Photo} alt="BOTD_Photo" style={{width: 150, height:200}}/>
-        <div style={styles.inColumnStyle}>
-          <h2>Beer Of The Day</h2>  
-          <p>This is where the Beer of The Day explanation lives.</p>
-          <p>More information about the Beer of The Day here.</p>
-          <p>And we continue to talk about the Beer of the Day.</p>
-          <p>Final thoughts about the beer. Wow, what a great beer!</p>
-        </div>
+    return (         
+      <div style={styles.inColumnStyle}>
+        <h2>Beer Of The Day</h2>
+        <p>Hive 56 is a dark sour ale aged with honey in an oak foudre for eighteen months. The beer is deep mahogany in color with aromas of strawberries, lemon, and tropical fruit; notes of dark chocolate, raspberries, and figs present themselves upon the first sip, followed by a lingering tartness.</p>
       </div>
     );
   }
@@ -81,7 +82,7 @@ export class Home extends Component {
 
   renderSearchBox() {
     return (
-      <div style= {{width: "50%", marginRight: "auto", marginLeft: "auto", marginBottom: "40px"}}>
+      <div style={{ width: "50%", marginRight: "auto", marginLeft: "auto", marginBottom: "40px" }}>
         <ReactSearchBox
           placeholder="Search"
           data={this.data}
@@ -118,16 +119,18 @@ const styles = {
     alignItems: "center",
   },
   inRowStyle: {
-    marginRight: "20px",
-    marginLeft: "20px",
+    marginRight: "70px",
+    marginLeft: "70px",
     display: "flex",
     flexDirection: "row",
+    flex: 1,
     alignItems: "top",
   },
   inColumnStyle: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "center", 
+    flex: 1,
   },
   inListStyle: {
     display: "flex",
