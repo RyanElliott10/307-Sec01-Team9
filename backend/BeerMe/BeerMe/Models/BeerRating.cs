@@ -12,13 +12,14 @@ namespace BeerMe.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BeerStyle
+    public partial class BeerRating
     {
         public int Id { get; set; }
-        public string Style { get; set; }
-        public int CategoryId { get; set; }
+        public int UserId { get; set; }
+        public int BeerId { get; set; }
+        public double Rating { get; set; }
     
-        public virtual BeerCategory BeerCategory { get; set; }
         public virtual Beer Beer { get; set; }
+        public virtual User User { get; set; }
     }
 }
