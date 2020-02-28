@@ -14,11 +14,21 @@ namespace BeerMe.Models
     
     public partial class BeerStyle
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public BeerStyle()
+        {
+            this.Beers = new HashSet<Beer>();
+        }
+    
         public int Id { get; set; }
         public string Style { get; set; }
         public int CategoryId { get; set; }
+        public Nullable<int> ColorValue { get; set; }
+        public Nullable<int> ABV { get; set; }
+        public Nullable<int> IBU { get; set; }
     
         public virtual BeerCategory BeerCategory { get; set; }
-        public virtual Beer Beer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Beer> Beers { get; set; }
     }
 }

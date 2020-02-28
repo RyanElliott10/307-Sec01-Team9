@@ -58,8 +58,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Style" Type="varchar(max)" Nullable="false" />
+          <Property Name="Style" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="ColorValue" Type="int" />
+          <Property Name="ABV" Type="int" />
+          <Property Name="IBU" Type="int" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -98,13 +101,13 @@
         </Association>
         <Association Name="FK_Beers_BeerStyles">
           <End Role="BeerStyles" Type="Self.BeerStyles" Multiplicity="1" />
-          <End Role="Beers" Type="Self.Beers" Multiplicity="0..1" />
+          <End Role="Beers" Type="Self.Beers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BeerStyles">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Beers">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="StyleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -153,29 +156,29 @@
         <EntityContainer Name="BeerMeEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="BeerMeModel.User" />
           <EntitySet Name="BeerCategories" EntityType="BeerMeModel.BeerCategory" />
+          <EntitySet Name="BeerABVs" EntityType="BeerMeModel.BeerABV" />
+          <EntitySet Name="BeerColors" EntityType="BeerMeModel.BeerColor" />
+          <EntitySet Name="BeerIBUs" EntityType="BeerMeModel.BeerIBU" />
+          <EntitySet Name="BeerRatings" EntityType="BeerMeModel.BeerRating" />
+          <AssociationSet Name="FK_BeerRatings_Users" Association="BeerMeModel.FK_BeerRatings_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="BeerRating" EntitySet="BeerRatings" />
+          </AssociationSet>
+          <EntitySet Name="Beers" EntityType="BeerMeModel.Beer" />
           <EntitySet Name="BeerStyles" EntityType="BeerMeModel.BeerStyle" />
           <AssociationSet Name="FK_BeerStyles_BeerCategories" Association="BeerMeModel.FK_BeerStyles_BeerCategories">
             <End Role="BeerCategory" EntitySet="BeerCategories" />
             <End Role="BeerStyle" EntitySet="BeerStyles" />
           </AssociationSet>
-          <EntitySet Name="BeerABVs" EntityType="BeerMeModel.BeerABV" />
-          <EntitySet Name="BeerColors" EntityType="BeerMeModel.BeerColor" />
-          <EntitySet Name="BeerIBUs" EntityType="BeerMeModel.BeerIBU" />
-          <EntitySet Name="BeerRatings" EntityType="BeerMeModel.BeerRating" />
-          <EntitySet Name="Beers" EntityType="BeerMeModel.Beer" />
           <AssociationSet Name="FK_BeerRatings_Beers" Association="BeerMeModel.FK_BeerRatings_Beers">
             <End Role="Beer" EntitySet="Beers" />
-            <End Role="BeerRating" EntitySet="BeerRatings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BeerRatings_Users" Association="BeerMeModel.FK_BeerRatings_Users">
-            <End Role="User" EntitySet="Users" />
             <End Role="BeerRating" EntitySet="BeerRatings" />
           </AssociationSet>
           <AssociationSet Name="FK_Beers_BeerStyles" Association="BeerMeModel.FK_Beers_BeerStyles">
             <End Role="BeerStyle" EntitySet="BeerStyles" />
             <End Role="Beer" EntitySet="Beers" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -196,28 +199,6 @@
           <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="BeerStyles" Relationship="BeerMeModel.FK_BeerStyles_BeerCategories" FromRole="BeerCategory" ToRole="BeerStyle" />
         </EntityType>
-        <EntityType Name="BeerStyle">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Style" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="CategoryId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="BeerCategory" Relationship="BeerMeModel.FK_BeerStyles_BeerCategories" FromRole="BeerStyle" ToRole="BeerCategory" />
-          <NavigationProperty Name="Beer" Relationship="BeerMeModel.FK_Beers_BeerStyles" FromRole="BeerStyle" ToRole="Beer" />
-        </EntityType>
-        <Association Name="FK_BeerStyles_BeerCategories">
-          <End Type="BeerMeModel.BeerCategory" Role="BeerCategory" Multiplicity="1" />
-          <End Type="BeerMeModel.BeerStyle" Role="BeerStyle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BeerCategory">
-              <PropertyRef Name="CategoryId" />
-            </Principal>
-            <Dependent Role="BeerStyle">
-              <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="BeerABV">
           <Key>
             <PropertyRef Name="Id" />
@@ -250,31 +231,9 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="BeerId" Type="Int32" Nullable="false" />
           <Property Name="Rating" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Beer" Relationship="BeerMeModel.FK_BeerRatings_Beers" FromRole="BeerRating" ToRole="Beer" />
           <NavigationProperty Name="User" Relationship="BeerMeModel.FK_BeerRatings_Users" FromRole="BeerRating" ToRole="User" />
+          <NavigationProperty Name="Beer" Relationship="BeerMeModel.FK_BeerRatings_Beers" FromRole="BeerRating" ToRole="Beer" />
         </EntityType>
-        <EntityType Name="Beer">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="BeerName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="StyleId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="BeerRatings" Relationship="BeerMeModel.FK_BeerRatings_Beers" FromRole="Beer" ToRole="BeerRating" />
-          <NavigationProperty Name="BeerStyle" Relationship="BeerMeModel.FK_Beers_BeerStyles" FromRole="Beer" ToRole="BeerStyle" />
-        </EntityType>
-        <Association Name="FK_BeerRatings_Beers">
-          <End Type="BeerMeModel.Beer" Role="Beer" Multiplicity="1" />
-          <End Type="BeerMeModel.BeerRating" Role="BeerRating" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Beer">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BeerRating">
-              <PropertyRef Name="BeerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_BeerRatings_Users">
           <End Type="BeerMeModel.User" Role="User" Multiplicity="1" />
           <End Type="BeerMeModel.BeerRating" Role="BeerRating" Multiplicity="*" />
@@ -287,19 +246,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Beer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="BeerName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StyleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BeerRatings" Relationship="BeerMeModel.FK_BeerRatings_Beers" FromRole="Beer" ToRole="BeerRating" />
+          <NavigationProperty Name="BeerStyle" Relationship="BeerMeModel.FK_Beers_BeerStyles" FromRole="Beer" ToRole="BeerStyle" />
+        </EntityType>
+        <EntityType Name="BeerStyle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Style" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="ColorValue" Type="Int32" />
+          <Property Name="ABV" Type="Int32" />
+          <Property Name="IBU" Type="Int32" />
+          <NavigationProperty Name="BeerCategory" Relationship="BeerMeModel.FK_BeerStyles_BeerCategories" FromRole="BeerStyle" ToRole="BeerCategory" />
+          <NavigationProperty Name="Beers" Relationship="BeerMeModel.FK_Beers_BeerStyles" FromRole="BeerStyle" ToRole="Beer" />
+        </EntityType>
+        <Association Name="FK_BeerStyles_BeerCategories">
+          <End Type="BeerMeModel.BeerCategory" Role="BeerCategory" Multiplicity="1" />
+          <End Type="BeerMeModel.BeerStyle" Role="BeerStyle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BeerCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="BeerStyle">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BeerRatings_Beers">
+          <End Type="BeerMeModel.Beer" Role="Beer" Multiplicity="1" />
+          <End Type="BeerMeModel.BeerRating" Role="BeerRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BeerRating">
+              <PropertyRef Name="BeerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Beers_BeerStyles">
           <End Type="BeerMeModel.BeerStyle" Role="BeerStyle" Multiplicity="1" />
-          <End Type="BeerMeModel.Beer" Role="Beer" Multiplicity="0..1" />
+          <End Type="BeerMeModel.Beer" Role="Beer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BeerStyle">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Beer">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="StyleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -322,15 +328,6 @@
               <MappingFragment StoreEntitySet="BeerCategories">
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BeerStyles">
-            <EntityTypeMapping TypeName="BeerMeModel.BeerStyle">
-              <MappingFragment StoreEntitySet="BeerStyles">
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="Style" ColumnName="Style" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -376,6 +373,18 @@
               <MappingFragment StoreEntitySet="Beers">
                 <ScalarProperty Name="StyleId" ColumnName="StyleId" />
                 <ScalarProperty Name="BeerName" ColumnName="BeerName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BeerStyles">
+            <EntityTypeMapping TypeName="BeerMeModel.BeerStyle">
+              <MappingFragment StoreEntitySet="BeerStyles">
+                <ScalarProperty Name="IBU" ColumnName="IBU" />
+                <ScalarProperty Name="ABV" ColumnName="ABV" />
+                <ScalarProperty Name="ColorValue" ColumnName="ColorValue" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Style" ColumnName="Style" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

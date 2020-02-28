@@ -19,7 +19,7 @@ namespace BeerMe.Models
         public int BeerId { get; set; }
         public double Rating { get; set; }
     
-        public virtual Beer Beer { get; set; }
         public virtual User User { get; set; }
+        public virtual Beer Beer { get; set; }
     }
 }
