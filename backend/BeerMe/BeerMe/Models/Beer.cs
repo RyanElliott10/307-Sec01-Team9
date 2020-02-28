@@ -12,23 +12,20 @@ namespace BeerMe.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BeerStyle
+    public partial class Beer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public BeerStyle()
+        public Beer()
         {
-            this.Beers = new HashSet<Beer>();
+            this.BeerRatings = new HashSet<BeerRating>();
         }
     
         public int Id { get; set; }
-        public string Style { get; set; }
-        public int CategoryId { get; set; }
-        public Nullable<int> ColorValue { get; set; }
-        public Nullable<int> ABV { get; set; }
-        public Nullable<int> IBU { get; set; }
+        public string BeerName { get; set; }
+        public int StyleId { get; set; }
     
-        public virtual BeerCategory BeerCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Beer> Beers { get; set; }
+        public virtual ICollection<BeerRating> BeerRatings { get; set; }
+        public virtual BeerStyle BeerStyle { get; set; }
     }
 }

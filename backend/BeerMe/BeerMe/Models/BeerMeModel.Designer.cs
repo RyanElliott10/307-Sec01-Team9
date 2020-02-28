@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\School\Documents\GitHub\307-Sec01-Team9\backend\BeerMe\BeerMe\Models\BeerMeModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\vedan\source\repos\307-Sec01-Team9\backend\BeerMe\BeerMe\Models\BeerMeModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

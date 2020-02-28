@@ -110,6 +110,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BeerCategoriesController.cs" />
+    <Compile Include="Controllers\BeerRatingsController.cs" />
     <Compile Include="Controllers\BeerStylesController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -117,7 +118,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Beer.cs">
+      <DependentUpon>BeerMeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BeerABV.cs">
+      <DependentUpon>BeerMeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BeerCategory.cs">
+      <DependentUpon>BeerMeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BeerColor.cs">
+      <DependentUpon>BeerMeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BeerIBU.cs">
       <DependentUpon>BeerMeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BeerMeModel.Context.cs">
@@ -134,6 +147,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BeerMeModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BeerRating.cs">
+      <DependentUpon>BeerMeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BeerStyle.cs">
       <DependentUpon>BeerMeModel.tt</DependentUpon>
