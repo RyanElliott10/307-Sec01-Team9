@@ -8,6 +8,48 @@ namespace BeerMe.Models
     public partial class User
     {
         private static BeerMeEntities db = new BeerMeEntities();
+
+        public List<int> findReccomendedBeers()
+        {
+            List<int> beersRatedByUser = this.BeerRatings.Select(beerRating => beerRating.Beer.Id).ToList();
+            int averageBeersId = (int)beersRatedByUser.Average();
+            int beerStartIndex = 1;
+            int beerEndIndex = 111;
+            int currentBeerForwardIndex = averageBeersId + 1;
+            int currentBeerBackwardIndex = averageBeersId - 1;
+            List<int> reccomendedBeerIds = new List<int>();
+            int noOfReccomendedBeers;
+            if (!beersRatedByUser.Contains(averageBeersId))
+            {
+                reccomendedBeerIds.Add(averageBeersId);
+                noOfReccomendedBeers = 1;
+            }
+            else
+            {
+                noOfReccomendedBeers = 0;
+            }
+            
+            while(currentBeerBackwardIndex >= beerStartIndex && currentBeerForwardIndex <= beerEndIndex && noOfReccomendedBeers <= 5)
+            {
+                if (!beersRatedByUser.Contains(currentBeerForwardIndex))
+                {
+                    reccomendedBeerIds.Add(currentBeerForwardIndex);
+                    noOfReccomendedBeers += 1;
+                }
+                if (!beersRatedByUser.Contains(currentBeerBackwardIndex))
+                {
+                    reccomendedBeerIds.Add(currentBeerBackwardIndex);
+                    noOfReccomendedBeers += 1;
+                }
+
+                currentBeerForwardIndex += 1;
+                currentBeerBackwardIndex -= 1;
+
+
+            }
+
+            return reccomendedBeerIds;
+        }
         public static bool Login(UserLoginDetails details,User dbUser)
         {
             if(details.email.Length == 0 || details.password.Length == 0)
