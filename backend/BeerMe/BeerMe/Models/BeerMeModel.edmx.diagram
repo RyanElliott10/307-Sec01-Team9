@@ -5,15 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="097ad61bb77141ea8475fb921cb25ed9" Name="Diagram1" ZoomLevel="88">
-        <EntityTypeShape EntityType="BeerMeModel.User" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="BeerMeModel.BeerCategory" Width="1.5" PointX="3.375" PointY="1" />
-        <EntityTypeShape EntityType="BeerMeModel.BeerABV" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="BeerMeModel.BeerColor" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="BeerMeModel.BeerIBU" Width="1.5" PointX="4.75" PointY="3.75" />
-        <EntityTypeShape EntityType="BeerMeModel.BeerRating" Width="1.5" PointX="10.125" PointY="0.875" />
+        <EntityTypeShape EntityType="BeerMeModel.User" Width="1.5" PointX="0.75" PointY="0.5" />
+        <EntityTypeShape EntityType="BeerMeModel.BeerCategory" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="BeerMeModel.BeerABV" Width="1.5" PointX="0.75" PointY="3.5" />
+        <EntityTypeShape EntityType="BeerMeModel.BeerColor" Width="1.5" PointX="2.75" PointY="3.5" />
+        <EntityTypeShape EntityType="BeerMeModel.BeerIBU" Width="1.5" PointX="4.75" PointY="3.5" />
+        <EntityTypeShape EntityType="BeerMeModel.BeerRating" Width="1.5" PointX="10.125" PointY="0.625" />
         <AssociationConnector Association="BeerMeModel.FK_BeerRatings_Users" />
-        <EntityTypeShape EntityType="BeerMeModel.Beer" Width="1.5" PointX="7.875" PointY="6.375" />
-        <EntityTypeShape EntityType="BeerMeModel.BeerStyle" Width="1.5" PointX="5.625" PointY="6.125" />
+        <EntityTypeShape EntityType="BeerMeModel.Beer" Width="1.5" PointX="7.625" PointY="1" />
+        <EntityTypeShape EntityType="BeerMeModel.BeerStyle" Width="1.5" PointX="5.375" PointY="0.75" />
         <AssociationConnector Association="BeerMeModel.FK_BeerStyles_BeerCategories" />
         <AssociationConnector Association="BeerMeModel.FK_BeerRatings_Beers" />
         <AssociationConnector Association="BeerMeModel.FK_Beers_BeerStyles" />
