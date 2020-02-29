@@ -24,7 +24,7 @@ export class Account extends Component {
 
   _handleAddBeerSubmit = async event => {
     event.preventDefault();
-    console.log("STATE:", this.state);
+    MainController.addBeer(this.state.addBeerData);
   };
 
   _renderControl(type, value, isDisabled, onChange = () => {}) {
@@ -69,54 +69,46 @@ export class Account extends Component {
       return null;
     }
     return (
-      <form onSubmit={this._handleAddBeerSubmit}>
-        <Form onSubmit={this._handleAddBeerSubmit}>
-          <Form.Row>
-            <Form.Group as={Col} controlId="formGridBeerName">
-              <Form.Label>Name of Beer</Form.Label>
-              {this._renderControl("name", "Corona", false, e => {
-                const newBeerData = this.state.addBeerData;
-                newBeerData.name = e.target.value;
-                this.setState({
-                  addBeerData: newBeerData
-                });
-              })}
-            </Form.Group>
-            <Form.Group as={Col} controlId="formGridBeerStyle">
-              <Form.Label>Style(s)</Form.Label>
-              {this._renderControl("name", "IPA", false, e => {
-                const newBeerData = this.state.addBeerData;
-                newBeerData.styles = e.target.value;
-                this.setState({
-                  addBeerData: newBeerData
-                });
-              })}
-            </Form.Group>
-          </Form.Row>
+      <Form as={Col}>
+        <Form.Row>
+          <Form.Group as={Col} controlId="formGridBeerName">
+            <Form.Label>Name of Beer</Form.Label>
+            {this._renderControl("name", "Corona", false, e => {
+              const newBeerData = this.state.addBeerData;
+              newBeerData.name = e.target.value;
+              this.setState({
+                addBeerData: newBeerData
+              });
+            })}
+          </Form.Group>
+          <Form.Group as={Col} controlId="formGridBeerStyle">
+            <Form.Label>Style(s)</Form.Label>
+            {this._renderControl("name", "IPA", false, e => {
+              const newBeerData = this.state.addBeerData;
+              newBeerData.styles = e.target.value;
+              this.setState({
+                addBeerData: newBeerData
+              });
+            })}
+          </Form.Group>
+        </Form.Row>
 
-          <Form.Row>
-            <Form.Group as={Col} controlId="formGridBeerColor">
-              <Form.Label>Color</Form.Label>
-              {this._renderControl("name", "Dark", false, e => {
-                const newBeerData = this.state.addBeerData;
-                newBeerData.color = e.target.value;
-                this.setState({
-                  addBeerData: newBeerData
-                });
-              })}
-            </Form.Group>
-          </Form.Row>
-          <ButtonToolbar style={{ justifyContent: "space-between" }}>
-            <Button
-              type="submit"
-              onSubmit={this._handleAddBeerSubmit}
-              disabled={!this._validateAddBeerForm()}
-            >
-              Add Beer
-            </Button>
-          </ButtonToolbar>
-        </Form>
-      </form>
+        <Form.Row>
+          <Form.Group as={Col} controlId="formGridBeerColor">
+            <Form.Label>Color</Form.Label>
+            {this._renderControl("name", "Dark", false, e => {
+              const newBeerData = this.state.addBeerData;
+              newBeerData.color = e.target.value;
+              this.setState({
+                addBeerData: newBeerData
+              });
+            })}
+          </Form.Group>
+        </Form.Row>
+        <Button type="submit" disabled={!this._validateAddBeerForm()} onClick={this._handleAddBeerSubmit}>
+          Add Beer
+        </Button>
+      </Form>
     );
   }
 
