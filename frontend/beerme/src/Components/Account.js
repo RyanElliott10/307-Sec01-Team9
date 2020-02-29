@@ -40,21 +40,21 @@ export class Account extends Component {
 
   _renderCommon() {
     return (
-      <Form.Group as={Col} controlid="formGridFirstName">
+      <Form.Group as={Col} controlId="formGridFirstName">
         <Form onSubmit={this._handleCreateAccountSubmit}>
           <Form.Row>
-            <Form.Group as={Col} controlid="formGridFirstName">
+            <Form.Group as={Col} controlId="formGridFirstName">
               <Form.Label>First Name</Form.Label>
               {this._renderControl("name", "Mark", true)}
             </Form.Group>
-            <Form.Group as={Col} controlid="formGridLastName">
+            <Form.Group as={Col} controlId="formGridLastName">
               <Form.Label>Last Name</Form.Label>
               {this._renderControl("name", "Johnson", true)}
             </Form.Group>
           </Form.Row>
 
           <Form.Row>
-            <Form.Group as={Col} controlid="formGridEmail">
+            <Form.Group as={Col} controlId="formGridEmail">
               <Form.Label>Email Address</Form.Label>
               {this._renderControl("email", "Email", true)}
             </Form.Group>
@@ -72,7 +72,7 @@ export class Account extends Component {
       <form onSubmit={this._handleAddBeerSubmit}>
         <Form onSubmit={this._handleAddBeerSubmit}>
           <Form.Row>
-            <Form.Group as={Col} controlid="formGridBeerName">
+            <Form.Group as={Col} controlId="formGridBeerName">
               <Form.Label>Name of Beer</Form.Label>
               {this._renderControl("name", "Corona", false, e => {
                 const newBeerData = this.state.addBeerData;
@@ -82,7 +82,7 @@ export class Account extends Component {
                 });
               })}
             </Form.Group>
-            <Form.Group as={Col} controlid="formGridBeerStyle">
+            <Form.Group as={Col} controlId="formGridBeerStyle">
               <Form.Label>Style(s)</Form.Label>
               {this._renderControl("name", "IPA", false, e => {
                 const newBeerData = this.state.addBeerData;
@@ -95,7 +95,7 @@ export class Account extends Component {
           </Form.Row>
 
           <Form.Row>
-            <Form.Group as={Col} controlid="formGridBeerColor">
+            <Form.Group as={Col} controlId="formGridBeerColor">
               <Form.Label>Color</Form.Label>
               {this._renderControl("name", "Dark", false, e => {
                 const newBeerData = this.state.addBeerData;
