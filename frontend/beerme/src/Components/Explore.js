@@ -86,9 +86,9 @@ export class Explore extends Component {
   };
 
   _onNextClick = () => {
-    const selections = this.pages[
-      this.state.currentPageIndex
-    ].checkboxes.filter(data => data.isChecked);
+    // const selections = this.pages[
+    //   this.state.currentPageIndex
+    // ].checkboxes.filter(data => data.isChecked);
 
     if (this.state.currentPageIndex === this.pages.length - 1) {
       this._submitSelections();
@@ -200,7 +200,11 @@ export class Explore extends Component {
         </Button>
         <Dots
           length={this.pages.length}
-          active={this.state.currentPageIndex}
+          active={
+            this.state.currentPageIndex === null
+              ? 0
+              : this.state.currentPageIndex
+          }
           size={10}
         />
         <Button
