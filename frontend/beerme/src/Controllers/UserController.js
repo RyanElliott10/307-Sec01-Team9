@@ -56,6 +56,10 @@ class UserController {
     return retValue;
   }
 
+  static async addBeer(data) {
+    console.log(data);
+  }
+
   static getCurrentUser() {
     return (
       this.email === Constants.DUMMY_LOGIN_EMAIL &&
