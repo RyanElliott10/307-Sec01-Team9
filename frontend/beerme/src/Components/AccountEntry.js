@@ -223,6 +223,7 @@ export class AccountEntry extends Component {
             });
           })}
         </Form.Group>
+
         <Form.Group controlId="formGroupPassword">
           <Form.Label>Password</Form.Label>
           {this._renderControl("password", "Password", e => {
@@ -233,6 +234,7 @@ export class AccountEntry extends Component {
             });
           })}
         </Form.Group>
+
         <ButtonToolbar style={{ justifyContent: "space-between" }}>
           <Button disabled={!this._validateLoginForm()} type="submit">
             Login

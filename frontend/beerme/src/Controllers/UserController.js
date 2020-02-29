@@ -62,6 +62,10 @@ class UserController {
       this.password === Constants.DUMMY_LOGIN_PASSWORD
     );
   }
+
+  static isBusiness() {
+    return true;
+  }
 }
 
 export default UserController;
