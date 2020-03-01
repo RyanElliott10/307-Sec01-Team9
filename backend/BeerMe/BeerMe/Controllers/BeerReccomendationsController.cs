@@ -8,13 +8,13 @@ using System.Web.Http;
 
 namespace BeerMe.Controllers
 {
-    public class BeerReccomendationsController : ApiController
+    public class BeerRecommendationsController : ApiController
     {
         private BeerMeEntities db = new BeerMeEntities();
 
         public IHttpActionResult PostUserForBeerReccomendations(User user)
         {
-            return Ok(user.findReccomendedBeers());
+            return Ok(user.findRecommendedBeers());
         }
 
     }

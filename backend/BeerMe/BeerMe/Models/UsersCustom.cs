@@ -9,9 +9,11 @@ namespace BeerMe.Models
     {
         private static BeerMeEntities db = new BeerMeEntities();
 
-        public List<int> findReccomendedBeers()
+        public List<int> findRecommendedBeers()
         {
-            List<int> beersRatedByUser = this.BeerRatings.Select(beerRating => beerRating.Beer.Id).ToList();
+            var userBeerRatings = db.BeerRatings.Where(ratings => ratings.UserId == this.Id && ratings.Rating >= 3.5).ToList();
+            this.BeerRatings = userBeerRatings;
+            List<int> beersRatedByUser = this.BeerRatings.Select(beerRating => beerRating.BeerId).ToList();
             if (beersRatedByUser.Count == 0)
             {
                 return new List<int>();
@@ -33,12 +35,16 @@ namespace BeerMe.Models
                 noOfReccomendedBeers = 0;
             }
             
-            while(currentBeerBackwardIndex >= beerStartIndex && currentBeerForwardIndex <= beerEndIndex && noOfReccomendedBeers <= 5)
+            while(currentBeerBackwardIndex >= beerStartIndex && currentBeerForwardIndex <= beerEndIndex && noOfReccomendedBeers < 5)
             {
                 if (!beersRatedByUser.Contains(currentBeerForwardIndex))
                 {
                     reccomendedBeerIds.Add(currentBeerForwardIndex);
                     noOfReccomendedBeers += 1;
+                }
+                if(noOfReccomendedBeers >= 5)
+                {
+                    break;
                 }
                 if (!beersRatedByUser.Contains(currentBeerBackwardIndex))
                 {
