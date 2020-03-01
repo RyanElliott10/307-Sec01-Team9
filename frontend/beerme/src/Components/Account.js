@@ -68,8 +68,11 @@ export class Account extends Component {
     if (!MainController.isBusiness()) {
       return null;
     }
+
     return (
       <Form as={Col}>
+        <h2>Add a Beer!</h2>
+        <hr></hr>
         <Form.Row>
           <Form.Group as={Col} controlId="formGridBeerName">
             <Form.Label>Name of Beer</Form.Label>
@@ -105,7 +108,11 @@ export class Account extends Component {
             })}
           </Form.Group>
         </Form.Row>
-        <Button type="submit" disabled={!this._validateAddBeerForm()} onClick={this._handleAddBeerSubmit}>
+        <Button
+          type="submit"
+          disabled={!this._validateAddBeerForm()}
+          onClick={this._handleAddBeerSubmit}
+        >
           Add Beer
         </Button>
       </Form>
@@ -115,10 +122,10 @@ export class Account extends Component {
   render() {
     return (
       <div className="Login" style={broadStyle}>
-        <Form.Row>
+        <Form>
           {this._renderCommon()}
           {this._renderAddBeer()}
-        </Form.Row>
+        </Form>
       </div>
     );
   }
