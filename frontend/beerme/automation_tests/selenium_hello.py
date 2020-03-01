@@ -4,8 +4,8 @@ import time
 from selenium import webdriver
 
 URL = 'http://localhost:3000/'
-
 DRIVER_PATH = f"{os.getcwd()}/geckodriver"
+
 driver = webdriver.Firefox(executable_path=DRIVER_PATH)
 driver.set_page_load_timeout(10)
 driver.get(URL)
