@@ -9,7 +9,7 @@ export class Recommended extends Component {
 
   componentDidMount() {
     NetClient.get(`https://jsonplaceholder.typicode.com/photos/`).then(res => {
-      const pics = res.slice(0, 10).map(data => data.thumbnailUrl);
+      const pics = res.slice(0, 5).map(data => data.thumbnailUrl);
       this.setState({
         photos: pics,
         loading: false,
@@ -19,14 +19,14 @@ export class Recommended extends Component {
 
     NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
       this.setState({
-        recBeers: data.slice(0, 10)
+        recBeers: data.slice(0, 5)
       });
       localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
     });
 
     NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
       this.setState({
-        recDesc: data.slice(20, 30)
+        recDesc: data.slice(20, 25)
       });
       localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
     });
