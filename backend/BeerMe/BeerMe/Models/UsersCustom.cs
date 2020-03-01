@@ -12,6 +12,10 @@ namespace BeerMe.Models
         public List<int> findReccomendedBeers()
         {
             List<int> beersRatedByUser = this.BeerRatings.Select(beerRating => beerRating.Beer.Id).ToList();
+            if (beersRatedByUser.Count == 0)
+            {
+                return new List<int>();
+            }
             int averageBeersId = (int)beersRatedByUser.Average();
             int beerStartIndex = 1;
             int beerEndIndex = 111;
