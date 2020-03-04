@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { Button, ButtonToolbar, Form, Col } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 
-import MainController from "../Controllers/UserController";
+import UserController from "../Controllers/UserController";
 
 export class AccountEntry extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      signedIn: MainController.getCurrentUser(),
+      signedIn: UserController.getCurrentUser(),
       isBusiness: false,
       createAccountData: {
         firstName: "",
@@ -51,7 +51,7 @@ export class AccountEntry extends Component {
     event.preventDefault();
     console.log(this.state);
     if (
-      await MainController.login(
+      await UserController.login(
         this.state.signInData.email,
         this.state.signInData.password
       )
@@ -74,7 +74,7 @@ export class AccountEntry extends Component {
     }
 
     if (
-      await MainController.createAccount(
+      await UserController.createAccount(
         this.state.createAccountData.firstName,
         this.state.createAccountData.lastName,
         this.state.createAccountData.email,
