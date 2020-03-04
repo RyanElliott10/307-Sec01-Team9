@@ -1,6 +1,13 @@
 import React, { Component } from "react";
-import { Button, ButtonToolbar, Form, Col } from "react-bootstrap";
-import MainController from "../Controllers/UserController";
+import {
+  Button,
+  Form,
+  Col,
+  DropdownButton,
+  ButtonToolbar,
+  Dropdown
+} from "react-bootstrap";
+import UserController from "../Controllers/UserController";
 
 export class Account extends Component {
   constructor(props) {
@@ -24,7 +31,7 @@ export class Account extends Component {
 
   _handleAddBeerSubmit = async event => {
     event.preventDefault();
-    MainController.addBeer(this.state.addBeerData);
+    UserController.addBeer(this.state.addBeerData);
   };
 
   _renderControl(type, value, isDisabled, onChange = () => {}) {
@@ -64,8 +71,26 @@ export class Account extends Component {
     );
   }
 
+  _renderDropdown(title, options) {
+    return (
+      <ButtonToolbar>
+        <DropdownButton
+          drop={"down"}
+          variant="secondary"
+          title={title}
+          id={`${title}-selector`}
+          key={`${title}-selector`}
+        >
+          {options.map(title => (
+            <Dropdown.Item eventKey="title">`${title}`</Dropdown.Item>
+          ))}
+        </DropdownButton>
+      </ButtonToolbar>
+    );
+  }
+
   _renderAddBeer() {
-    if (!MainController.isBusiness()) {
+    if (!UserController.isBusiness) {
       return null;
     }
 

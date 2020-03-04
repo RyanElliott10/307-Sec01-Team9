@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import * as Constants from "../../Utils/Constants";
-import MainController from "../../Controllers/UserController";
+import UserController from "../../Controllers/UserController";
 
 export function Header() {
   const onMouseOver = event => {
@@ -69,7 +69,7 @@ export function Header() {
           </h6>
         </Link>
         <Link
-          to={MainController.getCurrentUser() ? "/account" : "/account-entry"}
+          to={UserController.getCurrentUser() ? "/account" : "/account-entry"}
           style={recStyle}
           className={"account_account_entry_header_link"}
         >
