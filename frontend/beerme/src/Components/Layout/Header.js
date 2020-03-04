@@ -50,7 +50,11 @@ export function Header() {
       <div
         style={{ display: "flex", flexDirection: "row", paddingRight: "30px" }}
       >
-        <Link to="/explore" style={exploreStyle} className={"explore_header_link"}>
+        <Link
+          to="/explore"
+          style={exploreStyle}
+          className={"explore_header_link"}
+        >
           <h6
             onClick={onExploreClick}
             onMouseEnter={event => onMouseOver(event)}
@@ -59,7 +63,11 @@ export function Header() {
             Explore
           </h6>
         </Link>
-        <Link to="/recommended" style={recStyle} className={"recommended_header_link"}>
+        <Link
+          to="/recommended"
+          style={recStyle}
+          className={"recommended_header_link"}
+        >
           <h6
             onClick={onRecClick}
             onMouseEnter={event => onMouseOver(event)}
