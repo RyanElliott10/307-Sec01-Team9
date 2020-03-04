@@ -57,7 +57,6 @@ class UserController {
 
     let retValue = null;
     NetClient.post("https://localhost:44300/api/users", data).then(data => {
-      console.log("DATA:", data);
       if (data) {
         this.firstName = data.Name.split(" ")[0];
         this.lastName = data.Name.split(" ")[1];
