@@ -4,6 +4,7 @@ import Logo from "../img/BeerMe_Logo.png";
 import NetClient from "../Utils/NetClient";
 import Separator from "../img/Sep_Img.png";
 import ReactSearchBox from "react-search-box";
+import { Route } from 'react-router-dom';
 
 export class Home extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ export class Home extends Component {
       this.setState({ topTen: data.slice(0, 10) });
       localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
     });
+
   }
 
   renderTopTen() {
@@ -100,11 +102,14 @@ export class Home extends Component {
           marginBottom: "40px"
         }}
       >
+      <Route render={({ history}) => (
         <ReactSearchBox
           placeholder="Search"
           data={this.data}
           callback={record => console.log(record)}
+          onSelect={() => { history.push('/search-result') }}
         />
+        )} />
       </div>
     );
   }
