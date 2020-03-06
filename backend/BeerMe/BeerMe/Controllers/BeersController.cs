@@ -17,9 +17,16 @@ namespace BeerMe.Controllers
         private BeerMeEntities db = new BeerMeEntities();
 
         // GET: api/Beers
-        public IQueryable<Beer> GetBeers()
+        public IHttpActionResult GetBeers()
         {
-            return db.Beers;
+            var beers = db.Beers.Select(beer => new { 
+                Id = beer.Id,
+                BeerName = beer.BeerName,
+                Style = beer.BeerStyle.Style,
+                ABV = beer.BeerStyle.ABV,
+                IBU = beer.BeerStyle.IBU
+            });
+            return Ok(beers);
         }
 
         // GET: api/Beers/5
