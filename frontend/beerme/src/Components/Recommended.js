@@ -21,14 +21,14 @@ export class Recommended extends Component {
       this.setState({
         recBeers: data.slice(0, 5)
       });
-      localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
+      localStorage.setItem("appState", JSON.stringify(data.slice(0, 5)));
     });
 
     NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
       this.setState({
-        recDesc: data.slice(20, 25)
+        recDesc: data.slice(20, 30)
       });
-      localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
+      localStorage.setItem("appState", JSON.stringify(data.slice(20, 30)));
     });
   }
 

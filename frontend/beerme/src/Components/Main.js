@@ -6,6 +6,7 @@ import AccountEntry from "./AccountEntry";
 import Explore from "./Explore";
 import Home from "./Home";
 import Recommended from "./Recommended";
+import Rate from "./Rate";
 
 const Main = () => {
   return (
@@ -15,6 +16,7 @@ const Main = () => {
       <Route exact path="/explore" component={Explore} />
       <Route exact path="/" component={Home} />
       <Route exact path="/recommended" component={Recommended} />
+      <Route exact path="/search-result" component={Rate} />
     </Switch>
   );
 };

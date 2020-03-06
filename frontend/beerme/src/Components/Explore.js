@@ -5,6 +5,7 @@ import Dots from "react-carousel-dots";
 import * as Constants from "../Utils/Constants";
 import ExploreSelections from "../Models/ExploreSelections";
 import NetClient from "../Utils/NetClient";
+import Recommended from "./Recommended";
 
 const ExploreSpoofData = [
   {
@@ -226,6 +227,7 @@ export class Explore extends Component {
         {this._renderTopBlurb()}
         {this._renderSelectionBox()}
         {this._renderProgressionButtons()}
+        <Recommended />
       </div>
     );
   }
