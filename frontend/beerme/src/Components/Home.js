@@ -102,13 +102,14 @@ export class Home extends Component {
           marginBottom: "40px"
         }}
       >
-      <Route render={({ history}) => (
-        <ReactSearchBox
-          placeholder="Search"
-          data={this.data}
-          callback={record => console.log(record)}
-          onSelect={() => { history.push('/search-result') }}
-        />
+        
+        <Route render={({ history}) => (
+          <ReactSearchBox
+            placeholder="Search"
+            data={this.data}
+            callback={record => console.log(record)}
+            onSelect={() => { history.push('/search-result') }}
+          />
         )} />
       </div>
     );
