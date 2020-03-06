@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import StarRatings from './react-star-ratings';
+import StarRatings from 'react-star-ratings';
 import Photo from "../img/BOTD_photo.png";
 
 export default class Rate extends Component {
