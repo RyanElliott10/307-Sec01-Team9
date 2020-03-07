@@ -17,29 +17,83 @@ export default class Rate extends Component {
     render() {
       // rating = 2;
       return (
-        <div style={{display: "flex",  marginTop: "60px", flexDirection: "column", alignItems: "center"}}>
+        <div style={styles.inTitleStyle}>
           <h1>
             Corona
           </h1>
-          <div style={{marginTop: "50px", alignItems: "center"}}>
-          <h5>
-              Rate this beer so we know what you like!
+          <h5 style={{alignItems: "right"}}>
+            Average Rating:
           </h5>
-            <StarRatings
-              rating={this.state.rating}
-              starRatedColor="blue"
-              starHoverColor="grey"
-              changeRating={this.changeRating}
-              numberOfStars={5}
-              name='rating'
-              starSpacing="15px"
-            />
+          <div style={styles.inColStyle}>
+            <div style={styles.inRowStyle}>
+              <img
+                src={Photo}
+                alt="Photo"
+                style={{ width: 110, height: 180, marginRight: "20px" }}
+              />
+              <div style={styles.inBodyStyle}>
+                
+                <h5>
+                  Style:
+                </h5>
+                <h5>
+                  Alcohol Per Volume:
+                </h5>
+                <h5>
+                  International Bittering Unit:
+                </h5>
+              </div>   
+            </div>
+            <div style={styles.inColStyle}>
+              <h5>
+                  Rate this beer!
+              </h5>
+              <StarRatings
+                rating={this.state.rating}
+                starRatedColor="blue"
+                starHoverColor="grey"
+                changeRating={this.changeRating}
+                numberOfStars={5}
+                name='rating'
+                starSpacing="15px"
+              />
+            </div>
           </div>
         </div>
       );
     }
 }
 
+const styles = {
+  inColStyle: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    marginRight: "30px", 
+    alignItems: "center"
+  },
+  inBodyStyle: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    marginLeft: "30px", 
+    marginTop: "60px",
+    marginBottom: "90px",
+    alignItems: "left"   
+  },
+  inTitleStyle: {
+    display: "flex",
+    flexDirection: "column",
+    marginLeft: "200px",
+    marginRight: "200px", 
+    marginBottom: "100px"
+  },
+  inRowStyle: {
+    display: "flex",
+    flexDirection: "row",
+    marginTop: "50px"
+  }
+};
 
 class Bar extends Component {
     render() {
