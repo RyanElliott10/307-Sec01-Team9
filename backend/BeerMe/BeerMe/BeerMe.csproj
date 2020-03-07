@@ -126,6 +126,7 @@
     <Compile Include="Controllers\BeerReccomendationsController.cs" />
     <Compile Include="Controllers\BeersController.cs" />
     <Compile Include="Controllers\BeerStylesController.cs" />
+    <Compile Include="Controllers\ExploreBeerStylesController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -168,6 +169,7 @@
     <Compile Include="Models\BeerStyle.cs">
       <DependentUpon>BeerMeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ExploreFilters.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>BeerMeModel.tt</DependentUpon>
     </Compile>
