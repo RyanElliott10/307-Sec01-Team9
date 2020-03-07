@@ -6,7 +6,7 @@ cache:
     - node_modules
 script:
   - cd frontend/beerme/
-  - yarn test --coverage --watchAll=false
+  - npm test
   - npm run build
 deploy:
   provider: surge
