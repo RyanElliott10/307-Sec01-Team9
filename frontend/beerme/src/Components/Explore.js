@@ -7,7 +7,6 @@ import ExploreSelections from "../Models/ExploreSelections";
 import NetClient from "../Utils/NetClient";
 import Recommended from "./Recommended";
 
-// comment for travis CI
 const ExploreSpoofData = [
   {
     title: "Notes",
