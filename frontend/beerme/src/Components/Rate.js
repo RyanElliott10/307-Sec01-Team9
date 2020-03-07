@@ -13,26 +13,17 @@ export default class Rate extends Component {
         rating: newRating
       });
     }
-   
-    render() {
-      // rating = 2;
-      return (
-        <div style={styles.inTitleStyle}>
-          <h1>
-            Corona
-          </h1>
-          <h5 style={{alignItems: "right"}}>
-            Average Rating:
-          </h5>
-          <div style={styles.inColStyle}>
+
+    renderBody() {
+      return(
+        <div style={styles.inColStyle}>
             <div style={styles.inRowStyle}>
               <img
                 src={Photo}
                 alt="Photo"
                 style={{ width: 110, height: 180, marginRight: "20px" }}
               />
-              <div style={styles.inBodyStyle}>
-                
+              <div style={styles.inBodyStyle}>    
                 <h5>
                   Style:
                 </h5>
@@ -44,21 +35,43 @@ export default class Rate extends Component {
                 </h5>
               </div>   
             </div>
-            <div style={styles.inColStyle}>
-              <h5>
-                  Rate this beer!
-              </h5>
-              <StarRatings
-                rating={this.state.rating}
-                starRatedColor="blue"
-                starHoverColor="grey"
-                changeRating={this.changeRating}
-                numberOfStars={5}
-                name='rating'
-                starSpacing="15px"
-              />
-            </div>
           </div>
+      )
+    }
+
+    renderStars() {
+      return (
+        <div style={styles.inColStyle}>
+          <h5>
+            Rate this beer!
+          </h5>
+          <StarRatings
+            rating={this.state.rating}
+            starRatedColor="yellow"
+            starHoverColor="grey"
+            changeRating={this.changeRating}
+            numberOfStars={5}
+            name='rating'
+            starSpacing="15px"
+          />
+        </div>
+      )
+    }
+
+   
+    render() {
+      // rating = 2;
+      return (
+        <div style={styles.inTitleStyle}>
+          <h1>
+            Corona
+          </h1>
+          <h5 style={{alignItems: "right"}}>
+            Average Rating:
+          </h5>
+          {this.renderBody()}
+          {this.renderStars()}
+          
         </div>
       );
     }

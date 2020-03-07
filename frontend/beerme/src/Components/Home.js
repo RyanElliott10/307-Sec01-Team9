@@ -107,8 +107,10 @@ export class Home extends Component {
           <ReactSearchBox
             placeholder="Search"
             data={this.data}
-            callback={record => console.log(record)}
-            onSelect={() => { history.push('/search-result') }}
+            onSelect={(record) => {
+              console.log(record)
+              history.push('/search-result')
+            }}
           />
         )} />
       </div>
