@@ -8,7 +8,8 @@ export class Recommended extends Component {
   }
 
   componentDidMount() {
-    NetClient.get(`https://jsonplaceholder.typicode.com/photos/`).then(res => {
+    // GET for beer images
+    NetClient.get("https://jsonplaceholder.typicode.com/photos/").then(res => {
       const pics = res.slice(0, 5).map(data => data.thumbnailUrl);
       this.setState({
         photos: pics,
@@ -17,6 +18,7 @@ export class Recommended extends Component {
       });
     });
 
+    // GET for beer names
     NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
       this.setState({
         recBeers: data.slice(0, 5)
@@ -24,6 +26,7 @@ export class Recommended extends Component {
       localStorage.setItem("appState", JSON.stringify(data.slice(0, 5)));
     });
 
+    // GET for beer descriptions
     NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
       this.setState({
         recDesc: data.slice(20, 30)

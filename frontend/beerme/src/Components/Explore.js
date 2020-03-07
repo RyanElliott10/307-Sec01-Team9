@@ -44,6 +44,7 @@ export class Explore extends Component {
   }
 
   componentDidMount() {
+    // GET selections
     NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
       data.forEach(element => {
         element.selected = false;
@@ -71,6 +72,7 @@ export class Explore extends Component {
       return tmp;
     });
 
+    // POST to send selections to the backend
     NetClient.post("http://httpbin.org/post", selections).then(data =>
       console.log(data)
     );
@@ -221,15 +223,21 @@ export class Explore extends Component {
     );
   }
 
+  _renderRecommendations() {
+    return <Recommended />;
+  }
+
   render() {
-    return (
-      <div style={styles.mainStyle}>
-        {this._renderTopBlurb()}
-        {this._renderSelectionBox()}
-        {this._renderProgressionButtons()}
-        <Recommended />
-      </div>
-    );
+    if (!this.state.hasSubmitted) {
+      return (
+        <div style={styles.mainStyle}>
+          {this._renderTopBlurb()}
+          {this._renderSelectionBox()}
+          {this._renderProgressionButtons()}
+        </div>
+      );
+    }
+    return this._renderRecommendations();
   }
 }
 
