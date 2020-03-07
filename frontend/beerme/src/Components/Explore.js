@@ -6,30 +6,180 @@ import * as Constants from "../Utils/Constants";
 import ExploreSelections from "../Models/ExploreSelections";
 import NetClient from "../Utils/NetClient";
 import Recommended from "./Recommended";
+import BeerColors from "../img/beer_colors.png";
 
 const ExploreSpoofData = [
   {
-    title: "Notes",
-    description: "This is where the preferred notes description lives.",
+    title: "Bitterness (IBU)",
+    description: "A gauge of your preferred beer bitterness.",
     checkboxes: [
-      { id: 1, type: "notes", option: "notes_test1", isChecked: false },
-      { id: 2, type: "notes", option: "notes_test2", isChecked: false }
+      {
+        id: 1,
+        type: "ibu",
+        option: "Restrained (0-20)",
+        value: [0, 20],
+        isChecked: false
+      },
+      {
+        id: 2,
+        type: "ibu",
+        option: "Moderate (21-40)",
+        value: [21, 40],
+        isChecked: false
+      },
+      {
+        id: 3,
+        type: "ibu",
+        option: "Aggressive (41-60)",
+        value: [41, 60],
+        isChecked: false
+      },
+      {
+        id: 4,
+        type: "ibu",
+        option: "Harsh (60-100)",
+        value: [61, 100],
+        isChecked: false
+      }
+    ]
+  },
+  {
+    title: "Alcohol by Volume (ABV)",
+    description:
+      "Alcohol by volume is used to measure the alcohol content of beer, wine, distilled spirits, and other alcoholic beverages.",
+    checkboxes: [
+      {
+        id: 1,
+        type: "abv",
+        option: "Restrained (1-3%)",
+        value: [1, 3],
+        isChecked: false
+      },
+      {
+        id: 2,
+        type: "abv",
+        option: "Mild (4-6%)",
+        value: [4, 6],
+        isChecked: false
+      },
+      {
+        id: 3,
+        type: "abv",
+        option: "Moderate (7-9%)",
+        value: [7, 9],
+        isChecked: false
+      },
+      {
+        id: 4,
+        type: "abv",
+        option: "Strong (10-12%)",
+        value: [10, 12],
+        isChecked: false
+      },
+      {
+        id: 5,
+        type: "abv",
+        option: "Harsh (13-15%)",
+        value: [13, 15],
+        isChecked: false
+      }
     ]
   },
   {
     title: "Colors",
-    description: "This is where the preferred colors description lives.",
+    description: "Select your preferred color of beer.",
     checkboxes: [
-      { id: 1, type: "colors", option: "color_test1", isChecked: false },
-      { id: 2, type: "colors", option: "color_test2", isChecked: false }
-    ]
-  },
-  {
-    title: "Hints",
-    description: "This is where the preferred hints description lives.",
-    checkboxes: [
-      { id: 1, type: "hints", option: "hints_test1", isChecked: false },
-      { id: 2, type: "hints", option: "hints_test2", isChecked: false }
+      {
+        id: 1,
+        type: "color",
+        option: "Light Yellow",
+        value: [1, 1.5],
+        isChecked: false
+      },
+      {
+        id: 2,
+        type: "color",
+        option: "Straw",
+        value: [2, 3],
+        isChecked: false
+      },
+      {
+        id: 3,
+        type: "color",
+        option: "Pale",
+        value: [4],
+        isChecked: false
+      },
+      {
+        id: 4,
+        type: "color",
+        option: "Gold",
+        value: [5, 6],
+        isChecked: false
+      },
+      {
+        id: 5,
+        type: "color",
+        option: "Light Amber",
+        value: [7],
+        isChecked: false
+      },
+      {
+        id: 6,
+        type: "color",
+        option: "Amber",
+        value: [8],
+        isChecked: false
+      },
+      {
+        id: 7,
+        type: "color",
+        option: "Medium Amber",
+        value: [9],
+        isChecked: false
+      },
+      {
+        id: 8,
+        type: "color",
+        option: "Copper",
+        value: [10, 12],
+        isChecked: false
+      },
+      {
+        id: 9,
+        type: "color",
+        option: "Light Brown",
+        value: [13, 15],
+        isChecked: false
+      },
+      {
+        id: 10,
+        type: "color",
+        option: "Saddle Brown",
+        value: [16, 17],
+        isChecked: false
+      },
+      {
+        id: 11,
+        type: "color",
+        option: "Brown",
+        value: [18, 24],
+        isChecked: false
+      },
+      {
+        id: 12,
+        type: "color",
+        option: "Dark Brown",
+        value: [25, 39],
+        isChecked: false
+      },
+      {
+        id: 13,
+        type: "color",
+        option: "Black",
+        value: [40],
+        isChecked: false
+      }
     ]
   }
 ];
@@ -73,9 +223,12 @@ export class Explore extends Component {
     });
 
     // POST to send selections to the backend
-    NetClient.post("http://httpbin.org/post", selections).then(data =>
-      console.log(data)
-    );
+    NetClient.post("http://httpbin.org/post", selections).then(data => {
+      console.log(data);
+      this.setState({
+        recommendedStyle: data
+      });
+    });
   }
 
   // MARK: OnClicks
@@ -89,10 +242,6 @@ export class Explore extends Component {
   };
 
   _onNextClick = () => {
-    // const selections = this.pages[
-    //   this.state.currentPageIndex
-    // ].checkboxes.filter(data => data.isChecked);
-
     if (this.state.currentPageIndex === this.pages.length - 1) {
       this._submitSelections();
     } else {
@@ -153,12 +302,28 @@ export class Explore extends Component {
     );
   }
 
+  _renderColorImg() {
+    return (
+      <img
+        style={{
+          width: "1000px",
+          height: "150px"
+        }}
+        src={BeerColors}
+        alt="BeerColors"
+      />
+    );
+  }
+
   _renderSelections() {
     let firstHalf = this.pages[this.state.currentPageIndex].checkboxes;
     let secondHalf = null;
     if (firstHalf.length > 10) {
-      secondHalf = firstHalf.slice(10, firstHalf.length);
-      firstHalf = firstHalf.slice(0, 10);
+      secondHalf = firstHalf.slice(
+        Math.ceil(firstHalf.length / 2),
+        firstHalf.length
+      );
+      firstHalf = firstHalf.slice(0, Math.floor(firstHalf.length / 2) + 1);
     }
 
     return (
@@ -224,11 +389,18 @@ export class Explore extends Component {
   }
 
   _renderRecommendations() {
-    return <Recommended />;
+    return (
+      <Recommended
+        mainDesc={"Wassup my dude"}
+        photos={[""]}
+        recDesc={[{ id: 1, title: "Ryan's Beer" }]}
+        recBeers={[{ id: 1, title: "Ryan's Beer" }]}
+      />
+    );
   }
 
   render() {
-    if (!this.state.hasSubmitted) {
+    if (!this.state.recommendedStyle) {
       return (
         <div style={styles.mainStyle}>
           {this._renderTopBlurb()}
@@ -250,7 +422,10 @@ const styles = {
   selectionStyle: {
     flexDirection: "row",
     paddingLeft: "10px",
-    paddingTop: "25px"
+    paddingTop: "25px",
+    alignItems: "center",
+    alignContent: "center",
+    alignSelf: "center"
   },
   selectionBoxStyle: {
     background: "#F4F4F4",
