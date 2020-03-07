@@ -4,9 +4,10 @@ node_js:
 cache:
   directories:
     - node_modules
+  cache: yarn
 script:
   - cd frontend/beerme/
-  - npm test
+  - yarn test --coverage --watchAll=false
   - npm run build
 deploy:
   provider: surge
