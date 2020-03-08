@@ -6,6 +6,8 @@ import Separator from "../img/Sep_Img.png";
 import ReactSearchBox from "react-search-box";
 import { Route } from 'react-router-dom';
 
+import UserController from "../Controllers/UserController";
+
 export class Home extends Component {
   constructor(props) {
     super(props);
@@ -107,9 +109,12 @@ export class Home extends Component {
         <Route render={({ history}) => (
           <ReactSearchBox
             placeholder="Search"
-            data={this.data}
-            callback={record => console.log(record)}
-            onSelect={() => { history.push('/search-result') }}
+            data={this.data
+            onSelect={(record) => {
+              console.log(record)
+              UserController.currBeer = record.value
+              history.push('/search-result')
+            }}
           />
         )} />
       </div>
