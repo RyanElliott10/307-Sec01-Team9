@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import StarRatings from 'react-star-ratings';
 import Photo from "../img/BOTD_photo.png";
 
+import UserController from "../Controllers/UserController";
+
 export default class Rate extends Component {
     constructor(props) {
         super(props);
@@ -64,7 +66,7 @@ export default class Rate extends Component {
       return (
         <div style={styles.inTitleStyle}>
           <h1>
-            Corona
+            {UserController.currBeer}
           </h1>
           <h5 style={{alignItems: "right"}}>
             Average Rating:
