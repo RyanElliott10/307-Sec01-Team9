@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import NetClient from "../Utils/NetClient";
 import PropTypes from "prop-types";
+import UserController from "../Controllers/UserController";
+import LockedRecommended from "./LockedRecommended";
 
 export class Recommended extends Component {
   static propTypes = {
@@ -96,16 +98,26 @@ export class Recommended extends Component {
     );
   }
 
-  render() {
-    return (
-      <div style={styles.inTitleStyle}>
-        <h1>Recommended For You</h1>
-        <h5>{this.props.mainDesc}</h5>
+  _renderBody() {
+    if (UserController.getCurrentUser()) {
+      return (
         <div style={styles.inRowStyle}>
           {this.state.photos ? this.renderPhotos() : null}
           {this.state.recBeers ? this.renderRecBeers() : null}
           {this.state.recDesc ? this.renderDescriptions() : null}
         </div>
+      );
+    }
+
+    return <LockedRecommended />;
+  }
+
+  render() {
+    return (
+      <div style={styles.inTitleStyle}>
+        <h1>Recommended For You</h1>
+        <h5>{this.props.mainDesc}</h5>
+        {this._renderBody()}
       </div>
     );
   }

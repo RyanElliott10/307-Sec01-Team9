@@ -340,6 +340,13 @@ export class Explore extends Component {
     return arr.map(data => this._renderChecboxOption(data));
   }
 
+  _getBtnStyle() {
+    if (this.state.currentPageIndex == 2) {
+      return { paddingLeft: "200px" };
+    }
+    return { paddingLeft: "50px" };
+  }
+
   _renderChecboxOption(data) {
     let value = this.pages[this.state.currentPageIndex].checkboxes.filter(
       d => d.id === data.id
@@ -354,6 +361,7 @@ export class Explore extends Component {
             label={data.option}
             checked={value}
             onChange={this._onCheckboxClick.bind(this, data.id)}
+            style={this._getBtnStyle()}
           />
         </div>
       </Form>
