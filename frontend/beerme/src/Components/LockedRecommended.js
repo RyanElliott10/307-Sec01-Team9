@@ -3,6 +3,10 @@ import { Button, ButtonToolbar, Form, Col } from "react-bootstrap";
 
 import LockSVG from "../img/svg/LockSVG";
 import { Redirect } from "react-router-dom";
+import Lock from "../img/lock.png"
+
+import { Route } from 'react-router-dom';
+
 
 export class LockedRecommended extends Component {
   constructor(props) {
@@ -26,26 +30,36 @@ export class LockedRecommended extends Component {
       <div style={styles.mainContainer}>
         <Form style={styles.mainForm} onSubmit={this._createAccount}>
           <Form.Row>
-            <LockSVG
+            {/* <LockSVG
               fill="#fff"
               width={350}
               className="lock"
               style={{
                 justifyContent: "center",
                 justifySelf: "content",
-                justifyItems: "center"
+                alignItems: "center", 
+                marginTop: "80px", 
               }}
-            />
+            /> */}
+            <img src={Lock}
+                style={{width: "300px", height: "300px", marginTop: "50px", marginBottom: "30px", marginLeft: "50px", alignItems: "center"}} alt="Lock" />
           </Form.Row>
           <Form.Row>
             <Form.Label>
-              In order to view recommended, please create an account.
+              {"In order to view recommended, please"}
             </Form.Label>
-          </Form.Row>
-          <Form.Row>
-            <Button variant="primary" type="submit">
-              Create An Account
-            </Button>
+
+            <Route render={({ history}) => (
+              <span onClick ={() => {
+                  console.log("to account entry")
+                  history.push('/account-entry')
+                }}
+                style = {{color: "blue"}}
+                >
+                   {"create an account."}
+              </span>
+             )} />
+          
           </Form.Row>
         </Form>
       </div>
