@@ -8,6 +8,7 @@ class UserController {
   static password = "";
   static isBusiness = true; // change to default of false once live
   static businessName = "";
+  static currBeer = "";
 
   static async login(email, password) {
     console.log(`UserController: login ${email} ${password}`);
