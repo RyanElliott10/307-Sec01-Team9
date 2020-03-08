@@ -21,6 +21,13 @@ export class Home extends Component {
       localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
     });
 
+    NetClient.get("https://localhost:44300/api/beers").then(data => {
+      console.log("DATA:", data);
+      // this.setState({ allBeers: data.slice(0, 10) });
+      // localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
+    });
+
+    
   }
 
   renderTopTen() {

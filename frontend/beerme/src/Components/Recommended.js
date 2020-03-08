@@ -15,7 +15,7 @@ export class Recommended extends Component {
 
   static defaultProps = {
     mainDesc:
-      "Here is our personalized recommendation for new beer styles based off people with similar tastes!"
+      "Here is our personalized recommendation for new beer styles!"
   };
 
   constructor(props) {
