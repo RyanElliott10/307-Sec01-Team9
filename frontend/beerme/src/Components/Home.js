@@ -108,7 +108,7 @@ export class Home extends Component {
         <Route render={({ history}) => (
           <ReactSearchBox
             placeholder="Search"
-            data={this.data}
+            data={this.data
             onSelect={(record) => {
               console.log(record)
               UserController.currBeer = record.value
