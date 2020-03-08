@@ -20,7 +20,7 @@ class UserController {
       password: password
     };
 
-    const retValue = NetClient.post("https://localhost:44300/api/login", data).then(data => {
+    return NetClient.post("https://localhost:44300/api/login", data).then(data => {
       if (data.Name) {
         this.firstName = data.Name.split(" ")[0];
         this.lastName = data.Name.split(" ")[1];
@@ -31,12 +31,6 @@ class UserController {
       }
       return false;
     });
-
-    // retValue =
-    //   email === Constants.DUMMY_LOGIN_EMAIL &&
-    //   password === Constants.DUMMY_LOGIN_PASSWORD;
-    console.log("TEST:", retValue);
-    return retValue;
   }
 
   static async createAccount(
@@ -58,7 +52,7 @@ class UserController {
       businessName: businessName
     };
 
-    const retValue = NetClient.post("https://localhost:44300/api/users", data).then(data => {
+    return NetClient.post("https://localhost:44300/api/users", data).then(data => {
       if (data.Name) {
         this.firstName = data.Name.split(" ")[0];
         this.lastName = data.Name.split(" ")[1];
@@ -69,8 +63,6 @@ class UserController {
       }
       return false;
     });
-    
-    return retValue;
   }
 
   static getCurrentUser() {

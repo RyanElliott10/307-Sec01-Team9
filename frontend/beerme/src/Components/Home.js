@@ -15,6 +15,7 @@ export class Home extends Component {
   }
 
   componentDidMount() {
+    // GET for Top Ten beers
     NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
       this.setState({ topTen: data.slice(0, 10) });
       localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
@@ -108,7 +109,7 @@ export class Home extends Component {
         <Route render={({ history}) => (
           <ReactSearchBox
             placeholder="Search"
-            data={this.data
+            data={this.data}
             onSelect={(record) => {
               console.log(record)
               UserController.currBeer = record.value
