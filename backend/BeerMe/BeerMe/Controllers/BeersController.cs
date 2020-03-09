@@ -40,7 +40,6 @@ namespace BeerMe.Controllers
                 ABV = beer.BeerStyle.ABV,
                 IBU = beer.BeerStyle.IBU
             }).FirstOrDefault();
-
             if (beerById == null)
             {
                 return NotFound();
