@@ -45,7 +45,7 @@ export class LockedRecommended extends Component {
               to="/account-entry"
               style={{ color: "blue", marginLeft: "5px" }}
             >
-              create an account.
+              create or sign into an account.
             </Link>
           </Form.Row>
         </Form>
