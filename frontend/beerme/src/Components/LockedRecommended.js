@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { Form } from "react-bootstrap";
 
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import Lock from "../img/lock.png";
-
-import { Route } from "react-router-dom";
 
 export class LockedRecommended extends Component {
   constructor(props) {
@@ -43,20 +41,12 @@ export class LockedRecommended extends Component {
           </Form.Row>
           <Form.Row>
             <Form.Label>{"In order to view recommended, please"}</Form.Label>
-
-            <Route
-              render={({ history }) => (
-                <span
-                  onClick={() => {
-                    console.log("to account entry");
-                    history.push("/account-entry");
-                  }}
-                  style={{ color: "blue", marginLeft: "5px" }}
-                >
-                  {"create an account."}
-                </span>
-              )}
-            />
+            <Link
+              to="/account-entry"
+              style={{ color: "blue", marginLeft: "5px" }}
+            >
+              create an account.
+            </Link>
           </Form.Row>
         </Form>
       </div>
