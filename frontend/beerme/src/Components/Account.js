@@ -1,12 +1,13 @@
-import React, { Component } from "react";
+import React, { useState, Component } from "react";
 import {
   Button,
   Form,
   Col,
-  DropdownButton,
   ButtonToolbar,
-  Dropdown
+  Dropdown,
+  FormControl
 } from "react-bootstrap";
+import Select from "react-select";
 
 import UserController from "../Controllers/UserController";
 
@@ -82,21 +83,16 @@ export class Account extends Component {
   }
 
   _renderDropdown(title, options) {
-    return (
-      <ButtonToolbar>
-        <DropdownButton
-          drop={"down"}
-          variant="secondary"
-          title={title}
-          id={`${title}-selector`}
-          key={`${title}-selector`}
-        >
-          {options.map(title => (
-            <Dropdown.Item eventKey="title">`${title}`</Dropdown.Item>
-          ))}
-        </DropdownButton>
-      </ButtonToolbar>
-    );
+    const scaryAnimals = [
+      { label: "Alligators", value: 1 },
+      { label: "Crocodiles", value: 2 },
+      { label: "Sharks", value: 3 },
+      { label: "Small crocodiles", value: 4 },
+      { label: "Smallest crocodiles", value: 5 },
+      { label: "Snakes", value: 6 }
+    ];
+
+    return <Select style={{ width: "100%" }} options={scaryAnimals} />;
   }
 
   _renderAddBeer() {
@@ -104,34 +100,52 @@ export class Account extends Component {
       return null;
     }
 
+    // TO BE DELETED
+    const scaryAnimals = [
+      { label: "Alligators", value: 1 },
+      { label: "Crocodiles", value: 2 },
+      { label: "Sharks", value: 3 },
+      { label: "Small crocodiles", value: 4 },
+      { label: "Smallest crocodiles", value: 5 },
+      { label: "Snakes", value: 6 }
+    ];
+
     return (
-      <Form as={Col}>
-        <h2>Add a Beer!</h2>
-        <hr></hr>
-        <Form.Row>
-          <Form.Group as={Col} controlId="formGridBeerName">
-            <Form.Label>Name of Beer</Form.Label>
-            {this._renderControl("name", "Corona", false, e => {
-              const newBeerData = this.state.addBeerData;
-              newBeerData.name = e.target.value;
-              this.setState({
-                addBeerData: newBeerData
-              });
-            })}
-          </Form.Group>
-          <Form.Group>
-            <hr />
-            {this._renderDropdown("Style", ["marine", "add", "styles", "from", "post", "here"])}
-          </Form.Group>
-        </Form.Row>
-        <Button
-          type="submit"
-          disabled={!this._validateAddBeerForm()}
-          onClick={this._handleAddBeerSubmit}
-        >
-          Add Beer
-        </Button>
-      </Form>
+      <React.Fragment>
+        <Form as={Col}>
+          <h2>Add a Beer!</h2>
+          <hr></hr>
+          <Form.Row>
+            <Form.Group as={Col} controlId="formGridBeerName">
+              <Form.Label>Name of Beer</Form.Label>
+              {this._renderControl("name", "Corona", false, e => {
+                const newBeerData = this.state.addBeerData;
+                newBeerData.name = e.target.value;
+                this.setState({
+                  addBeerData: newBeerData
+                });
+              })}
+            </Form.Group>
+          </Form.Row>
+        </Form>
+        <div style={{ marginLeft: "15px", marginRight: "15px" }}>
+          <Form>
+            <Form.Label>Style</Form.Label>
+          </Form>
+          <Select
+            style={{ marginLeft: "500px", backgroundColor: "#ff0" }}
+            options={this.beerStyles}
+          />
+          <hr />
+          <Button
+            type="submit"
+            disabled={!this._validateAddBeerForm()}
+            onClick={this._handleAddBeerSubmit}
+          >
+            Add Beer
+          </Button>
+        </div>
+      </React.Fragment>
     );
   }
 

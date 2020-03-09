@@ -18,7 +18,6 @@ class UserController {
   static cachedBeers = [];
 
   static async login(email, password) {
-    return true;
     console.log(`UserController: login ${email} ${password}`);
     this.email = email;
     this.password = password;
@@ -55,7 +54,6 @@ class UserController {
     isBusiness = false,
     businessName = ""
   ) {
-    return true;
     this.email = email;
     this.password = password;
 
