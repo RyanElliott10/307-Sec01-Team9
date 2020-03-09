@@ -4,6 +4,9 @@ import Logo from "../img/BeerMe_Logo.png";
 import NetClient from "../Utils/NetClient";
 import Separator from "../img/Sep_Img.png";
 import ReactSearchBox from "react-search-box";
+import { Route } from 'react-router-dom';
+
+import UserController from "../Controllers/UserController";
 
 export class Home extends Component {
   constructor(props) {
@@ -12,10 +15,19 @@ export class Home extends Component {
   }
 
   componentDidMount() {
+    // GET for Top Ten beers
     NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
       this.setState({ topTen: data.slice(0, 10) });
       localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
     });
+
+    NetClient.get("https://localhost:44300/api/beers").then(data => {
+      console.log("DATA:", data);
+      // this.setState({ allBeers: data.slice(0, 10) });
+      // localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
+    });
+
+    
   }
 
   renderTopTen() {
@@ -100,11 +112,18 @@ export class Home extends Component {
           marginBottom: "40px"
         }}
       >
-        <ReactSearchBox
-          placeholder="Search"
-          data={this.data}
-          callback={record => console.log(record)}
-        />
+        
+        <Route render={({ history}) => (
+          <ReactSearchBox
+            placeholder="Search"
+            data={this.data}
+            onSelect={(record) => {
+              console.log(record)
+              UserController.currBeer = record.value
+              history.push('/search-result')
+            }}
+          />
+        )} />
       </div>
     );
   }

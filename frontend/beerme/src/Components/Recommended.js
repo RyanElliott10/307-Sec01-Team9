@@ -1,35 +1,68 @@
 import React, { Component } from "react";
+
 import NetClient from "../Utils/NetClient";
+import PropTypes from "prop-types";
+import UserController from "../Controllers/UserController";
+import LockedRecommended from "./LockedRecommended";
 
 export class Recommended extends Component {
+  static propTypes = {
+    mainDesc: PropTypes.string,
+    photos: PropTypes.arrayOf(PropTypes.string),
+    recBeers: PropTypes.arrayOf(PropTypes.object),
+    recDesc: PropTypes.arrayOf(PropTypes.string)
+  };
+
+  static defaultProps = {
+    mainDesc:
+      "Here is our personalized recommendation for new beer styles!"
+  };
+
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      mainDesc: this.props.mainDesc,
+      photos: this.props.photos,
+      recBeers: this.props.recBeers,
+      recDesc: this.props.recDesc
+    };
   }
 
   componentDidMount() {
-    NetClient.get(`https://jsonplaceholder.typicode.com/photos/`).then(res => {
-      const pics = res.slice(0, 5).map(data => data.thumbnailUrl);
-      this.setState({
-        photos: pics,
-        loading: false,
-        error: null
-      });
-    });
+    // GET for beer images
+    if (!this.props.photos) {
+      NetClient.get("https://jsonplaceholder.typicode.com/photos/").then(
+        res => {
+          const pics = res.slice(0, 5).map(data => data.thumbnailUrl);
+          this.setState({
+            photos: pics,
+            loading: false,
+            error: null
+          });
+        }
+      );
+    }
 
-    NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
-      this.setState({
-        recBeers: data.slice(0, 5)
+    // GET for beer names
+    if (!this.props.recBeers) {
+      NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
+        this.setState({
+          recBeers: data.slice(0, 5)
+        });
+        localStorage.setItem("appState", JSON.stringify(data.slice(0, 5)));
       });
-      localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
-    });
+    }
 
-    NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
-      this.setState({
-        recDesc: data.slice(20, 25)
+    // GET for beer descriptions
+    if (!this.props.recDesc) {
+      NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
+        console.log("YOTE:", data.slice(20, 30));
+        this.setState({
+          recDesc: data.slice(20, 30)
+        });
+        localStorage.setItem("appState", JSON.stringify(data.slice(20, 30)));
       });
-      localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
-    });
+    }
   }
 
   renderPhotos() {
@@ -65,19 +98,26 @@ export class Recommended extends Component {
     );
   }
 
-  render() {
-    return (
-      <div style={styles.inTitleStyle}>
-        <h1>Recommended For You</h1>
-        <h5>
-          Here is our personalized recommendation for new beer styles based off
-          people with similar tastes!
-        </h5>
+  _renderBody() {
+    if (UserController.getCurrentUser()) {
+      return (
         <div style={styles.inRowStyle}>
           {this.state.photos ? this.renderPhotos() : null}
           {this.state.recBeers ? this.renderRecBeers() : null}
           {this.state.recDesc ? this.renderDescriptions() : null}
         </div>
+      );
+    }
+
+    return <LockedRecommended />;
+  }
+
+  render() {
+    return (
+      <div style={styles.inTitleStyle}>
+        <h1>Recommended For You</h1>
+        <h5>{this.props.mainDesc}</h5>
+        {this._renderBody()}
       </div>
     );
   }
