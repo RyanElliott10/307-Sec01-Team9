@@ -15,6 +15,7 @@ class NetClient {
   }
 
   static async post(url, data) {
+    console.log("JSON:", JSON.stringify(data));
     return await fetch(url, {
       method: "POST",
       body: JSON.stringify(data),
