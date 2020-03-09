@@ -29,7 +29,6 @@ export class Recommended extends Component {
   }
 
   async componentDidMount() {
-    // GET for beer images
     if (!this.props.photos) {
       NetClient.get("https://jsonplaceholder.typicode.com/photos/").then(
         res => {
@@ -43,14 +42,12 @@ export class Recommended extends Component {
       );
     }
 
-    // GET for beer names
     if (!this.props.recBeers) {
       NetClient.post(
         "https://localhost:44300/api/BeerRecommendations",
         UserController.getCurrentUserObject()
       ).then(data => {
         if (UserController.cachedBeers.length === 0) {
-          // await UserController.fetchAllBeers();
           NetClient.get("https://localhost:44300/api/beers").then(allBeers => {
             UserController.cachedBeers = allBeers;
             const filteredBeers = UserController.cachedBeers.filter(
@@ -71,7 +68,6 @@ export class Recommended extends Component {
       });
     }
 
-    // GET for beer descriptions
     if (!this.props.recDesc) {
       NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
         this.setState({
