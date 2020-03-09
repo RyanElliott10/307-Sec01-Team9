@@ -30,17 +30,6 @@ export class LockedRecommended extends Component {
       <div style={styles.mainContainer}>
         <Form style={styles.mainForm} onSubmit={this._createAccount}>
           <Form.Row>
-            {/* <LockSVG
-              fill="#fff"
-              width={350}
-              className="lock"
-              style={{
-                justifyContent: "center",
-                justifySelf: "content",
-                alignItems: "center", 
-                marginTop: "80px", 
-              }}
-            /> */}
             <img src={Lock}
                 style={{width: "300px", height: "300px", marginTop: "50px", marginBottom: "30px", marginLeft: "50px", alignItems: "center"}} alt="Lock" />
           </Form.Row>
@@ -54,7 +43,7 @@ export class LockedRecommended extends Component {
                   console.log("to account entry")
                   history.push('/account-entry')
                 }}
-                style = {{color: "blue"}}
+                style = {{color: "blue", marginLeft: "5px"}}
                 >
                    {"create an account."}
               </span>

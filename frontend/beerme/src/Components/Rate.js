@@ -87,7 +87,7 @@ export default class Rate extends Component {
             {UserController.currBeer}
           </h1>
           <h5 style={{alignItems: "right"}}>
-            {`Average Rating: ${this.state.currentBeerRating ? this.state.currentBeerRating : "Not yet rated"}`}
+            {`Average Rating: ${this.state.currentBeerRating ? this.state.currentBeerRating.toFixed(2) : "Not yet rated"}`}
           </h5>
           {this.renderBody()}
           {this.renderStars()}
