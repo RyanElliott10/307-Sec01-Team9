@@ -53,18 +53,18 @@ export class Account extends Component {
           <Form.Row>
             <Form.Group as={Col} controlId="formGridFirstName">
               <Form.Label>First Name</Form.Label>
-              {this._renderControl("name", "Mark", true)}
+              {this._renderControl("name", UserController.firstName, true)}
             </Form.Group>
             <Form.Group as={Col} controlId="formGridLastName">
               <Form.Label>Last Name</Form.Label>
-              {this._renderControl("name", "Johnson", true)}
+              {this._renderControl("name", UserController.lastName, true)}
             </Form.Group>
           </Form.Row>
 
           <Form.Row>
             <Form.Group as={Col} controlId="formGridEmail">
               <Form.Label>Email Address</Form.Label>
-              {this._renderControl("email", "Email", true)}
+              {this._renderControl("email", UserController.email, true)}
             </Form.Group>
           </Form.Row>
         </Form>
