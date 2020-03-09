@@ -1,13 +1,13 @@
 import UserController from "../UserController";
 
 test("invalid email with a valid passowrd to login", async () => {
-    const value = await UserController.login("wrong-email", "password123");
-    expect(value).toBeFalsy();
+  const value = await UserController.login("wrong-email", "password123");
+  expect(value).toBeFalsy();
 });
 
 test("valid email with an invalid passowrd to login", async () => {
-    const value = await UserController.login("test@gmail.com", "Password123");
-    expect(value).toBeFalsy();
+  const value = await UserController.login("test@gmail.com", "Password123");
+  expect(value).toBeFalsy();
 });
 
 // test("valid email with a valid passowrd to login", async () => {
@@ -18,7 +18,7 @@ test("valid email with an invalid passowrd to login", async () => {
 // This isn't a valid test since the return data is dummy data. Should eventually
 // return a user object.
 test("getCurrentUser returns false when there is no logged in user", async () => {
-    await UserController.login("test@gmail.com", "password123")
-    const currentUser = UserController.getCurrentUser();
-    expect(currentUser).toBeFalsy();
+  await UserController.login("test@gmail.com", "password123");
+  const currentUser = UserController.getCurrentUser();
+  expect(currentUser).toBeFalsy();
 });

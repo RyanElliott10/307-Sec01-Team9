@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import { Button, ButtonToolbar, Form, Col } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
-import LockSVG from "../img/svg/LockSVG";
 import { Redirect } from "react-router-dom";
-import Lock from "../img/lock.png"
+import Lock from "../img/lock.png";
 
-import { Route } from 'react-router-dom';
-
+import { Route } from "react-router-dom";
 
 export class LockedRecommended extends Component {
   constructor(props) {
@@ -30,25 +28,35 @@ export class LockedRecommended extends Component {
       <div style={styles.mainContainer}>
         <Form style={styles.mainForm} onSubmit={this._createAccount}>
           <Form.Row>
-            <img src={Lock}
-                style={{width: "300px", height: "300px", marginTop: "50px", marginBottom: "30px", marginLeft: "50px", alignItems: "center"}} alt="Lock" />
+            <img
+              src={Lock}
+              style={{
+                width: "300px",
+                height: "300px",
+                marginTop: "50px",
+                marginBottom: "30px",
+                marginLeft: "50px",
+                alignItems: "center"
+              }}
+              alt="Lock"
+            />
           </Form.Row>
           <Form.Row>
-            <Form.Label>
-              {"In order to view recommended, please"}
-            </Form.Label>
+            <Form.Label>{"In order to view recommended, please"}</Form.Label>
 
-            <Route render={({ history}) => (
-              <span onClick ={() => {
-                  console.log("to account entry")
-                  history.push('/account-entry')
-                }}
-                style = {{color: "blue", marginLeft: "5px"}}
+            <Route
+              render={({ history }) => (
+                <span
+                  onClick={() => {
+                    console.log("to account entry");
+                    history.push("/account-entry");
+                  }}
+                  style={{ color: "blue", marginLeft: "5px" }}
                 >
-                   {"create an account."}
-              </span>
-             )} />
-          
+                  {"create an account."}
+                </span>
+              )}
+            />
           </Form.Row>
         </Form>
       </div>
