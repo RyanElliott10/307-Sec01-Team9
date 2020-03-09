@@ -114,10 +114,7 @@ export class Account extends Component {
           <Form>
             <Form.Label>Style</Form.Label>
           </Form>
-          <Select
-            style={{ marginLeft: "500px", backgroundColor: "#ff0" }}
-            options={this.beerStyles}
-          />
+          <Select options={this.beerStyles} />
           <hr />
           <Button
             type="submit"
