@@ -1,12 +1,5 @@
-import React, { useState, Component } from "react";
-import {
-  Button,
-  Form,
-  Col,
-  ButtonToolbar,
-  Dropdown,
-  FormControl
-} from "react-bootstrap";
+import React, { Component } from "react";
+import { Button, Form, Col } from "react-bootstrap";
 import Select from "react-select";
 
 import UserController from "../Controllers/UserController";
