@@ -343,7 +343,7 @@ export class Explore extends Component {
   }
 
   _getBtnStyle() {
-    if (this.state.currentPageIndex == 0) {
+    if (ExploreSpoofData[this.state.currentPageIndex].title === "Colors") {
       return { paddingLeft: "200px" };
     }
     return { paddingLeft: "50px" };
