@@ -8,6 +8,16 @@ class UserController {
   static password = "";
   static isBusiness = true; // change to default of false once live
   static businessName = "";
+  static currBeer = "";
+  static currABV = "";
+  static currIBU = "";
+  static currStyle = "";
+  static currBeerId = 0;
+  static userId = 0;
+
+
+  static isLoggedIn = false;
+  static cachedBeers = [];
 
   static async login(email, password) {
     console.log(`UserController: login ${email} ${password}`);
@@ -19,21 +29,21 @@ class UserController {
       password: password
     };
 
-    let retValue = null;
-    NetClient.post("http://httpbin.org/post", data).then(data => {
-      if (data.Name) {
+    return NetClient.post("https://localhost:44300/api/login", data).then(data => {
+      if (data) {
+         this.userId = data.Id
         this.firstName = data.Name.split(" ")[0];
         this.lastName = data.Name.split(" ")[1];
         this.email = data.Email;
         this.isBusiness = data.IsBusiness;
-        this.businessName = data.businessName;
+        this.businessName = data.BusinessName;
+        this.isLoggedIn = true;
+        return this.isLoggedIn;
+      } else {
+        this.isLoggedIn = false;
+        return this.isLoggedIn;
       }
     });
-
-    retValue =
-      email === Constants.DUMMY_LOGIN_EMAIL &&
-      password === Constants.DUMMY_LOGIN_PASSWORD;
-    return retValue;
   }
 
   static async createAccount(
@@ -55,28 +65,42 @@ class UserController {
       businessName: businessName
     };
 
-    let retValue = null;
-    NetClient.post("https://localhost:44300/api/users", data).then(data => {
+    return NetClient.post("https://localhost:44300/api/users", data).then(data => {
       if (data) {
+        this.userId = data.Id
         this.firstName = data.Name.split(" ")[0];
         this.lastName = data.Name.split(" ")[1];
         this.email = data.Email;
         this.isBusiness = data.IsBusiness;
-        this.businessName = data.businessName;
+        this.businessName = data.BusinessName;
+        this.isLoggedIn = true;
+        return this.isLoggedIn;
+      } else {
+        this.isLoggedIn = false;
+        return this.isLoggedIn;
       }
     });
+  }
 
-    retValue =
-      email === Constants.DUMMY_LOGIN_EMAIL &&
-      password === Constants.DUMMY_LOGIN_PASSWORD;
-    return retValue;
+  static getCurrentUserObject() {
+    return {
+      Id: this.userId,
+      Name: `${this.firstName} ${this.lastName}`,
+      Email: this.email,
+      Password: this.password,
+      IsBusiness: this.isBusiness,
+      BusinessName: this.businessName
+    };
   }
 
   static getCurrentUser() {
-    return (
-      this.email === Constants.DUMMY_LOGIN_EMAIL &&
-      this.password === Constants.DUMMY_LOGIN_PASSWORD
-    );
+    return this.isLoggedIn;
+  }
+
+  static async fetchAllBeers() {
+    NetClient.get("https://localhost:44300/api/beers").then(data => {
+      this.cachedBeers = data;
+    });
   }
 }
 

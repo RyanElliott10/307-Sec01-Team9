@@ -1,35 +1,80 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
 import NetClient from "../Utils/NetClient";
+import PropTypes from "prop-types";
+import UserController from "../Controllers/UserController";
+import LockedRecommended from "./LockedRecommended";
 
 export class Recommended extends Component {
+  static propTypes = {
+    mainDesc: PropTypes.string,
+    photos: PropTypes.arrayOf(PropTypes.string),
+    recBeers: PropTypes.arrayOf(PropTypes.object),
+    recDesc: PropTypes.arrayOf(PropTypes.string)
+  };
+
+  static defaultProps = {
+    mainDesc:
+      "Here is our personalized recommendation for new beer styles!"
+  };
+
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      mainDesc: this.props.mainDesc,
+      photos: this.props.photos,
+      recBeers: this.props.recBeers,
+      recDesc: this.props.recDesc
+    };
   }
 
-  componentDidMount() {
-    NetClient.get(`https://jsonplaceholder.typicode.com/photos/`).then(res => {
-      const pics = res.slice(0, 5).map(data => data.thumbnailUrl);
-      this.setState({
-        photos: pics,
-        loading: false,
-        error: null
-      });
-    });
+  async componentDidMount() {
+    // GET for beer images
+    if (!this.props.photos) {
+      NetClient.get("https://jsonplaceholder.typicode.com/photos/").then(
+        res => {
+          const pics = res.slice(0, 5).map(data => data.thumbnailUrl);
+          this.setState({
+            photos: pics,
+            loading: false,
+            error: null
+          });
+        }
+      );
+    }
 
-    NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
-      this.setState({
-        recBeers: data.slice(0, 5)
-      });
-      localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
+    // GET for beer names
+    if (!this.props.recBeers) {
+      NetClient.post("https://localhost:44300/api/BeerRecommendations", UserController.getCurrentUserObject()).then(data => {
+      
+      if (UserController.cachedBeers.length === 0) {
+        // await UserController.fetchAllBeers();
+        NetClient.get("https://localhost:44300/api/beers").then(allBeers => {
+          UserController.cachedBeers = allBeers;
+          const filteredBeers =  UserController.cachedBeers.filter(cachedBeer => data.includes(cachedBeer.Id));
+          this.setState({
+            recBeers: filteredBeers
+          });
+        });
+      } else {
+        const filteredBeers =  UserController.cachedBeers.filter(cachedBeer => data.includes(cachedBeer.Id));
+        this.setState({
+          recBeers: filteredBeers
+        });
+      }
     });
+  }
 
-    NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
-      this.setState({
-        recDesc: data.slice(20, 25)
+    // GET for beer descriptions
+    if (!this.props.recDesc) {
+      NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
+        this.setState({
+          recDesc: data.slice(20, 30)
+        });
+        localStorage.setItem("appState", JSON.stringify(data.slice(20, 30)));
       });
-      localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
-    });
+    }
   }
 
   renderPhotos() {
@@ -49,7 +94,15 @@ export class Recommended extends Component {
     return (
       <div style={styles.inColStyle}>
         {this.state.recBeers.map(beer => (
-          <p key={beer.id}>{beer.title}</p>
+          <Link to="/search-result" onClick={() => {
+            UserController.currBeer = beer.BeerName;
+            UserController.currBeerId = beer.Id;
+            UserController.currStyle = beer.Style
+            UserController.currABV = beer.ABV
+            UserController.currIBU = beer.IBU
+          }}>
+            <p key={beer.BeerName}>{beer.BeerName}</p>
+          </Link>
         ))}
       </div>
     );
@@ -65,19 +118,26 @@ export class Recommended extends Component {
     );
   }
 
-  render() {
-    return (
-      <div style={styles.inTitleStyle}>
-        <h1>Recommended For You</h1>
-        <h5>
-          Here is our personalized recommendation for new beer styles based off
-          people with similar tastes!
-        </h5>
+  _renderBody() {
+    if (UserController.getCurrentUser()) {
+      return (
         <div style={styles.inRowStyle}>
           {this.state.photos ? this.renderPhotos() : null}
           {this.state.recBeers ? this.renderRecBeers() : null}
           {this.state.recDesc ? this.renderDescriptions() : null}
         </div>
+      );
+    }
+
+    return <LockedRecommended />;
+  }
+
+  render() {
+    return (
+      <div style={styles.inTitleStyle}>
+        <h1>Recommended For You</h1>
+        <h5>{this.props.mainDesc}</h5>
+        {this._renderBody()}
       </div>
     );
   }
