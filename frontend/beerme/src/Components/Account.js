@@ -10,6 +10,11 @@ import {
 
 import UserController from "../Controllers/UserController";
 
+// FOR POST:
+//  BeerName, StyleId
+// Dropdown with Style
+// Just 2 fields: Beer Name, Style
+
 export class Account extends Component {
   constructor(props) {
     super(props);
@@ -44,6 +49,10 @@ export class Account extends Component {
         onChange={onChange}
       />
     );
+  }
+
+  _renderBusinessName() {
+    return <h2>{UserController.businessName}</h2>;
   }
 
   _renderCommon() {
@@ -110,28 +119,9 @@ export class Account extends Component {
               });
             })}
           </Form.Group>
-          <Form.Group as={Col} controlId="formGridBeerStyle">
-            <Form.Label>Style(s)</Form.Label>
-            {this._renderControl("name", "IPA", false, e => {
-              const newBeerData = this.state.addBeerData;
-              newBeerData.styles = e.target.value;
-              this.setState({
-                addBeerData: newBeerData
-              });
-            })}
-          </Form.Group>
-        </Form.Row>
-
-        <Form.Row>
-          <Form.Group as={Col} controlId="formGridBeerColor">
-            <Form.Label>Color</Form.Label>
-            {this._renderControl("name", "Dark", false, e => {
-              const newBeerData = this.state.addBeerData;
-              newBeerData.color = e.target.value;
-              this.setState({
-                addBeerData: newBeerData
-              });
-            })}
+          <Form.Group>
+            <hr />
+            {this._renderDropdown("Style", ["marine", "add", "styles", "from", "post", "here"])}
           </Form.Group>
         </Form.Row>
         <Button
@@ -149,6 +139,7 @@ export class Account extends Component {
     return (
       <div className="Login" style={broadStyle}>
         <Form>
+          {UserController.isBusiness ? this._renderBusinessName() : null}
           {this._renderCommon()}
           {this._renderAddBeer()}
         </Form>
