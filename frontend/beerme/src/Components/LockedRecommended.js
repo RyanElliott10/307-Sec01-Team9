@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form } from "react-bootstrap";
-
 import { Redirect, Link } from "react-router-dom";
+
 import Lock from "../img/lock.png";
 
 export class LockedRecommended extends Component {
