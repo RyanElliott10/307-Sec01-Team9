@@ -11,7 +11,7 @@ namespace BeerMe.Models
 
         public List<int> findRecommendedBeers()
         {
-            var userBeerRatings = db.BeerRatings.Where(ratings => ratings.UserId == this.Id && ratings.Rating >= 3.5).ToList();
+            var userBeerRatings = db.BeerRatings.Where(ratings => ratings.UserId == this.Id && ratings.Rating >= 3).ToList();
             this.BeerRatings = userBeerRatings;
             List<int> beersRatedByUser = this.BeerRatings.Select(beerRating => beerRating.BeerId).ToList();
             if (beersRatedByUser.Count == 0)
