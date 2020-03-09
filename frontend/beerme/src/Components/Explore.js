@@ -227,19 +227,19 @@ export class Explore extends Component {
 
     const interObjArr = selections.map(sel => {
       console.log(sel);
-      if (sel.type === 'color') {
+      if (sel.type === "color") {
         // Color
         return {
           ColorStart: sel.value[0],
           ColorEnd: sel.value[1]
         };
-      } else if (sel.type === 'ibu') {
+      } else if (sel.type === "ibu") {
         // IBU
         return {
           IBUStart: sel.value[0],
           IBUEnd: sel.value[1]
         };
-      } else if (sel.type === 'abv') {
+      } else if (sel.type === "abv") {
         // ABV
         return {
           ABVStart: sel.value[0],
@@ -404,6 +404,13 @@ export class Explore extends Component {
     );
   }
 
+  _isSubmitDisabled() {
+    return (
+      this.state.currentPageIndex === this.pages.length - 1 &&
+      this._getAllSelections() < 3
+    );
+  }
+
   _renderProgressionButtons() {
     return (
       <ButtonToolbar style={styles.btnsStyle}>
@@ -423,6 +430,7 @@ export class Explore extends Component {
           variant="secondary"
           style={{ backgroundColor: Constants.ORANGE_COLOR, outline: "none" }}
           onClick={this._onNextClick}
+          disabled={this._isSubmitDisabled()}
         >
           {this.state.currentPageIndex === this.pages.length - 1
             ? "Submit"
