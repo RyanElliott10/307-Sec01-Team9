@@ -25,7 +25,8 @@ namespace BeerMe.Controllers
         // GET: api/BeerRatings/5
         [ResponseType(typeof(BeerRating))]
 
-        //id is the BeerId
+       //Here the id parameter represents the BeerId passed in by the client
+       //Finds the average ratings across all users for that particular beer
         public IHttpActionResult GetAverageBeerRating(int id)
         {
             int beerId = id;
