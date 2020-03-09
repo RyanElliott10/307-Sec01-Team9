@@ -41,8 +41,6 @@ export class Home extends Component {
       //  this.setState({ allBeers: data.slice(0, 10) });
       //  localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
     });
-
-    
   }
 
   renderTopTen() {

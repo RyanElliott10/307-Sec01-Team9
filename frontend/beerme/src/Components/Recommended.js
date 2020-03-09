@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import NetClient from "../Utils/NetClient";
 import PropTypes from "prop-types";
@@ -45,23 +46,19 @@ export class Recommended extends Component {
 
     // GET for beer names
     if (!this.props.recBeers) {
-      NetClient.post("http://localhost44300/api/BeerRecommendations", UserController.getCurrentUserObject()).then(data => {
-      const dummyData = [1, 2, 3, 4, 5];
-      console.log("DATA YA YEET:", data);
+      NetClient.post("https://localhost:44300/api/BeerRecommendations", UserController.getCurrentUserObject()).then(data => {
       
       if (UserController.cachedBeers.length === 0) {
         // await UserController.fetchAllBeers();
-        NetClient.get("https://localhost:44300/api/beers").then(data => {
-          UserController.cachedBeers = data;
-          const filteredBeers =  UserController.cachedBeers.filter(data => dummyData.includes(data.Id));
-          console.log("FILTRATION BABY:", filteredBeers)
+        NetClient.get("https://localhost:44300/api/beers").then(allBeers => {
+          UserController.cachedBeers = allBeers;
+          const filteredBeers =  UserController.cachedBeers.filter(cachedBeer => data.includes(cachedBeer.Id));
           this.setState({
             recBeers: filteredBeers
           });
         });
       } else {
-        const filteredBeers =  UserController.cachedBeers.filter(data => dummyData.includes(data.Id));
-        console.log("rfgf", filteredBeers);
+        const filteredBeers =  UserController.cachedBeers.filter(cachedBeer => data.includes(cachedBeer.Id));
         this.setState({
           recBeers: filteredBeers
         });
@@ -72,7 +69,6 @@ export class Recommended extends Component {
     // GET for beer descriptions
     if (!this.props.recDesc) {
       NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
-        console.log("YOTE:", data.slice(20, 30));
         this.setState({
           recDesc: data.slice(20, 30)
         });
@@ -98,7 +94,15 @@ export class Recommended extends Component {
     return (
       <div style={styles.inColStyle}>
         {this.state.recBeers.map(beer => (
-          <p key={beer.BeerName}>{beer.BeerName}</p>
+          <Link to="/search-result" onClick={() => {
+            UserController.currBeer = beer.BeerName;
+            UserController.currBeerId = beer.Id;
+            UserController.currStyle = beer.Style
+            UserController.currABV = beer.ABV
+            UserController.currIBU = beer.IBU
+          }}>
+            <p key={beer.BeerName}>{beer.BeerName}</p>
+          </Link>
         ))}
       </div>
     );
