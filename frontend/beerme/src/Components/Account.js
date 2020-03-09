@@ -46,6 +46,12 @@ export class Account extends Component {
     );
   }
 
+  _renderBusinessName() {
+    return (
+      <h2>{UserController.businessName}</h2>
+    )
+  }
+
   _renderCommon() {
     return (
       <Form.Group as={Col} controlId="formGridFirstName">
@@ -149,6 +155,7 @@ export class Account extends Component {
     return (
       <div className="Login" style={broadStyle}>
         <Form>
+        {UserController.isBusiness ? this._renderBusinessName() : null}
           {this._renderCommon()}
           {this._renderAddBeer()}
         </Form>
