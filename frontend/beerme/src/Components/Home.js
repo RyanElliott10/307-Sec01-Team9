@@ -22,9 +22,24 @@ export class Home extends Component {
     });
 
     NetClient.get("https://localhost:44300/api/beers").then(data => {
-      console.log("DATA:", data);
-      // this.setState({ allBeers: data.slice(0, 10) });
-      // localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
+      UserController.cachedBeers = data;
+      const searchData = data.map((d) => {
+        console.log(d)
+        return {
+          key: d.BeerName,
+          value: d.BeerName, 
+          id: d.Id,
+          style: d.Style,
+          abv: d.ABV,
+          ibu: d.IBU,
+        };
+      });
+      this.setState({
+        allBeers: searchData
+      });
+      //  console.log(searchData);
+      //  this.setState({ allBeers: data.slice(0, 10) });
+      //  localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
     });
 
     
@@ -116,10 +131,15 @@ export class Home extends Component {
         <Route render={({ history}) => (
           <ReactSearchBox
             placeholder="Search"
-            data={this.data}
+            data={this.state.allBeers}
             onSelect={(record) => {
               console.log(record)
               UserController.currBeer = record.value
+              UserController.currStyle = record.style
+              UserController.currABV = record.abv
+              UserController.currIBU = record.ibu
+              UserController.currBeerId = record.id
+
               history.push('/search-result')
             }}
           />

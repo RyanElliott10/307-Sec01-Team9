@@ -3,6 +3,7 @@ import StarRatings from 'react-star-ratings';
 import Photo from "../img/BOTD_photo.png";
 
 import UserController from "../Controllers/UserController";
+import NetClient from '../Utils/NetClient';
 
 export default class Rate extends Component {
     constructor(props) {
@@ -10,13 +11,24 @@ export default class Rate extends Component {
         this.state = {};
     }
 
-    changeRating( newRating, name ) {
+    changeRating = (newRating, name ) => {
       this.setState({
         rating: newRating
       });
+
+      const rateData = {
+        UserId: UserController.userId,
+        BeerId: UserController.currBeerId,
+        Rating: newRating
+      };
+
+      console.log("TITS:", rateData);
+
+      NetClient.post("https://localhost:44300/api/beerratings", rateData).then(data => console.log(data));
     }
 
     renderBody() {
+      console.log("FUCK ME", UserController.currStyle);
       return(
         <div style={styles.inColStyle}>
             <div style={styles.inRowStyle}>
@@ -27,13 +39,13 @@ export default class Rate extends Component {
               />
               <div style={styles.inBodyStyle}>    
                 <h5>
-                  Style:
+                  {`Style: ${UserController.currStyle}`}
                 </h5>
                 <h5>
-                  Alcohol Per Volume:
+                  {`Alcohol Per Volume: ${UserController.currABV}`}
                 </h5>
                 <h5>
-                  International Bittering Unit:
+                  {`International Bittering Unit: ${UserController.currIBU}`}
                 </h5>
               </div>   
             </div>
