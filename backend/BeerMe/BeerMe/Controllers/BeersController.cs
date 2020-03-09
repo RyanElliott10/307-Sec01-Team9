@@ -33,13 +33,19 @@ namespace BeerMe.Controllers
         [ResponseType(typeof(Beer))]
         public IHttpActionResult GetBeer(int id)
         {
-            Beer beer = db.Beers.Find(id);
-            if (beer == null)
+            var beerById = db.Beers.Where(beer => beer.Id == id).Select(beer => new {
+                Id = beer.Id,
+                BeerName = beer.BeerName,
+                Style = beer.BeerStyle.Style,
+                ABV = beer.BeerStyle.ABV,
+                IBU = beer.BeerStyle.IBU
+            });
+            if (beerById == null)
             {
                 return NotFound();
             }
 
-            return Ok(beer);
+            return Ok(beerById);
         }
 
         // PUT: api/Beers/5
