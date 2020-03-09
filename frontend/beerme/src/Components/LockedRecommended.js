@@ -30,31 +30,21 @@ export class LockedRecommended extends Component {
       <div style={styles.mainContainer}>
         <Form style={styles.mainForm} onSubmit={this._createAccount}>
           <Form.Row>
-            {/* <LockSVG
-              fill="#fff"
-              width={350}
-              className="lock"
-              style={{
-                justifyContent: "center",
-                justifySelf: "content",
-                alignItems: "center", 
-                marginTop: "80px", 
-              }}
-            /> */}
             <img src={Lock}
-                style={{width: "300px", height: "300px", marginTop: "50px", marginBottom: "30px", marginLeft: "50px", alignItems: "center"}} alt="Lock" />
+                style={{width: "300px", height: "300px", marginTop: "50px", marginBottom: "70px", marginLeft: "50px", alignItems: "center"}} alt="Lock" />
           </Form.Row>
           <Form.Row>
-            <Form.Label>
-              {"In order to view recommended, please"}
-            </Form.Label>
+            <span style= {{marginRight: "5px"}}>
+              {"In order to view your recommendations, please "}
+            </span>
 
             <Route render={({ history}) => (
               <span onClick ={() => {
                   console.log("to account entry")
                   history.push('/account-entry')
                 }}
-                style = {{color: "blue"}}
+                style = {{color: "blue", marginBottom: "20px"}}
+                
                 >
                    {"create an account."}
               </span>
@@ -72,7 +62,8 @@ const styles = {
     display: "flex",
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "rgb(244, 244, 244)"
+    backgroundColor: "rgb(244, 244, 244)",
+    marginTop: "20px"
   },
 
   mainForm: {
