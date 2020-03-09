@@ -11,7 +11,8 @@ export class Recommended extends Component {
     mainDesc: PropTypes.string,
     photos: PropTypes.arrayOf(PropTypes.string),
     recBeers: PropTypes.arrayOf(PropTypes.object),
-    recDesc: PropTypes.arrayOf(PropTypes.object)
+    recDesc: PropTypes.arrayOf(PropTypes.object),
+    fromExplore: PropTypes.bool
   };
 
   static defaultProps = {
@@ -123,7 +124,15 @@ export class Recommended extends Component {
   }
 
   _renderBody() {
-    if (UserController.getCurrentUser()) {
+    if (this.props.fromExplore) {
+      return (
+        <div style={styles.inRowStyle}>
+          {this.state.photos ? this.renderPhotos() : null}
+          {this.state.recBeers ? this.renderRecBeers() : null}
+          {this.state.recDesc ? this.renderDescriptions() : null}
+        </div>
+      );
+    } else if (UserController.getCurrentUser()) {
       return (
         <div style={styles.inRowStyle}>
           {this.state.photos ? this.renderPhotos() : null}
