@@ -16,7 +16,12 @@ namespace BeerMe.Controllers
         {
             User dbUser = db.Users.Where(user => user.Email.Equals(details.email)).FirstOrDefault();
             bool isLoginSuccessful = Models.User.Login(details, dbUser);
-            return Ok(isLoginSuccessful);
+            if(isLoginSuccessful)
+            {
+                return Ok(dbUser);
+            }
+            return Ok(new User());
+
         }
     }
 }
