@@ -65,18 +65,22 @@ export default class Rate extends Component {
     renderStars() {
       if (!UserController.isLoggedIn) {
         return(
-          <Form style= {{alignItems: "center", justifyContent: "center"}}>
-            <Form.Row>
-            <Form.Label>{"In order to rate this beer, please"}</Form.Label>
+          <Form>
+            <Form.Row style= {{alignItems: "top", justifyContent: "center"}}>
+            <Form.Label>{"Please "}</Form.Label>
               <Link
                 to="/account-entry"
-                style={{ color: "blue", marginLeft: "5px" }}
+                style={{ color: "blue", marginLeft: "5px", marginRight: "5px" }}
               >
-                create an account.
+                create an account
               </Link>
+              <Form.Label>{" to rate this beer."}</Form.Label>
             </Form.Row>
           </Form>
         )
+      }
+      else if (UserController.isBusiness) {
+        return(null)
       }
       else return (
         <div style={styles.inColStyle}>
