@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, Form, Col } from "react-bootstrap";
 import Select from "react-select";
+import { Redirect } from "react-router-dom";
 
 import UserController from "../Controllers/UserController";
 
@@ -143,15 +144,18 @@ export class Account extends Component {
   }
 
   render() {
-    return (
-      <div className="Login" style={broadStyle}>
-        <Form>
-          {UserController.isBusiness ? this._renderBusinessName() : null}
-          {this._renderCommon()}
-          {this._renderAddBeer()}
-        </Form>
-      </div>
-    );
+    if (UserController.getCurrentUser()) {
+      return (
+        <div className="Login" style={broadStyle}>
+          <Form>
+            {UserController.isBusiness ? this._renderBusinessName() : null}
+            {this._renderCommon()}
+            {this._renderAddBeer()}
+          </Form>
+        </div>
+      );
+    }
+    return <Redirect to="/account-entry" />
   }
 }
 
