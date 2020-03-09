@@ -407,7 +407,7 @@ export class Explore extends Component {
   _isSubmitDisabled() {
     return (
       this.state.currentPageIndex === this.pages.length - 1 &&
-      this._getAllSelections() < 3
+      this._getAllSelections().length < 3
     );
   }
 
