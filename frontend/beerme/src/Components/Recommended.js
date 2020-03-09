@@ -11,7 +11,7 @@ export class Recommended extends Component {
     mainDesc: PropTypes.string,
     photos: PropTypes.arrayOf(PropTypes.string),
     recBeers: PropTypes.arrayOf(PropTypes.object),
-    recDesc: PropTypes.arrayOf(PropTypes.string)
+    recDesc: PropTypes.arrayOf(PropTypes.object)
   };
 
   static defaultProps = {
