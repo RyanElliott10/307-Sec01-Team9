@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+import { Route } from "react-router-dom";
+import ReactSearchBox from "react-search-box";
+
 import BOTD_Photo from "../img/BOTD_photo.png";
 import Logo from "../img/BeerMe_Logo.png";
-import NetClient from "../Utils/NetClient";
 import Separator from "../img/Sep_Img.png";
-import ReactSearchBox from "react-search-box";
-import { Route } from 'react-router-dom';
 
+import NetClient from "../Utils/NetClient";
 import UserController from "../Controllers/UserController";
 
 export class Home extends Component {
@@ -15,19 +16,27 @@ export class Home extends Component {
   }
 
   componentDidMount() {
-    // GET for Top Ten beers
     NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
       this.setState({ topTen: data.slice(0, 10) });
       localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
     });
 
     NetClient.get("https://localhost:44300/api/beers").then(data => {
-      console.log("DATA:", data);
-      // this.setState({ allBeers: data.slice(0, 10) });
-      // localStorage.setItem("appState", JSON.stringify(data.slice(0, 10)));
+      UserController.cachedBeers = data;
+      const searchData = data.map(d => {
+        return {
+          key: d.BeerName,
+          value: d.BeerName,
+          id: d.Id,
+          style: d.Style,
+          abv: d.ABV,
+          ibu: d.IBU
+        };
+      });
+      this.setState({
+        allBeers: searchData
+      });
     });
-
-    
   }
 
   renderTopTen() {
@@ -79,29 +88,6 @@ export class Home extends Component {
     );
   }
 
-  data = [
-    {
-      key: "Corona",
-      value: "Corona"
-    },
-    {
-      key: "Modelo",
-      value: "Modelo"
-    },
-    {
-      key: "Lagunitas",
-      value: "Lagunitas"
-    },
-    {
-      key: "Blue Moon",
-      value: "Blue Moon"
-    },
-    {
-      key: "805",
-      value: "805"
-    }
-  ];
-
   renderSearchBox() {
     return (
       <div
@@ -112,18 +98,22 @@ export class Home extends Component {
           marginBottom: "40px"
         }}
       >
-        
-        <Route render={({ history}) => (
-          <ReactSearchBox
-            placeholder="Search"
-            data={this.data}
-            onSelect={(record) => {
-              console.log(record)
-              UserController.currBeer = record.value
-              history.push('/search-result')
-            }}
-          />
-        )} />
+        <Route
+          render={({ history }) => (
+            <ReactSearchBox
+              placeholder="Search"
+              data={this.state.allBeers}
+              onSelect={record => {
+                UserController.currBeer = record.value;
+                UserController.currStyle = record.style;
+                UserController.currABV = record.abv;
+                UserController.currIBU = record.ibu;
+                UserController.currBeerId = record.id;
+                history.push("/search-result");
+              }}
+            />
+          )}
+        />
       </div>
     );
   }

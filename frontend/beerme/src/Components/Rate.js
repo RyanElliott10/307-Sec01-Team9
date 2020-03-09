@@ -3,6 +3,7 @@ import StarRatings from 'react-star-ratings';
 import Photo from "../img/BOTD_photo.png";
 
 import UserController from "../Controllers/UserController";
+import NetClient from '../Utils/NetClient';
 
 export default class Rate extends Component {
     constructor(props) {
@@ -10,10 +11,27 @@ export default class Rate extends Component {
         this.state = {};
     }
 
-    changeRating( newRating, name ) {
+    componentDidMount() {
+      NetClient.get(`https://localhost:44300/api/beerratings/${UserController.currBeerId}`).then(data => {
+        console.log(data);
+        this.setState({
+          currentBeerRating: data
+        })
+      });
+    }
+
+    changeRating = (newRating, name ) => {
       this.setState({
         rating: newRating
       });
+
+      const rateData = {
+        UserId: UserController.userId,
+        BeerId: UserController.currBeerId,
+        Rating: newRating
+      };
+
+      NetClient.post("https://localhost:44300/api/beerratings", rateData).then(data => console.log(data));
     }
 
     renderBody() {
@@ -27,13 +45,13 @@ export default class Rate extends Component {
               />
               <div style={styles.inBodyStyle}>    
                 <h5>
-                  Style:
+                  {`Style: ${UserController.currStyle}`}
                 </h5>
                 <h5>
-                  Alcohol Per Volume:
+                  {`Alcohol Per Volume: ${UserController.currABV}`}
                 </h5>
                 <h5>
-                  International Bittering Unit:
+                  {`International Bittering Unit: ${UserController.currIBU}`}
                 </h5>
               </div>   
             </div>
@@ -69,7 +87,7 @@ export default class Rate extends Component {
             {UserController.currBeer}
           </h1>
           <h5 style={{alignItems: "right"}}>
-            Average Rating:
+            {`Average Rating: ${this.state.currentBeerRating ? this.state.currentBeerRating.toFixed(2) : "Not yet rated"}`}
           </h5>
           {this.renderBody()}
           {this.renderStars()}

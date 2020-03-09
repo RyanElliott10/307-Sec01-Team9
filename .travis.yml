@@ -1,24 +1,18 @@
-matrix:
-	include:
-		-language: node_js
-		node_js:
-  		- "stable"
-		cache:
-  		directories:
-    		- node_modules
-  		cache: yarn
-		script:
-  		- cd frontend/beerme/
-  		- npm install
-  		- yarn test --coverage --watchAll=false
-		deploy:
-		  provider: surge
-		  skip_cleanup: true
-		  domain: csc307-group9.surge.sh
-		  project: ./build/
-		on:
-		  branch: master
-		-language: csharp
-		 solution: backend/BeerMe/BeerMe.sln
-	 	 script:
-  		 - xbuild /p:Configuration=Release backend/BeerMe/BeerMe.sln
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+    - node_modules
+  cache: yarn
+script:
+  - cd frontend/beerme/
+  - npm install
+  - yarn test --coverage --watchAll=false
+deploy:
+  provider: surge
+  skip_cleanup: true
+  domain: csc307-group9.surge.sh
+  project: ./build/
+on:
+  branch: master

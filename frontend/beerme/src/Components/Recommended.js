@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import NetClient from "../Utils/NetClient";
 import PropTypes from "prop-types";
@@ -14,8 +15,7 @@ export class Recommended extends Component {
   };
 
   static defaultProps = {
-    mainDesc:
-      "Here is our personalized recommendation for new beer styles!"
+    mainDesc: "Here is our personalized recommendation for new beer styles!"
   };
 
   constructor(props) {
@@ -28,8 +28,7 @@ export class Recommended extends Component {
     };
   }
 
-  componentDidMount() {
-    // GET for beer images
+  async componentDidMount() {
     if (!this.props.photos) {
       NetClient.get("https://jsonplaceholder.typicode.com/photos/").then(
         res => {
@@ -43,20 +42,34 @@ export class Recommended extends Component {
       );
     }
 
-    // GET for beer names
     if (!this.props.recBeers) {
-      NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
-        this.setState({
-          recBeers: data.slice(0, 5)
-        });
-        localStorage.setItem("appState", JSON.stringify(data.slice(0, 5)));
+      NetClient.post(
+        "https://localhost:44300/api/BeerRecommendations",
+        UserController.getCurrentUserObject()
+      ).then(data => {
+        if (UserController.cachedBeers.length === 0) {
+          NetClient.get("https://localhost:44300/api/beers").then(allBeers => {
+            UserController.cachedBeers = allBeers;
+            const filteredBeers = UserController.cachedBeers.filter(
+              cachedBeer => data.includes(cachedBeer.Id)
+            );
+            this.setState({
+              recBeers: filteredBeers
+            });
+          });
+        } else {
+          const filteredBeers = UserController.cachedBeers.filter(cachedBeer =>
+            data.includes(cachedBeer.Id)
+          );
+          this.setState({
+            recBeers: filteredBeers
+          });
+        }
       });
     }
 
-    // GET for beer descriptions
     if (!this.props.recDesc) {
       NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
-        console.log("YOTE:", data.slice(20, 30));
         this.setState({
           recDesc: data.slice(20, 30)
         });
@@ -82,7 +95,18 @@ export class Recommended extends Component {
     return (
       <div style={styles.inColStyle}>
         {this.state.recBeers.map(beer => (
-          <p key={beer.id}>{beer.title}</p>
+          <Link
+            to="/search-result"
+            onClick={() => {
+              UserController.currBeer = beer.BeerName;
+              UserController.currBeerId = beer.Id;
+              UserController.currStyle = beer.Style;
+              UserController.currABV = beer.ABV;
+              UserController.currIBU = beer.IBU;
+            }}
+          >
+            <p key={beer.BeerName}>{beer.BeerName}</p>
+          </Link>
         ))}
       </div>
     );
