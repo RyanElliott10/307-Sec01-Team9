@@ -95,15 +95,11 @@ export class Recommended extends Component {
       <div style={styles.inColStyle}>
         {this.state.recBeers.map(beer => (
           <Link to="/search-result" onClick={() => {
-            console.log("BEER:", beer);
             UserController.currBeer = beer.BeerName;
             UserController.currBeerId = beer.Id;
-
-            // UserController.currBeer = record.value
             UserController.currStyle = beer.Style
             UserController.currABV = beer.ABV
             UserController.currIBU = beer.IBU
-            // UserController.currBeerId = record.id
           }}>
             <p key={beer.BeerName}>{beer.BeerName}</p>
           </Link>
