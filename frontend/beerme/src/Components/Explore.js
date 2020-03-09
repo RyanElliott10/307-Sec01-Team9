@@ -10,82 +10,6 @@ import BeerColors from "../img/beer_colors.png";
 
 const ExploreSpoofData = [
   {
-    title: "Bitterness (IBU)",
-    description: "A gauge of your preferred beer bitterness.",
-    checkboxes: [
-      {
-        id: 1,
-        type: "ibu",
-        option: "Restrained (0-20)",
-        value: [0, 20],
-        isChecked: false
-      },
-      {
-        id: 2,
-        type: "ibu",
-        option: "Moderate (21-40)",
-        value: [21, 40],
-        isChecked: false
-      },
-      {
-        id: 3,
-        type: "ibu",
-        option: "Aggressive (41-60)",
-        value: [41, 60],
-        isChecked: false
-      },
-      {
-        id: 4,
-        type: "ibu",
-        option: "Harsh (60-100)",
-        value: [61, 100],
-        isChecked: false
-      }
-    ]
-  },
-  {
-    title: "Alcohol by Volume (ABV)",
-    description:
-      "Alcohol by volume is used to measure the alcohol content of beer, wine, distilled spirits, and other alcoholic beverages.",
-    checkboxes: [
-      {
-        id: 1,
-        type: "abv",
-        option: "Restrained (1-3%)",
-        value: [1, 3],
-        isChecked: false
-      },
-      {
-        id: 2,
-        type: "abv",
-        option: "Mild (4-6%)",
-        value: [4, 6],
-        isChecked: false
-      },
-      {
-        id: 3,
-        type: "abv",
-        option: "Moderate (7-9%)",
-        value: [7, 9],
-        isChecked: false
-      },
-      {
-        id: 4,
-        type: "abv",
-        option: "Strong (10-12%)",
-        value: [10, 12],
-        isChecked: false
-      },
-      {
-        id: 5,
-        type: "abv",
-        option: "Harsh (13-15%)",
-        value: [13, 15],
-        isChecked: false
-      }
-    ]
-  },
-  {
     title: "Colors",
     description: "Select your preferred color of beer.",
     checkboxes: [
@@ -181,6 +105,82 @@ const ExploreSpoofData = [
         isChecked: false
       }
     ]
+  },
+  {
+    title: "Bitterness (IBU)",
+    description: "A gauge of your preferred beer bitterness.",
+    checkboxes: [
+      {
+        id: 1,
+        type: "ibu",
+        option: "Restrained (0-20)",
+        value: [0, 20],
+        isChecked: false
+      },
+      {
+        id: 2,
+        type: "ibu",
+        option: "Moderate (21-40)",
+        value: [21, 40],
+        isChecked: false
+      },
+      {
+        id: 3,
+        type: "ibu",
+        option: "Aggressive (41-60)",
+        value: [41, 60],
+        isChecked: false
+      },
+      {
+        id: 4,
+        type: "ibu",
+        option: "Harsh (60-100)",
+        value: [61, 100],
+        isChecked: false
+      }
+    ]
+  },
+  {
+    title: "Alcohol by Volume (ABV)",
+    description:
+      "Alcohol by volume is used to measure the alcohol content of beer, wine, distilled spirits, and other alcoholic beverages.",
+    checkboxes: [
+      {
+        id: 1,
+        type: "abv",
+        option: "Restrained (1-3%)",
+        value: [1, 3],
+        isChecked: false
+      },
+      {
+        id: 2,
+        type: "abv",
+        option: "Mild (4-6%)",
+        value: [4, 6],
+        isChecked: false
+      },
+      {
+        id: 3,
+        type: "abv",
+        option: "Moderate (7-9%)",
+        value: [7, 9],
+        isChecked: false
+      },
+      {
+        id: 4,
+        type: "abv",
+        option: "Strong (10-12%)",
+        value: [10, 12],
+        isChecked: false
+      },
+      {
+        id: 5,
+        type: "abv",
+        option: "Harsh (13-15%)",
+        value: [13, 15],
+        isChecked: false
+      }
+    ]
   }
 ];
 
@@ -259,6 +259,8 @@ export class Explore extends Component {
     this.pages[this.state.currentPageIndex].checkboxes.map(data => {
       if (data.id === id) {
         data.isChecked = !data.isChecked;
+      } else {
+        data.isChecked = false;
       }
     });
     this.forceUpdate();
@@ -341,7 +343,7 @@ export class Explore extends Component {
   }
 
   _getBtnStyle() {
-    if (this.state.currentPageIndex == 2) {
+    if (this.state.currentPageIndex == 0) {
       return { paddingLeft: "200px" };
     }
     return { paddingLeft: "50px" };
