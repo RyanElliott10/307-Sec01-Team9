@@ -39,7 +39,7 @@ namespace BeerMe.Controllers
                 Style = beer.BeerStyle.Style,
                 ABV = beer.BeerStyle.ABV,
                 IBU = beer.BeerStyle.IBU
-            });
+            }).FirstOrDefault();
             if (beerById == null)
             {
                 return NotFound();
