@@ -12,7 +12,6 @@ export class LockedRecommended extends Component {
 
   _createAccount = event => {
     event.preventDefault();
-    console.log("_createAccount");
     this.setState({
       redirect: true
     });

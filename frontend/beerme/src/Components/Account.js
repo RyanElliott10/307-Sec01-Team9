@@ -7,8 +7,6 @@ import UserController from "../Controllers/UserController";
 
 // FOR POST:
 //  BeerName, StyleId
-// Dropdown with Style
-// Just 2 fields: Beer Name, Style
 
 export class Account extends Component {
   constructor(props) {
@@ -47,7 +45,10 @@ export class Account extends Component {
   }
 
   _renderBusinessName() {
-    return <h2>{UserController.businessName}</h2>;
+    if (UserController.isBusiness) {
+      return <h2>{UserController.businessName}</h2>;
+    }
+    return null;
   }
 
   _renderCommon() {
@@ -74,19 +75,6 @@ export class Account extends Component {
         </Form>
       </Form.Group>
     );
-  }
-
-  _renderDropdown(title, options) {
-    const scaryAnimals = [
-      { label: "Alligators", value: 1 },
-      { label: "Crocodiles", value: 2 },
-      { label: "Sharks", value: 3 },
-      { label: "Small crocodiles", value: 4 },
-      { label: "Smallest crocodiles", value: 5 },
-      { label: "Snakes", value: 6 }
-    ];
-
-    return <Select style={{ width: "100%" }} options={scaryAnimals} />;
   }
 
   _renderAddBeer() {
@@ -148,14 +136,14 @@ export class Account extends Component {
       return (
         <div className="Login" style={broadStyle}>
           <Form>
-            {UserController.isBusiness ? this._renderBusinessName() : null}
+            {this._renderBusinessName()}
             {this._renderCommon()}
             {this._renderAddBeer()}
           </Form>
         </div>
       );
     }
-    return <Redirect to="/account-entry" />
+    return <Redirect to="/account-entry" />;
   }
 }
 

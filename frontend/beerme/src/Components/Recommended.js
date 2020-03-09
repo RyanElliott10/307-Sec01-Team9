@@ -155,6 +155,7 @@ export class Recommended extends Component {
     );
   }
 }
+
 const styles = {
   inColStyle: {
     display: "flex",
