@@ -28,7 +28,7 @@ export class Recommended extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     // GET for beer images
     if (!this.props.photos) {
       NetClient.get("https://jsonplaceholder.typicode.com/photos/").then(
@@ -45,13 +45,29 @@ export class Recommended extends Component {
 
     // GET for beer names
     if (!this.props.recBeers) {
-      NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
-        this.setState({
-          recBeers: data.slice(0, 5)
+      NetClient.post("http://localhost44300/api/BeerRecommendations", UserController.getCurrentUserObject()).then(data => {
+      const dummyData = [1, 2, 3, 4, 5];
+      console.log("DATA YA YEET:", data);
+      
+      if (UserController.cachedBeers.length === 0) {
+        // await UserController.fetchAllBeers();
+        NetClient.get("https://localhost:44300/api/beers").then(data => {
+          UserController.cachedBeers = data;
+          const filteredBeers =  UserController.cachedBeers.filter(data => dummyData.includes(data.Id));
+          console.log("FILTRATION BABY:", filteredBeers)
+          this.setState({
+            recBeers: filteredBeers
+          });
         });
-        localStorage.setItem("appState", JSON.stringify(data.slice(0, 5)));
-      });
-    }
+      } else {
+        const filteredBeers =  UserController.cachedBeers.filter(data => dummyData.includes(data.Id));
+        console.log("rfgf", filteredBeers);
+        this.setState({
+          recBeers: filteredBeers
+        });
+      }
+    });
+  }
 
     // GET for beer descriptions
     if (!this.props.recDesc) {
@@ -82,7 +98,7 @@ export class Recommended extends Component {
     return (
       <div style={styles.inColStyle}>
         {this.state.recBeers.map(beer => (
-          <p key={beer.id}>{beer.title}</p>
+          <p key={beer.BeerName}>{beer.BeerName}</p>
         ))}
       </div>
     );
