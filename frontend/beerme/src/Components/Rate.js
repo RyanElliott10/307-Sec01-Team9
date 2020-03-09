@@ -11,6 +11,15 @@ export default class Rate extends Component {
         this.state = {};
     }
 
+    componentDidMount() {
+      NetClient.get(`https://localhost:44300/api/beerratings/${UserController.currBeerId}`).then(data => {
+        console.log(data);
+        this.setState({
+          currentBeerRating: data
+        })
+      });
+    }
+
     changeRating = (newRating, name ) => {
       this.setState({
         rating: newRating
@@ -22,13 +31,10 @@ export default class Rate extends Component {
         Rating: newRating
       };
 
-      console.log("TITS:", rateData);
-
       NetClient.post("https://localhost:44300/api/beerratings", rateData).then(data => console.log(data));
     }
 
     renderBody() {
-      console.log("FUCK ME", UserController.currStyle);
       return(
         <div style={styles.inColStyle}>
             <div style={styles.inRowStyle}>
@@ -81,7 +87,7 @@ export default class Rate extends Component {
             {UserController.currBeer}
           </h1>
           <h5 style={{alignItems: "right"}}>
-            Average Rating:
+            {`Average Rating: ${this.state.currentBeerRating ? this.state.currentBeerRating : "Not yet rated"}`}
           </h5>
           {this.renderBody()}
           {this.renderStars()}
