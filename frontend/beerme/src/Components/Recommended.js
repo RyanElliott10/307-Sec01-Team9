@@ -45,8 +45,9 @@ export class Recommended extends Component {
 
     // GET for beer names
     if (!this.props.recBeers) {
-      NetClient.post("http://localhost44300/api/beerrecommendations", UserController.getCurrentUserObject()).then(data => {
+      NetClient.post("http://localhost44300/api/BeerRecommendations", UserController.getCurrentUserObject()).then(data => {
       const dummyData = [1, 2, 3, 4, 5];
+      console.log("DATA YA YEET:", data);
       
       if (UserController.cachedBeers.length === 0) {
         // await UserController.fetchAllBeers();

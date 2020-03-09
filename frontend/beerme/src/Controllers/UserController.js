@@ -29,7 +29,7 @@ class UserController {
       password: password
     };
 
-    NetClient.post("https://localhost:44300/api/login", data).then(data => {
+    return NetClient.post("https://localhost:44300/api/login", data).then(data => {
       if (data) {
          this.userId = data.Id
         this.firstName = data.Name.split(" ")[0];
