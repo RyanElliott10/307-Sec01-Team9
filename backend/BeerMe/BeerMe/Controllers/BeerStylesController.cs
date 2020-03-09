@@ -8,7 +8,6 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Web.Http.OData;
 using BeerMe.Models;
 
 namespace BeerMe.Controllers
@@ -18,7 +17,6 @@ namespace BeerMe.Controllers
         private BeerMeEntities db = new BeerMeEntities();
 
         // GET: api/BeerStyles
-        [EnableQuery]
         public IHttpActionResult GetBeerStyles()
         {
             var styles = db.BeerStyles.Select(style =>
