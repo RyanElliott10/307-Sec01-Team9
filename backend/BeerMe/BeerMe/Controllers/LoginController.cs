@@ -16,6 +16,8 @@ namespace BeerMe.Controllers
         {
             User dbUser = db.Users.Where(user => user.Email.Equals(details.email)).FirstOrDefault();
             bool isLoginSuccessful = Models.User.Login(details, dbUser);
+
+            // User is verified otherwise new user is being created
             if(isLoginSuccessful)
             {
                 return Ok(dbUser);
