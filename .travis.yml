@@ -9,7 +9,6 @@ script:
   - cd frontend/beerme/
   - npm install
   - yarn test --coverage --watchAll=false
-  - npm run build
 deploy:
   provider: surge
   skip_cleanup: true
