@@ -223,7 +223,7 @@ export class Explore extends Component {
     });
 
     // POST to send selections to the backend
-    NetClient.post("http://httpbin.org/post", selections).then(data => {
+    NetClient.post("https://localhost:44300/api/ExploreBeerStyles", selections).then(data => {
       console.log(data);
       this.setState({
         recommendedStyle: data

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import StarRatings from 'react-star-ratings';
 import Photo from "../img/BOTD_photo.png";
+import * as Constants from "..//Utils/Constants";
 
 import UserController from "../Controllers/UserController";
 import NetClient from '../Utils/NetClient';
@@ -67,7 +68,7 @@ export default class Rate extends Component {
           </h5>
           <StarRatings
             rating={this.state.rating}
-            starRatedColor="yellow"
+            starRatedColor= {Constants.ORANGE_COLOR}
             starHoverColor="grey"
             changeRating={this.changeRating}
             numberOfStars={5}
