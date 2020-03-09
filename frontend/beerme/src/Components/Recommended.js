@@ -15,8 +15,7 @@ export class Recommended extends Component {
   };
 
   static defaultProps = {
-    mainDesc:
-      "Here is our personalized recommendation for new beer styles!"
+    mainDesc: "Here is our personalized recommendation for new beer styles!"
   };
 
   constructor(props) {
@@ -46,25 +45,31 @@ export class Recommended extends Component {
 
     // GET for beer names
     if (!this.props.recBeers) {
-      NetClient.post("https://localhost:44300/api/BeerRecommendations", UserController.getCurrentUserObject()).then(data => {
-      
-      if (UserController.cachedBeers.length === 0) {
-        // await UserController.fetchAllBeers();
-        NetClient.get("https://localhost:44300/api/beers").then(allBeers => {
-          UserController.cachedBeers = allBeers;
-          const filteredBeers =  UserController.cachedBeers.filter(cachedBeer => data.includes(cachedBeer.Id));
+      NetClient.post(
+        "https://localhost:44300/api/BeerRecommendations",
+        UserController.getCurrentUserObject()
+      ).then(data => {
+        if (UserController.cachedBeers.length === 0) {
+          // await UserController.fetchAllBeers();
+          NetClient.get("https://localhost:44300/api/beers").then(allBeers => {
+            UserController.cachedBeers = allBeers;
+            const filteredBeers = UserController.cachedBeers.filter(
+              cachedBeer => data.includes(cachedBeer.Id)
+            );
+            this.setState({
+              recBeers: filteredBeers
+            });
+          });
+        } else {
+          const filteredBeers = UserController.cachedBeers.filter(cachedBeer =>
+            data.includes(cachedBeer.Id)
+          );
           this.setState({
             recBeers: filteredBeers
           });
-        });
-      } else {
-        const filteredBeers =  UserController.cachedBeers.filter(cachedBeer => data.includes(cachedBeer.Id));
-        this.setState({
-          recBeers: filteredBeers
-        });
-      }
-    });
-  }
+        }
+      });
+    }
 
     // GET for beer descriptions
     if (!this.props.recDesc) {
@@ -94,13 +99,16 @@ export class Recommended extends Component {
     return (
       <div style={styles.inColStyle}>
         {this.state.recBeers.map(beer => (
-          <Link to="/search-result" onClick={() => {
-            UserController.currBeer = beer.BeerName;
-            UserController.currBeerId = beer.Id;
-            UserController.currStyle = beer.Style
-            UserController.currABV = beer.ABV
-            UserController.currIBU = beer.IBU
-          }}>
+          <Link
+            to="/search-result"
+            onClick={() => {
+              UserController.currBeer = beer.BeerName;
+              UserController.currBeerId = beer.Id;
+              UserController.currStyle = beer.Style;
+              UserController.currABV = beer.ABV;
+              UserController.currIBU = beer.IBU;
+            }}
+          >
             <p key={beer.BeerName}>{beer.BeerName}</p>
           </Link>
         ))}
