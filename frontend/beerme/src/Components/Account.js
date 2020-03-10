@@ -1,19 +1,12 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Form,
-  Col,
-  DropdownButton,
-  ButtonToolbar,
-  Dropdown
-} from "react-bootstrap";
+import { Button, Form, Col } from "react-bootstrap";
+import Select from "react-select";
+import { Redirect } from "react-router-dom";
 
 import UserController from "../Controllers/UserController";
 
 // FOR POST:
 //  BeerName, StyleId
-// Dropdown with Style
-// Just 2 fields: Beer Name, Style
 
 export class Account extends Component {
   constructor(props) {
@@ -52,7 +45,10 @@ export class Account extends Component {
   }
 
   _renderBusinessName() {
-    return <h2>{UserController.businessName}</h2>;
+    if (UserController.isBusiness) {
+      return <h2>{UserController.businessName}</h2>;
+    }
+    return null;
   }
 
   _renderCommon() {
@@ -81,70 +77,70 @@ export class Account extends Component {
     );
   }
 
-  _renderDropdown(title, options) {
-    return (
-      <ButtonToolbar>
-        <DropdownButton
-          drop={"down"}
-          variant="secondary"
-          title={title}
-          id={`${title}-selector`}
-          key={`${title}-selector`}
-        >
-          {options.map(title => (
-            <Dropdown.Item eventKey="title">`${title}`</Dropdown.Item>
-          ))}
-        </DropdownButton>
-      </ButtonToolbar>
-    );
-  }
-
   _renderAddBeer() {
     if (!UserController.isBusiness) {
       return null;
     }
 
+    // TO BE DELETED
+    const scaryAnimals = [
+      { label: "Alligators", value: 1 },
+      { label: "Crocodiles", value: 2 },
+      { label: "Sharks", value: 3 },
+      { label: "Small crocodiles", value: 4 },
+      { label: "Smallest crocodiles", value: 5 },
+      { label: "Snakes", value: 6 }
+    ];
+
     return (
-      <Form as={Col}>
-        <h2>Add a Beer!</h2>
-        <hr></hr>
-        <Form.Row>
-          <Form.Group as={Col} controlId="formGridBeerName">
-            <Form.Label>Name of Beer</Form.Label>
-            {this._renderControl("name", "Corona", false, e => {
-              const newBeerData = this.state.addBeerData;
-              newBeerData.name = e.target.value;
-              this.setState({
-                addBeerData: newBeerData
-              });
-            })}
-          </Form.Group>
-          <Form.Group>
-            <hr />
-            {this._renderDropdown("Style", ["marine", "add", "styles", "from", "post", "here"])}
-          </Form.Group>
-        </Form.Row>
-        <Button
-          type="submit"
-          disabled={!this._validateAddBeerForm()}
-          onClick={this._handleAddBeerSubmit}
-        >
-          Add Beer
-        </Button>
-      </Form>
+      <React.Fragment>
+        <Form as={Col}>
+          <h2>Add a Beer!</h2>
+          <hr></hr>
+          <Form.Row>
+            <Form.Group as={Col} controlId="formGridBeerName">
+              <Form.Label>Name of Beer</Form.Label>
+              {this._renderControl("name", "Corona", false, e => {
+                const newBeerData = this.state.addBeerData;
+                newBeerData.name = e.target.value;
+                this.setState({
+                  addBeerData: newBeerData
+                });
+              })}
+            </Form.Group>
+          </Form.Row>
+        </Form>
+        <div style={{ marginLeft: "15px", marginRight: "15px" }}>
+          <Form>
+            <Form.Label>Style</Form.Label>
+          </Form>
+          <Select options={this.beerStyles} />
+          <hr />
+          <Button
+            type="submit"
+            disabled={!this._validateAddBeerForm()}
+            onClick={this._handleAddBeerSubmit}
+          >
+            Add Beer
+          </Button>
+        </div>
+      </React.Fragment>
     );
   }
 
   render() {
-    return (
-      <div className="Login" style={broadStyle}>
-        <Form>
-          {UserController.isBusiness ? this._renderBusinessName() : null}
-          {this._renderCommon()}
-          {this._renderAddBeer()}
-        </Form>
-      </div>
-    );
+    if (UserController.getCurrentUser()) {
+      return (
+        <div className="Login" style={broadStyle}>
+          <Form>
+            {this._renderBusinessName()}
+            {this._renderCommon()}
+            {this._renderAddBeer()}
+          </Form>
+        </div>
+      );
+    }
+    return <Redirect to="/account-entry" />;
   }
 }
 

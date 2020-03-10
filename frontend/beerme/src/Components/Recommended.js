@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+import LockedRecommended from "./LockedRecommended";
 import NetClient from "../Utils/NetClient";
 import PropTypes from "prop-types";
 import UserController from "../Controllers/UserController";
-import LockedRecommended from "./LockedRecommended";
 
 export class Recommended extends Component {
   static propTypes = {
@@ -155,6 +155,7 @@ export class Recommended extends Component {
     );
   }
 }
+
 const styles = {
   inColStyle: {
     display: "flex",

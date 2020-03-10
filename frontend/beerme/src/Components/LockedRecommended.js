@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form } from "react-bootstrap";
-
 import { Redirect, Link } from "react-router-dom";
+
 import Lock from "../img/lock.png";
 
 export class LockedRecommended extends Component {
@@ -12,7 +12,6 @@ export class LockedRecommended extends Component {
 
   _createAccount = event => {
     event.preventDefault();
-    console.log("_createAccount");
     this.setState({
       redirect: true
     });
@@ -45,7 +44,7 @@ export class LockedRecommended extends Component {
               to="/account-entry"
               style={{ color: "blue", marginLeft: "5px" }}
             >
-              create an account.
+              create or sign into an account.
             </Link>
           </Form.Row>
         </Form>
