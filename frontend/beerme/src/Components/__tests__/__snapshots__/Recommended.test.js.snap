@@ -62,7 +62,8 @@ exports[`renders correctly 1`] = `
         >
           In order to view recommended, please
         </label>
-        <span
+        <a
+          href="/account-entry"
           onClick={[Function]}
           style={
             Object {
@@ -71,8 +72,8 @@ exports[`renders correctly 1`] = `
             }
           }
         >
-          create an account.
-        </span>
+          create or sign into an account.
+        </a>
       </div>
     </form>
   </div>
