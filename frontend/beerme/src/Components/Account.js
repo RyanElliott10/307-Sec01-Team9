@@ -13,6 +13,7 @@ export class Account extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      addBeerName: "",
       addBeerData: {
         label: "",
         value: null
@@ -21,6 +22,9 @@ export class Account extends Component {
   }
 
   componentDidMount() {
+    this.setState({
+      allStyles: [{ value: 0, label: "test" }]
+    });
     NetClient.get("https://localhost:44300/api/BeerStyles").then(data => {
       const styles = data.map(d => {
         return {
@@ -38,7 +42,8 @@ export class Account extends Component {
   _validateAddBeerForm() {
     return (
       this.state.addBeerData.label.length > 0 &&
-      this.state.addBeerData.value
+      this.state.addBeerData.value !== null &&
+      this.state.addBeerName.length > 0
     );
   }
 
@@ -48,17 +53,20 @@ export class Account extends Component {
 
   _handleAddBeerSubmit = async event => {
     event.preventDefault();
-    //UserController.addBeer(this.state.addBeerData);
     NetClient.post("https://localhost:44300/api/Beers", {
-      Id: this.state.addBeerData.value,
-      BeerName: this.state.addBeerData.label.length
+      BeerName: this.state.addBeerName,
+      Id: this.state.addBeerData.value
     });
-    this.setState({
-      addBeerData: {
-        label: "",
-        value: null
-      }
-    })
+    this.setState(
+      {
+        addBeerName: "",
+        addBeerData: {
+          label: "",
+          value: null
+        }
+      },
+      () => (this.addBeerFormRef.value = this.state.addBeerName)
+    );
   };
 
   _handleRemoveBeerSubmit = async event => {
@@ -126,13 +134,18 @@ export class Account extends Component {
     return (
       <>
         <Form.Label>Name of Beer</Form.Label>
-        {this._renderControl("name", "Corona", false, e => {
-          const newBeerData = this.state.addBeerData;
-          newBeerData.label = e.target.value;
-          this.setState({
-            addBeerData: newBeerData
-          });
-        })}
+        <Form.Control
+          ref={form => (this.addBeerFormRef = form)}
+          disabled={false}
+          type={"name"}
+          placeholder={"Corona"}
+          onChange={e => {
+            const newName = e.target.value;
+            this.setState({
+              addBeerName: newName
+            });
+          }}
+        />
       </>
     );
   }
@@ -146,14 +159,14 @@ export class Account extends Component {
         <Select
           options={this.state.allStyles}
           value={this.state.addBeerData}
-          onChange={event =>
+          onChange={event => {
             this.setState({
               addBeerData: {
-                label: this.state.addBeerData.name,
+                label: event.label,
                 value: event.value
               }
-            })
-          }
+            });
+          }}
         />{" "}
       </>
     );

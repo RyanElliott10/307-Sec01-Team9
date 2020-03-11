@@ -14,7 +14,7 @@ class UserController {
   static currBeerId = 0;
   static userId = 0;
 
-  static isLoggedIn = false;
+  static isLoggedIn = true;
   static cachedBeers = [];
 
   static async login(email, password) {
