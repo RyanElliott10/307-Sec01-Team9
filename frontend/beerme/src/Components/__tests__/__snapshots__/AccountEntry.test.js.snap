@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="Login"
+  style={
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+      "marginLeft": "100px",
+      "marginRight": "100px",
+      "paddingTop": "50px",
+    }
+  }
+>
+  <form
+    className=""
+    onSubmit={[Function]}
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="form-label"
+        htmlFor="formGroupEmail"
+      >
+        Email Address
+      </label>
+      <input
+        className="form-control"
+        id="formGroupEmail"
+        onChange={[Function]}
+        placeholder="Email"
+        type="email"
+      />
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="form-label"
+        htmlFor="formGroupPassword"
+      >
+        Password
+      </label>
+      <input
+        className="form-control"
+        id="formGroupPassword"
+        onChange={[Function]}
+        placeholder="Password"
+        type="password"
+      />
+    </div>
+    <div
+      className="btn-toolbar"
+      role="toolbar"
+      style={
+        Object {
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <button
+        className="btn btn-primary"
+        disabled={true}
+        type="submit"
+      >
+        Login
+      </button>
+      <button
+        className="btn btn-secondary"
+        disabled={false}
+        onClick={[Function]}
+        type="submit"
+      >
+        Don't have an account? Create one
+      </button>
+    </div>
+  </form>
+</div>
+`;
