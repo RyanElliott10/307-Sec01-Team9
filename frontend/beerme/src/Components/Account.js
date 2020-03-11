@@ -14,7 +14,7 @@ export class Account extends Component {
     super(props);
     this.state = {
       addBeerData: {
-        name: "",
+        label: "",
         value: null
       }
     };
@@ -24,8 +24,8 @@ export class Account extends Component {
     NetClient.get("https://localhost:44300/api/BeerStyles").then(data => {
       const styles = data.map(d => {
         return {
-          value: d.Id,
-          label: d.Style
+          label: d.Style,
+          value: d.Id
         };
       });
 
@@ -53,6 +53,12 @@ export class Account extends Component {
       Id: this.state.addBeerData.value,
       BeerName: this.state.addBeerData.label.length
     });
+    this.setState({
+      addBeerData: {
+        label: "",
+        value: null
+      }
+    })
   };
 
   _handleRemoveBeerSubmit = async event => {
