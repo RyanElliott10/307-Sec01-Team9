@@ -12,9 +12,9 @@
         <EntityTypeShape EntityType="BeerMeModel.BeerIBU" Width="1.5" PointX="4.75" PointY="3.5" />
         <EntityTypeShape EntityType="BeerMeModel.BeerRating" Width="1.5" PointX="10.125" PointY="0.625" />
         <AssociationConnector Association="BeerMeModel.FK_BeerRatings_Users" />
-        <EntityTypeShape EntityType="BeerMeModel.Beer" Width="1.5" PointX="7.625" PointY="1" />
         <EntityTypeShape EntityType="BeerMeModel.BeerStyle" Width="1.5" PointX="5.375" PointY="0.75" />
         <AssociationConnector Association="BeerMeModel.FK_BeerStyles_BeerCategories" />
+        <EntityTypeShape EntityType="BeerMeModel.Beer" Width="1.5" PointX="7.625" PointY="1" />
         <AssociationConnector Association="BeerMeModel.FK_BeerRatings_Beers" />
         <AssociationConnector Association="BeerMeModel.FK_Beers_BeerStyles" />
         </Diagram>
