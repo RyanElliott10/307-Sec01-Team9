@@ -15,7 +15,7 @@ export class Account extends Component {
     this.state = {
       addBeerData: {
         name: "",
-        selectedStyle: null
+        value: null
       }
     };
   }
@@ -37,8 +37,8 @@ export class Account extends Component {
 
   _validateAddBeerForm() {
     return (
-      this.state.addBeerData.name.length > 0 &&
-      this.state.addBeerData.selectedStyle
+      this.state.addBeerData.label.length > 0 &&
+      this.state.addBeerData.value
     );
   }
 
@@ -50,8 +50,8 @@ export class Account extends Component {
     event.preventDefault();
     //UserController.addBeer(this.state.addBeerData);
     NetClient.post("https://localhost:44300/api/Beers", {
-      Id: this.state.addBeerData.selectedStyle,
-      BeerName: this.state.addBeerData.name.length
+      Id: this.state.addBeerData.value,
+      BeerName: this.state.addBeerData.label.length
     });
   };
 
@@ -122,7 +122,7 @@ export class Account extends Component {
         <Form.Label>Name of Beer</Form.Label>
         {this._renderControl("name", "Corona", false, e => {
           const newBeerData = this.state.addBeerData;
-          newBeerData.name = e.target.value;
+          newBeerData.label = e.target.value;
           this.setState({
             addBeerData: newBeerData
           });
@@ -139,11 +139,12 @@ export class Account extends Component {
         </Form>
         <Select
           options={this.state.allStyles}
+          value={this.state.addBeerData}
           onChange={event =>
             this.setState({
               addBeerData: {
-                name: this.state.addBeerData.name,
-                selectedStyle: event.value
+                label: this.state.addBeerData.name,
+                value: event.value
               }
             })
           }
@@ -188,7 +189,7 @@ export class Account extends Component {
             this.setState({
               addBeerData: {
                 name: this.state.addBeerData.name,
-                selectedStyle: event.value
+                value: event.value
               }
             })
           }
