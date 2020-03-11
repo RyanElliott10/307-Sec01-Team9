@@ -124,6 +124,7 @@
     <Compile Include="Controllers\BeerCategoriesController.cs" />
     <Compile Include="Controllers\BeerRatingsController.cs" />
     <Compile Include="Controllers\BeerReccomendationsController.cs" />
+    <Compile Include="Controllers\BeersByBusinessController.cs" />
     <Compile Include="Controllers\BeersController.cs" />
     <Compile Include="Controllers\BeerStylesController.cs" />
     <Compile Include="Controllers\ExploreBeerStylesController.cs" />
