@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+import LockedRecommended from "./LockedRecommended";
 import NetClient from "../Utils/NetClient";
 import PropTypes from "prop-types";
 import UserController from "../Controllers/UserController";
-import LockedRecommended from "./LockedRecommended";
 
 export class Recommended extends Component {
   static propTypes = {
     mainDesc: PropTypes.string,
     photos: PropTypes.arrayOf(PropTypes.string),
     recBeers: PropTypes.arrayOf(PropTypes.object),
-    recDesc: PropTypes.arrayOf(PropTypes.string)
+    fromExplore: PropTypes.bool
   };
 
   static defaultProps = {
@@ -24,7 +24,6 @@ export class Recommended extends Component {
       mainDesc: this.props.mainDesc,
       photos: this.props.photos,
       recBeers: this.props.recBeers,
-      recDesc: this.props.recDesc
     };
   }
 
@@ -68,14 +67,6 @@ export class Recommended extends Component {
       });
     }
 
-    if (!this.props.recDesc) {
-      NetClient.get("http://jsonplaceholder.typicode.com/todos").then(data => {
-        this.setState({
-          recDesc: data.slice(20, 30)
-        });
-        localStorage.setItem("appState", JSON.stringify(data.slice(20, 30)));
-      });
-    }
   }
 
   renderPhotos() {
@@ -83,9 +74,9 @@ export class Recommended extends Component {
       return null;
     }
     return (
-      <div style={styles.inColStyle}>
+      <div>
         {this.state.photos.map(image => (
-          <img src={image} key={image} />
+          <img src={image} key={image} style={styles.inColStyle} />
         ))}
       </div>
     );
@@ -112,23 +103,20 @@ export class Recommended extends Component {
     );
   }
 
-  renderDescriptions() {
-    return (
-      <div style={styles.inColStyle}>
-        {this.state.recDesc.map(beer => (
-          <p key={beer.id}>{beer.title}</p>
-        ))}
-      </div>
-    );
-  }
 
   _renderBody() {
-    if (UserController.getCurrentUser()) {
+    if (this.props.fromExplore) {
       return (
         <div style={styles.inRowStyle}>
           {this.state.photos ? this.renderPhotos() : null}
           {this.state.recBeers ? this.renderRecBeers() : null}
-          {this.state.recDesc ? this.renderDescriptions() : null}
+        </div>
+      );
+    } else if (UserController.getCurrentUser()) {
+      return (
+        <div style={styles.inRowStyle}>
+          {this.state.photos ? this.renderPhotos() : null}
+          {this.state.recBeers ? this.renderRecBeers() : null}
         </div>
       );
     }
@@ -146,12 +134,15 @@ export class Recommended extends Component {
     );
   }
 }
+
 const styles = {
   inColStyle: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-around",
-    marginRight: "30px"
+    paddingBottom: "20px",
+    marginRight: "40px", 
+    marginLeft: "100px"
   },
   inTitleStyle: {
     display: "flex",

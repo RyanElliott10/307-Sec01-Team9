@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import StarRatings from 'react-star-ratings';
 import Photo from "../img/BOTD_photo.png";
+import * as Constants from "..//Utils/Constants";
+import { Form } from "react-bootstrap";
+import { Redirect, Link } from "react-router-dom";
 
 import UserController from "../Controllers/UserController";
 import NetClient from '../Utils/NetClient';
@@ -60,14 +63,33 @@ export default class Rate extends Component {
     }
 
     renderStars() {
-      return (
+      if (!UserController.isLoggedIn) {
+        return(
+          <Form>
+            <Form.Row style= {{alignItems: "top", justifyContent: "center"}}>
+            <Form.Label>{"Please "}</Form.Label>
+              <Link
+                to="/account-entry"
+                style={{ color: "blue", marginLeft: "5px", marginRight: "5px" }}
+              >
+                create an account
+              </Link>
+              <Form.Label>{" to rate this beer."}</Form.Label>
+            </Form.Row>
+          </Form>
+        )
+      }
+      else if (UserController.isBusiness) {
+        return(null)
+      }
+      else return (
         <div style={styles.inColStyle}>
           <h5>
             Rate this beer!
           </h5>
           <StarRatings
             rating={this.state.rating}
-            starRatedColor="yellow"
+            starRatedColor= {Constants.ORANGE_COLOR}
             starHoverColor="grey"
             changeRating={this.changeRating}
             numberOfStars={5}
