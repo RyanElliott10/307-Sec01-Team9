@@ -63,7 +63,16 @@ export default class Rate extends Component {
     }
 
     renderStars() {
-      if (!UserController.isLoggedIn) {
+      if (UserController.isBusiness) {
+        return(
+          <Form>
+            <Form.Row style= {{alignItems: "top", justifyContent: "center", marginTop: "50px"}}>
+              <Form.Label>{"As a business, you may not rate this beer."}</Form.Label>
+            </Form.Row>
+          </Form>
+        )
+      }
+      else if (!UserController.isLoggedIn) {
         return(
           <Form>
             <Form.Row style= {{alignItems: "top", justifyContent: "center"}}>
@@ -78,9 +87,6 @@ export default class Rate extends Component {
             </Form.Row>
           </Form>
         )
-      }
-      else if (UserController.isBusiness) {
-        return(null)
       }
       else return (
         <div style={styles.inColStyle}>
