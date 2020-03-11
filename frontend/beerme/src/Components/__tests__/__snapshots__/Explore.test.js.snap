@@ -27,14 +27,7 @@ exports[`renders correctly 1`] = `
       }
     }
   >
-    <button
-      className="btn btn-secondary"
-      disabled={false}
-      onClick={[Function]}
-      type="button"
-    >
-      Previous
-    </button>
+    <div />
     <div
       className="react-carousel-dots-holder "
       style={

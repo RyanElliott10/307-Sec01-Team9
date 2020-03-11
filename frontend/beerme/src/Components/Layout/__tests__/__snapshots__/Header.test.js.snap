@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  style={
+    Object {
+      "alignItems": "center",
+      "background": "#F4F4F4",
+      "display": "flex",
+      "flex": 1,
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "marginBottom": "20px",
+      "padding": "10px",
+      "paddingLeft": "30px",
+    }
+  }
+>
+  <a
+    href="/"
+    onClick={[Function]}
+    style={
+      Object {
+        "color": "#CC752A",
+        "cursor": "pointer",
+        "paddingRight": "10px",
+        "textDecoration": "none",
+      }
+    }
+  >
+    <h1
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseOut={[Function]}
+    >
+      BeerMe
+    </h1>
+  </a>
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "row",
+        "paddingRight": "30px",
+      }
+    }
+  >
+    <a
+      className="explore_header_link"
+      href="/explore"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "#000",
+          "cursor": "pointer",
+          "paddingRight": "10px",
+          "textDecoration": "none",
+        }
+      }
+    >
+      <h6
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseOut={[Function]}
+      >
+        Explore
+      </h6>
+    </a>
+    <a
+      className="recommended_header_link"
+      href="/recommended"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "#000",
+          "cursor": "pointer",
+          "paddingLeft": "10px",
+          "textDecoration": "none",
+        }
+      }
+    >
+      <h6
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseOut={[Function]}
+      >
+        Recommended
+      </h6>
+    </a>
+    <a
+      className="account_account_entry_header_link"
+      href="/account-entry"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "#000",
+          "cursor": "pointer",
+          "paddingLeft": "10px",
+          "textDecoration": "none",
+        }
+      }
+    >
+      <h6
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseOut={[Function]}
+      >
+        Account
+      </h6>
+    </a>
+  </div>
+</div>
+`;

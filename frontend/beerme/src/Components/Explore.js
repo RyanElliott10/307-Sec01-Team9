@@ -358,12 +358,10 @@ export class Explore extends Component {
     }
 
     return (
-      <div style={styles.selectionStyle}>
-        <Row>
-          <Col>{this._renderChecks(firstHalf)}</Col>
-          <Col>{secondHalf ? this._renderChecks(secondHalf) : null}</Col>
-        </Row>
-      </div>
+      <Row className="justify-content-md-center">
+        <Col>{this._renderChecks(firstHalf)}</Col>
+        <Col>{secondHalf ? this._renderChecks(secondHalf) : null}</Col>
+      </Row>
     );
   }
 
@@ -387,6 +385,7 @@ export class Explore extends Component {
       <Form key={data.id}>
         <div className="mb-3">
           <Form.Check
+            md="auto"
             custom
             id={data.id}
             label={data.option}
@@ -396,6 +395,14 @@ export class Explore extends Component {
           />
         </div>
       </Form>
+    );
+  }
+
+  _renderPreviousButton() {
+    return (
+      <Button variant="secondary" onClick={this._onPreviousClick}>
+        Previous
+      </Button>
     );
   }
 
@@ -409,9 +416,7 @@ export class Explore extends Component {
   _renderProgressionButtons() {
     return (
       <ButtonToolbar style={styles.btnsStyle}>
-        <Button variant="secondary" onClick={this._onPreviousClick}>
-          Previous
-        </Button>
+        {this.state.currentPageIndex ? this._renderPreviousButton() : <div />}
         <Dots
           length={this.pages.length}
           active={
@@ -465,14 +470,6 @@ const styles = {
     marginLeft: "200px",
     marginRight: "200px",
     paddingBottom: "150px"
-  },
-  selectionStyle: {
-    flexDirection: "row",
-    paddingLeft: "10px",
-    paddingTop: "25px",
-    alignItems: "center",
-    alignContent: "center",
-    alignSelf: "center"
   },
   selectionBoxStyle: {
     background: "#F4F4F4",
