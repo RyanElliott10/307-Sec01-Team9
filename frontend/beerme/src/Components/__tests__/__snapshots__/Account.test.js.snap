@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="Login"
+  style={
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+      "marginLeft": "100px",
+      "marginRight": "100px",
+      "paddingTop": "50px",
+    }
+  }
+>
+  <form
+    className=""
+  >
+    <div
+      className="form-group col"
+    >
+      <form
+        className=""
+      >
+        <div
+          className="form-row"
+        >
+          <div
+            className="form-group col"
+          >
+            <label
+              className="form-label"
+              htmlFor="formGridFirstName"
+            >
+              First Name
+            </label>
+            <input
+              className="form-control"
+              disabled={true}
+              id="formGridFirstName"
+              onChange={[Function]}
+              placeholder="Mark"
+              type="name"
+            />
+          </div>
+          <div
+            className="form-group col"
+          >
+            <label
+              className="form-label"
+              htmlFor="formGridLastName"
+            >
+              Last Name
+            </label>
+            <input
+              className="form-control"
+              disabled={true}
+              id="formGridLastName"
+              onChange={[Function]}
+              placeholder="Johnson"
+              type="name"
+            />
+          </div>
+        </div>
+        <div
+          className="form-row"
+        >
+          <div
+            className="form-group col"
+          >
+            <label
+              className="form-label"
+              htmlFor="formGridEmail"
+            >
+              Email Address
+            </label>
+            <input
+              className="form-control"
+              disabled={true}
+              id="formGridEmail"
+              onChange={[Function]}
+              placeholder="Email"
+              type="email"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div
+      className="col"
+    >
+      <h2>
+        Add a Beer!
+      </h2>
+      <hr />
+      <div
+        className="form-row"
+      >
+        <div
+          className="form-group col"
+        >
+          <label
+            className="form-label"
+            htmlFor="formGridBeerName"
+          >
+            Name of Beer
+          </label>
+          <input
+            className="form-control"
+            disabled={false}
+            id="formGridBeerName"
+            onChange={[Function]}
+            placeholder="Corona"
+            type="name"
+          />
+        </div>
+        <div
+          className="form-group col"
+        >
+          <label
+            className="form-label"
+            htmlFor="formGridBeerStyle"
+          >
+            Style(s)
+          </label>
+          <input
+            className="form-control"
+            disabled={false}
+            id="formGridBeerStyle"
+            onChange={[Function]}
+            placeholder="IPA"
+            type="name"
+          />
+        </div>
+      </div>
+      <div
+        className="form-row"
+      >
+        <div
+          className="form-group col"
+        >
+          <label
+            className="form-label"
+            htmlFor="formGridBeerColor"
+          >
+            Color
+          </label>
+          <input
+            className="form-control"
+            disabled={false}
+            id="formGridBeerColor"
+            onChange={[Function]}
+            placeholder="Dark"
+            type="name"
+          />
+        </div>
+      </div>
+      <button
+        className="btn btn-primary"
+        disabled={true}
+        onClick={[Function]}
+        type="submit"
+      >
+        Add Beer
+      </button>
+    </div>
+  </form>
+</div>
+`;
