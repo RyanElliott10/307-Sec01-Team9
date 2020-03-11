@@ -8,7 +8,7 @@ cache:
 script:
   - cd frontend/beerme/
   - npm install
-  - yarn test --coverage --watchAll=false
+  - yarn test --coverage --watchAll=false -u
 deploy:
   provider: surge
   skip_cleanup: true

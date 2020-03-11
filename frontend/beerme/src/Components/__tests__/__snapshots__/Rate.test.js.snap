@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "marginBottom": "100px",
+      "marginLeft": "200px",
+      "marginRight": "200px",
+    }
+  }
+>
+  <h1>
+    
+  </h1>
+  <h5
+    style={
+      Object {
+        "alignItems": "right",
+      }
+    }
+  >
+    Average Rating: Not yet rated
+  </h5>
+  <div
+    style={
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "flexDirection": "column",
+        "justifyContent": "space-around",
+        "marginRight": "30px",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexDirection": "row",
+          "marginTop": "50px",
+        }
+      }
+    >
+      <img
+        alt="Photo"
+        src="BOTD_photo.png"
+        style={
+          Object {
+            "height": 180,
+            "marginRight": "20px",
+            "width": 110,
+          }
+        }
+      />
+      <div
+        style={
+          Object {
+            "alignItems": "left",
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "space-around",
+            "marginBottom": "90px",
+            "marginLeft": "30px",
+            "marginTop": "60px",
+          }
+        }
+      >
+        <h5>
+          Style: 
+        </h5>
+        <h5>
+          Alcohol Per Volume: 
+        </h5>
+        <h5>
+          International Bittering Unit: 
+        </h5>
+      </div>
+    </div>
+  </div>
+  <form
+    className=""
+  >
+    <div
+      className="form-row"
+      style={
+        Object {
+          "alignItems": "top",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <label
+        className="form-label"
+      >
+        Please 
+      </label>
+      <a
+        href="/account-entry"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "blue",
+            "marginLeft": "5px",
+            "marginRight": "5px",
+          }
+        }
+      >
+        create an account
+      </a>
+      <label
+        className="form-label"
+      >
+         to rate this beer.
+      </label>
+    </div>
+  </form>
+</div>
+`;

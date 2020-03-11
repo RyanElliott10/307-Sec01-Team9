@@ -3,7 +3,6 @@ import { Form, Button, ButtonToolbar, Row, Col } from "react-bootstrap";
 import Dots from "react-carousel-dots";
 
 import * as Constants from "../Utils/Constants";
-import ExploreSelections from "../Models/ExploreSelections";
 import NetClient from "../Utils/NetClient";
 import Recommended from "./Recommended";
 import BeerColors from "../img/beer_colors.png";
@@ -283,10 +282,6 @@ export class Explore extends Component {
         currentPageIndex: this.state.currentPageIndex + 1
       });
     }
-  };
-
-  _onFinalSubmit = () => {
-    new ExploreSelections();
   };
 
   _onCheckboxClick = id => {
