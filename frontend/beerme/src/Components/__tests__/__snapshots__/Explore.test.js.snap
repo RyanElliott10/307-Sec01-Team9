@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  style={
+    Object {
+      "marginLeft": "200px",
+      "marginRight": "200px",
+      "paddingBottom": "150px",
+    }
+  }
+>
+  <h1>
+    Explore
+  </h1>
+  <h5>
+    Use our unique beer exploration tool to find new and interesting beers for you!
+  </h5>
+  <div
+    className="btn-toolbar"
+    role="toolbar"
+    style={
+      Object {
+        "display": "flex",
+        "justifyContent": "space-between",
+        "paddingTop": "10px",
+      }
+    }
+  >
+    <button
+      className="btn btn-secondary"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Previous
+    </button>
+    <div
+      className="react-carousel-dots-holder "
+      style={
+        Object {
+          "height": 10,
+          "width": 60,
+        }
+      }
+    />
+    <button
+      className="btn btn-secondary"
+      disabled={false}
+      onClick={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#CC752A",
+          "outline": "none",
+        }
+      }
+      type="button"
+    >
+      Next
+    </button>
+  </div>
+</div>
+`;

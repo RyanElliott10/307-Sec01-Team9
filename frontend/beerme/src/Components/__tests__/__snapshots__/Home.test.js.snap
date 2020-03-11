@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    style={
+      Object {
+        "alignContent": "center",
+        "marginLeft": "200px",
+        "marginRight": "200px",
+        "marginTop": "45px",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "column",
+        }
+      }
+    >
+      <img
+        alt="Logo"
+        src="BeerMe_Logo.png"
+      />
+    </div>
+    <div
+      style={
+        Object {
+          "marginBottom": "40px",
+          "marginLeft": "auto",
+          "marginRight": "auto",
+          "width": "50%",
+        }
+      }
+    >
+      <div
+        className="sc-htpNat dePyzG"
+      >
+        <input
+          className="sc-bdVaJa jwfbbd"
+          onChange={[Function]}
+          placeholder="Search"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
