@@ -42,13 +42,15 @@ export class Account extends Component {
     );
   }
 
+
   _handleAddBeerSubmit = async event => {
     event.preventDefault();
     //UserController.addBeer(this.state.addBeerData);
     NetClient.post("https://localhost:44300/api/Beers", {
-      Id: this.state.addBeerData.selectedStyle,
-      BeerName: this.state.addBeerData.name.length
+      StyleId: this.state.addBeerData.selectedStyle,
+      BeerName: this.state.addBeerData.name
     });
+
   };
 
   _renderControl(type, value, isDisabled, onChange = () => { }) {
