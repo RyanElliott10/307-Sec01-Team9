@@ -15,8 +15,7 @@ export class Account extends Component {
     this.state = {
       addBeerData: {
         name: "",
-        styles: "",
-        styleClicked: false
+        selectedStyle: null
       }
     };
   }
@@ -29,7 +28,7 @@ export class Account extends Component {
           label: d.Style
         };
       });
-      
+
       this.setState({
         allStyles: styles
       });
@@ -39,16 +38,20 @@ export class Account extends Component {
   _validateAddBeerForm() {
     return (
       this.state.addBeerData.name.length > 0 &&
-      this.state.addBeerData.styles.length > 0
+      this.state.addBeerData.selectedStyle
     );
   }
 
   _handleAddBeerSubmit = async event => {
     event.preventDefault();
-    UserController.addBeer(this.state.addBeerData);
+    //UserController.addBeer(this.state.addBeerData);
+    NetClient.post("https://localhost:44300/api/Beers", {
+      Id: this.state.addBeerData.selectedStyle,
+      BeerName: this.state.addBeerData.name.length
+    });
   };
 
-  _renderControl(type, value, isDisabled, onChange = () => {}) {
+  _renderControl(type, value, isDisabled, onChange = () => { }) {
     return (
       <Form.Control
         disabled={isDisabled}
@@ -97,16 +100,6 @@ export class Account extends Component {
       return null;
     }
 
-    // TO BE DELETED
-    const scaryAnimals = [
-      { label: "Alligators", value: 1 },
-      { label: "Crocodiles", value: 2 },
-      { label: "Sharks", value: 3 },
-      { label: "Small crocodiles", value: 4 },
-      { label: "Smallest crocodiles", value: 5 },
-      { label: "Snakes", value: 6 }
-    ];
-
     return (
       <React.Fragment>
         <Form as={Col}>
@@ -129,7 +122,12 @@ export class Account extends Component {
           <Form>
             <Form.Label>Style</Form.Label>
           </Form>
-          <Select options={this.state.allStyles} />
+          <Select options={this.state.allStyles} onChange={(event) => this.setState({
+            addBeerData: {
+              name: this.state.addBeerData.name,
+              selectedStyle: event.value
+            }
+          })} />
           <hr />
           <Button
             type="submit"
