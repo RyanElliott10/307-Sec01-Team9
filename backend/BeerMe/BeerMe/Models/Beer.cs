@@ -23,6 +23,7 @@ namespace BeerMe.Models
         public int Id { get; set; }
         public string BeerName { get; set; }
         public int StyleId { get; set; }
+        public Nullable<int> UserId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BeerRating> BeerRatings { get; set; }

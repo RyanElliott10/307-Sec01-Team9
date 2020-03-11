@@ -87,6 +87,7 @@ namespace BeerMe.Controllers
         [ResponseType(typeof(Beer))]
         public IHttpActionResult PostBeer(Beer beer)
         {
+            beer.Id = new Random().Next(112, 65535);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

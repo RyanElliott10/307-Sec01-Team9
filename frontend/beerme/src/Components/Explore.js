@@ -9,82 +9,7 @@ import BeerColors from "../img/beer_colors.png";
 
 const ExploreSpoofData = [
   {
-    title: "Bitterness (IBU)",
-    description: "A gauge of your preferred beer bitterness.",
-    checkboxes: [
-      {
-        id: 1,
-        type: "ibu",
-        option: "Restrained (0-20)",
-        value: [0, 20],
-        isChecked: false
-      },
-      {
-        id: 2,
-        type: "ibu",
-        option: "Moderate (21-40)",
-        value: [21, 40],
-        isChecked: false
-      },
-      {
-        id: 3,
-        type: "ibu",
-        option: "Aggressive (41-60)",
-        value: [41, 60],
-        isChecked: false
-      },
-      {
-        id: 4,
-        type: "ibu",
-        option: "Harsh (60-100)",
-        value: [61, 100],
-        isChecked: false
-      }
-    ]
-  },
-  {
-    title: "Alcohol by Volume (ABV)",
-    description:
-      "Alcohol by volume is used to measure the alcohol content of beer, wine, distilled spirits, and other alcoholic beverages.",
-    checkboxes: [
-      {
-        id: 1,
-        type: "abv",
-        option: "Restrained (1-3%)",
-        value: [1, 3],
-        isChecked: false
-      },
-      {
-        id: 2,
-        type: "abv",
-        option: "Mild (4-6%)",
-        value: [4, 6],
-        isChecked: false
-      },
-      {
-        id: 3,
-        type: "abv",
-        option: "Moderate (7-9%)",
-        value: [7, 9],
-        isChecked: false
-      },
-      {
-        id: 4,
-        type: "abv",
-        option: "Strong (10-12%)",
-        value: [10, 12],
-        isChecked: false
-      },
-      {
-        id: 5,
-        type: "abv",
-        option: "Harsh (13-15%)",
-        value: [13, 15],
-        isChecked: false
-      }
-    ]
-  },
-  {
+    id: 0,
     title: "Colors",
     description: "Select your preferred color of beer.",
     checkboxes: [
@@ -106,7 +31,7 @@ const ExploreSpoofData = [
         id: 3,
         type: "color",
         option: "Pale",
-        value: [4],
+        value: [4, 4],
         isChecked: false
       },
       {
@@ -120,21 +45,21 @@ const ExploreSpoofData = [
         id: 5,
         type: "color",
         option: "Light Amber",
-        value: [7],
+        value: [7, 7],
         isChecked: false
       },
       {
         id: 6,
         type: "color",
         option: "Amber",
-        value: [8],
+        value: [8, 8],
         isChecked: false
       },
       {
         id: 7,
         type: "color",
         option: "Medium Amber",
-        value: [9],
+        value: [9, 9],
         isChecked: false
       },
       {
@@ -176,7 +101,85 @@ const ExploreSpoofData = [
         id: 13,
         type: "color",
         option: "Black",
-        value: [40],
+        value: [40, 100],
+        isChecked: false
+      }
+    ]
+  },
+  {
+    id: 1,
+    title: "Bitterness (IBU)",
+    description: "A gauge of your preferred beer bitterness.",
+    checkboxes: [
+      {
+        id: 1,
+        type: "ibu",
+        option: "Restrained (0-20)",
+        value: [0, 20],
+        isChecked: false
+      },
+      {
+        id: 2,
+        type: "ibu",
+        option: "Moderate (21-40)",
+        value: [21, 40],
+        isChecked: false
+      },
+      {
+        id: 3,
+        type: "ibu",
+        option: "Aggressive (41-60)",
+        value: [41, 60],
+        isChecked: false
+      },
+      {
+        id: 4,
+        type: "ibu",
+        option: "Harsh (60-100)",
+        value: [61, 100],
+        isChecked: false
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: "Alcohol by Volume (ABV)",
+    description:
+      "Alcohol by volume is used to measure the alcohol content of beer, wine, distilled spirits, and other alcoholic beverages.",
+    checkboxes: [
+      {
+        id: 1,
+        type: "abv",
+        option: "Restrained (1-3%)",
+        value: [1, 3],
+        isChecked: false
+      },
+      {
+        id: 2,
+        type: "abv",
+        option: "Mild (4-6%)",
+        value: [4, 6],
+        isChecked: false
+      },
+      {
+        id: 3,
+        type: "abv",
+        option: "Moderate (7-9%)",
+        value: [7, 9],
+        isChecked: false
+      },
+      {
+        id: 4,
+        type: "abv",
+        option: "Strong (10-12%)",
+        value: [10, 12],
+        isChecked: false
+      },
+      {
+        id: 5,
+        type: "abv",
+        option: "Harsh (13-15%)",
+        value: [13, 15],
         isChecked: false
       }
     ]
@@ -221,8 +224,39 @@ export class Explore extends Component {
       return tmp;
     });
 
-    // POST to send selections to the backend
-    NetClient.post("http://httpbin.org/post", selections).then(data => {
+    const interObjArr = selections.map(sel => {
+      console.log(sel);
+      if (sel.type === "color") {
+        // Color
+        return {
+          ColorStart: sel.value[0],
+          ColorEnd: sel.value[1]
+        };
+      } else if (sel.type === "ibu") {
+        // IBU
+        return {
+          IBUStart: sel.value[0],
+          IBUEnd: sel.value[1]
+        };
+      } else if (sel.type === "abv") {
+        // ABV
+        return {
+          ABVStart: sel.value[0],
+          ABVEnd: sel.value[1]
+        };
+      }
+      return {};
+    });
+
+    const postObj = {};
+    for (let i = 0; i < interObjArr.length; i++) {
+      const keys = Object.keys(interObjArr[i]);
+      for (let j = 0; j < keys.length; j++) {
+        postObj[keys[j]] = interObjArr[i][keys[j]];
+      }
+    }
+
+    NetClient.post("https://localhost:44300/api/ExploreBeerStyles", postObj).then(data => {
       console.log(data);
       this.setState({
         recommendedStyle: data
@@ -254,6 +288,8 @@ export class Explore extends Component {
     this.pages[this.state.currentPageIndex].checkboxes.map(data => {
       if (data.id === id) {
         data.isChecked = !data.isChecked;
+      } else {
+        data.isChecked = false;
       }
     });
     this.forceUpdate();
@@ -334,7 +370,7 @@ export class Explore extends Component {
   }
 
   _getBtnStyle() {
-    if (this.state.currentPageIndex == 2) {
+    if (ExploreSpoofData[this.state.currentPageIndex].title === "Colors") {
       return { paddingLeft: "200px" };
     }
     return { paddingLeft: "50px" };
@@ -370,6 +406,13 @@ export class Explore extends Component {
     );
   }
 
+  _isSubmitDisabled() {
+    return (
+      this.state.currentPageIndex === this.pages.length - 1 &&
+      this._getAllSelections().length < 3
+    );
+  }
+
   _renderProgressionButtons() {
     return (
       <ButtonToolbar style={styles.btnsStyle}>
@@ -387,6 +430,7 @@ export class Explore extends Component {
           variant="secondary"
           style={{ backgroundColor: Constants.ORANGE_COLOR, outline: "none" }}
           onClick={this._onNextClick}
+          disabled={this._isSubmitDisabled()}
         >
           {this.state.currentPageIndex === this.pages.length - 1
             ? "Submit"
