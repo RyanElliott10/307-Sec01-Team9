@@ -42,12 +42,6 @@ export class Account extends Component {
     );
   }
 
-  _clearFields() {
-    return(
-      this.state.addBeerData.Id = "",
-      this.state.addBeerData.Style = ""
-    )
-  }
 
   _handleAddBeerSubmit = async event => {
     event.preventDefault();
@@ -140,7 +134,7 @@ export class Account extends Component {
           <Button
             type="submit"
             disabled={!this._validateAddBeerForm()}
-            onClick={this._handleAddBeerSubmit, this._clearFields}
+            onClick={this._handleAddBeerSubmit}
           >
             Add Beer
           </Button>
