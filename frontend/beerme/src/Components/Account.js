@@ -3,6 +3,7 @@ import { Button, Form, Col } from "react-bootstrap";
 import Select from "react-select";
 import { Redirect } from "react-router-dom";
 
+import NetClient from "../Utils/NetClient";
 import UserController from "../Controllers/UserController";
 
 // FOR POST:
@@ -15,16 +16,30 @@ export class Account extends Component {
       addBeerData: {
         name: "",
         styles: "",
-        color: ""
+        styleClicked: false
       }
     };
+  }
+
+  componentDidMount() {
+    NetClient.get("https://localhost:44300/api/BeerStyles").then(data => {
+      const styles = data.map(d => {
+        return {
+          value: d.Id,
+          label: d.Style
+        };
+      });
+      
+      this.setState({
+        allStyles: styles
+      });
+    });
   }
 
   _validateAddBeerForm() {
     return (
       this.state.addBeerData.name.length > 0 &&
-      this.state.addBeerData.styles.length > 0 &&
-      this.state.addBeerData.color.length > 0
+      this.state.addBeerData.styles.length > 0
     );
   }
 
@@ -114,7 +129,7 @@ export class Account extends Component {
           <Form>
             <Form.Label>Style</Form.Label>
           </Form>
-          <Select options={this.beerStyles} />
+          <Select options={this.state.allStyles} />
           <hr />
           <Button
             type="submit"
