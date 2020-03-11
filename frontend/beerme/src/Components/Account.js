@@ -55,7 +55,7 @@ export class Account extends Component {
     event.preventDefault();
     NetClient.post("https://localhost:44300/api/Beers", {
       BeerName: this.state.addBeerName,
-      Id: this.state.addBeerData.value
+      StyleId: this.state.addBeerData.value
     });
     this.setState(
       {
