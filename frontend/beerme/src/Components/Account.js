@@ -42,6 +42,13 @@ export class Account extends Component {
     );
   }
 
+  _clearFields() {
+    return(
+      this.state.addBeerData.Id = "",
+      this.state.addBeerData.Style = ""
+    )
+  }
+
   _handleAddBeerSubmit = async event => {
     event.preventDefault();
     //UserController.addBeer(this.state.addBeerData);
@@ -49,6 +56,7 @@ export class Account extends Component {
       StyleId: this.state.addBeerData.selectedStyle,
       BeerName: this.state.addBeerData.name
     });
+
   };
 
   _renderControl(type, value, isDisabled, onChange = () => { }) {
@@ -132,7 +140,7 @@ export class Account extends Component {
           <Button
             type="submit"
             disabled={!this._validateAddBeerForm()}
-            onClick={this._handleAddBeerSubmit}
+            onClick={this._handleAddBeerSubmit, this._clearFields}
           >
             Add Beer
           </Button>
