@@ -4,7 +4,7 @@ from selenium import webdriver
 import selenium
 
 
-URL = 'http://localhost:3003/'
+URL = 'http://localhost:3000/'
 
 driver = webdriver.Chrome(os.getcwd()+"\\chromedriver.exe")
 driver.set_page_load_timeout(10)
