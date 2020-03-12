@@ -17,6 +17,10 @@ export class Account extends Component {
       addBeerData: {
         label: "",
         value: null
+      },
+      removeBeerData: {
+        label: "",
+        value: null
       }
     };
   }
@@ -25,6 +29,7 @@ export class Account extends Component {
     this.setState({
       allStyles: [{ value: 0, label: "test" }]
     });
+
     NetClient.get("https://localhost:44300/api/BeerStyles").then(data => {
       const styles = data.map(d => {
         return {
@@ -37,6 +42,23 @@ export class Account extends Component {
       this.setState({
         allStyles: styles
       });
+    });
+
+    this.fetchRemoveBeers();
+  }
+
+  fetchRemoveBeers() {
+    NetClient.get(`https://localhost:44300/api/BeersByBusiness/${UserController.userId}`).then(data => {
+      const businessBeers = data.map(d => {
+        return {
+          value: d.Id,
+          label: d.BeerName
+        };
+      });
+
+      this.setState({
+        businessBeers: businessBeers
+      }, () => console.log("UPDATED STATE:", this.state));
     });
   }
 
@@ -54,11 +76,14 @@ export class Account extends Component {
 
   _handleAddBeerSubmit = async event => {
     event.preventDefault();
+    console.log("SELECTED_STYLE:", this.state.addBeerData.selectedStyle);
     NetClient.post("https://localhost:44300/api/Beers", {
       StyleId: this.state.addBeerData.selectedStyle,
       BeerName: this.state.addBeerData.name, 
       UserId: UserController.userId
     });
+
+    console.log("RESET ADD BEER DATA");
     this.setState(
       {
         addBeerName: "",
@@ -69,10 +94,16 @@ export class Account extends Component {
       },
       () => (this.addBeerFormRef.value = this.state.addBeerName)
     );
+
+    this.fetchRemoveBeers()
   };
 
   _handleRemoveBeerSubmit = async event => {
     event.preventDefault();
+    console.log("DELETING A BEER:", this.state.removeBeerData.value);
+    NetClient.delete(`https://localhost:44300/api/beers/${this.state.removeBeerData.value}`)
+
+    this.fetchRemoveBeers();
   };
 
   _renderControl(type, value, isDisabled, onChange = () => {}) {
@@ -162,12 +193,14 @@ export class Account extends Component {
           options={this.state.allStyles}
           value={this.state.addBeerData}
           onChange={event => {
+            console.log("EVENT LABEL:", event.label);
+            console.log("EVENT LABEL:", event.value);
             this.setState({
               addBeerData: {
                 label: event.label,
                 value: event.value
               }
-            });
+            }, console.log("UPDATED STATE ON SELECT TO:", this.state));
           }}
         />{" "}
       </>
@@ -205,14 +238,14 @@ export class Account extends Component {
         <hr />
         <Form.Label>Name of Beer</Form.Label>
         <Select
-          options={this.state.allStyles}
+          options={this.state.businessBeers}
           onChange={event =>
             this.setState({
-              addBeerData: {
-                name: this.state.addBeerData.name,
+              removeBeerData: {
+                name: event.label,
                 value: event.value
               }
-            })
+            }, () => console.log("UPDATED STATE:", this.state))
           }
         />
         <hr />

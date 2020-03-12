@@ -27,6 +27,15 @@ class NetClient {
       .catch(console.log);
   }
 
+  static async delete(url) {
+    return await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(res => res.json());
+  }
+
   static async dummyGetData() {
     // "localhost:44300/api/beerstyles"
     // "localhost:44300/api/beercategories"
