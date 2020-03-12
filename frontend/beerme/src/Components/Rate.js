@@ -22,14 +22,22 @@ export default class Rate extends Component {
       this.setState({
         currentBeerRating: data
       });
+
+      const ratedBeer = UserController.beerRatings.filter(beer => beer.BeerId === this.state.currentBeerRating.currBeerId);
+      if (ratedBeer.length > 0) {
+        this.hasUserRated = true;
+        this.setState({
+          rating = ratedBeer.Rating
+        });
+      }
     });
   }
 
   changeRating = newRating => {
+    this.hasUserRated = true;
     this.setState({
       rating: newRating
     });
-    this.hasUserRated = true;
 
     const rateData = {
       UserId: UserController.userId,
