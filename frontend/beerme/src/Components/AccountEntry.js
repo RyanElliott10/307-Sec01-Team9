@@ -83,7 +83,6 @@ export class AccountEntry extends Component {
         this.state.createAccountData.businessName
       )
     ) {
-      console.log("LOGGED IN");
       this.setState({
         signedIn: true
       });

@@ -79,3 +79,5 @@ exports[`renders correctly 1`] = `
   </form>
 </div>
 `;
+
+exports[`renders correctly with a current user 1`] = `null`;

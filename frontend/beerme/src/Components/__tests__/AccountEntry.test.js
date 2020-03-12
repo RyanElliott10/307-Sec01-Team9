@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
+import { BrowserRouter } from "react-router-dom";
 
 import AccountEntry from "../AccountEntry";
 import UserController from "../../Controllers/UserController";
@@ -12,7 +13,13 @@ it("renders correctly", () => {
 
 it("renders correctly with a current user", () => {
   UserController.isLoggedIn = true;
-  const tree = renderer.create(<AccountEntry />).toJSON();
+  const tree = renderer
+    .create(
+      <BrowserRouter>
+        <AccountEntry />
+      </BrowserRouter>
+    )
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });
 
