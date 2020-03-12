@@ -110,7 +110,7 @@ export class Recommended extends Component {
           {this.state.recBeers ? this.renderRecBeers() : null}
         </div>
       );
-    } else if (this.state.recBeers.length == 0) {
+    } else if (this.state.recBeers && this.state.recBeers.length == 0) {
       return (
         <div style={styles.inRowStyle}>
           You must rate at least 1 beer before we are able to recommend you any!
