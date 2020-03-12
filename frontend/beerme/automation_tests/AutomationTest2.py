@@ -5,7 +5,7 @@ import selenium
 
 from automation_tests.BeerMeSurfingCommandsUsingSelenium import BeerMeSurfingCommandsUsingSelenium
 
-URL = 'http://localhost:3007/'
+URL = 'http://localhost:3000/'
 
 driver = webdriver.Chrome(os.getcwd()+"\\chromedriver.exe")
 driver.set_page_load_timeout(10)
