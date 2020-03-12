@@ -16,6 +16,7 @@ class UserController {
 
   static isLoggedIn = false;
   static cachedBeers = [];
+  static beerRatings = [];
 
   static assignLoginData(data) {
     if (data && data.Name) {
@@ -26,6 +27,7 @@ class UserController {
       this.isBusiness = data.IsBusiness;
       this.businessName = data.BusinessName;
       this.isLoggedIn = true;
+      this.beerRatings = data.BeerRatings;
       return this.isLoggedIn;
     } else {
       this.isLoggedIn = false;
@@ -43,7 +45,10 @@ class UserController {
       password: password
     };
 
-    return NetClient.post("https://localhost:44300/api/login", data).then(data => this.assignLoginData(data));
+    return NetClient.post(
+      "https://localhost:44300/api/login",
+      data
+    ).then(data => this.assignLoginData(data));
   }
 
   static async createAccount(
@@ -65,7 +70,10 @@ class UserController {
       businessName: businessName
     };
 
-    return NetClient.post("https://localhost:44300/api/users", data).then(data => this.assignLoginData(data));
+    return NetClient.post(
+      "https://localhost:44300/api/users",
+      data
+    ).then(data => this.assignLoginData(data));
   }
 
   static getCurrentUserObject() {
@@ -102,8 +110,12 @@ class UserController {
     this.currStyle = "";
     this.currBeerId = 0;
     this.userId = 0;
-  
+
     this.isLoggedIn = false;
+  }
+
+  static addToRatedBeers(data) {
+    this.beerRatings?.push(data);
   }
 }
 

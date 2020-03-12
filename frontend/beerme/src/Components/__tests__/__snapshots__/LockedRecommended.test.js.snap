@@ -48,6 +48,7 @@ exports[`renders correctly 1`] = `
       </label>
       <a
         href="/account-entry"
+        id="go-to-create-account-link"
         onClick={[Function]}
         style={
           Object {

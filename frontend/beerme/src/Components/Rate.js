@@ -22,10 +22,19 @@ export default class Rate extends Component {
       this.setState({
         currentBeerRating: data
       });
+
+      const ratedBeer = UserController.beerRatings.filter(beer => beer.BeerId === this.state.currentBeerRating.currBeerId);
+      if (ratedBeer.length > 0) {
+        this.hasUserRated = true;
+        this.setState({
+          rating: ratedBeer.Rating
+        });
+      }
     });
   }
 
-  changeRating = (newRating, name) => {
+  changeRating = newRating => {
+    this.hasUserRated = true;
     this.setState({
       rating: newRating
     });
@@ -36,10 +45,16 @@ export default class Rate extends Component {
       Rating: newRating
     };
 
-    NetClient.post(
-      "https://localhost:44300/api/beerratings",
-      rateData
-    ).then(data => console.log(data));
+    NetClient.post("https://localhost:44300/api/beerratings", rateData).then(
+      data => {
+        console.log(data);
+        UserController.addToRatedBeers({
+          BeerId: UserController.currBeerId,
+          UserId: UserController.userId,
+          Rating: newRating
+        });
+      }
+    );
   };
 
   renderBody() {
@@ -105,13 +120,13 @@ export default class Rate extends Component {
             numberOfStars={5}
             name="rating"
             starSpacing="15px"
+            isSelectable={!this.hasUserRated}
           />
         </div>
       );
   }
 
   render() {
-    // rating = 2;
     return (
       <div style={styles.inTitleStyle}>
         <h1>{UserController.currBeer}</h1>
