@@ -29,6 +29,7 @@ export default class Rate extends Component {
     this.setState({
       rating: newRating
     });
+    this.hasUserRated = true;
 
     const rateData = {
       UserId: UserController.userId,
@@ -111,13 +112,13 @@ export default class Rate extends Component {
             numberOfStars={5}
             name="rating"
             starSpacing="15px"
+            isSelectable={!this.hasUserRated}
           />
         </div>
       );
   }
 
   render() {
-    // rating = 2;
     return (
       <div style={styles.inTitleStyle}>
         <h1>{UserController.currBeer}</h1>
