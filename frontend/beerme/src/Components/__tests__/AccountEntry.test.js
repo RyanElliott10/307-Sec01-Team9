@@ -1,11 +1,25 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
+import { BrowserRouter } from "react-router-dom";
 
 import AccountEntry from "../AccountEntry";
+import UserController from "../../Controllers/UserController";
 
 it("renders correctly", () => {
   const tree = renderer.create(<AccountEntry />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it("renders correctly with a current user", () => {
+  UserController.isLoggedIn = true;
+  const tree = renderer
+    .create(
+      <BrowserRouter>
+        <AccountEntry />
+      </BrowserRouter>
+    )
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -39,16 +53,15 @@ it("_validateAccountCreationForm correctly says the create account form is valid
 });
 
 it("_handleSignInSubmit does not sign in with invalid information", () => {
-  const ref = shallow(<AccountEntry />)
+  UserController.isLoggedIn = false;
+  const ref = shallow(<AccountEntry />);
   ref.instance().setState({
     signInData: {
       email: "test@gmail.com",
-      password: "password123",
+      password: "password123"
     }
   });
 
   // expect(ref._validateAccountCreationForm()).toBeTruthy();
-  expect(ref.state('signedIn')).toBeFalsy();
+  expect(ref.state("signedIn")).toBeFalsy();
 });
-
-

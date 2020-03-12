@@ -19,6 +19,7 @@ exports[`renders correctly 1`] = `
   <a
     className="beerme-homepage-clickable"
     href="/"
+    id="beerme-homepage-clickable"
     onClick={[Function]}
     style={
       Object {

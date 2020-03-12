@@ -43,7 +43,7 @@ export class Home extends Component {
     return (
       <div style={styles.inListStyle}>
         <h2>Top Ten Beer Styles</h2>
-        {this.state.topTen.map(beer => (
+        {this.state.topTen?.map(beer => (
           <p key={beer.id}>{beer.title}</p>
         ))}
       </div>
@@ -131,7 +131,7 @@ export class Home extends Component {
         >
           {this.renderLogo()}
           {this.renderSearchBox()}
-          {this.state.topTen ? this.renderBody() : null}
+          {this.renderBody()}
         </div>
       </div>
     );
