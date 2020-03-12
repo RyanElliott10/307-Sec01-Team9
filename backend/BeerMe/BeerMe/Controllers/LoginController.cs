@@ -20,7 +20,25 @@ namespace BeerMe.Controllers
             // User is verified otherwise new user is being created
             if(isLoginSuccessful)
             {
-                return Ok(dbUser);
+                var loggedInUser = new
+                {
+                    Id = dbUser.Id,
+                    Name = dbUser.Name,
+                    Email = dbUser.Email,
+                    IsBusiness = dbUser.IsBusiness,
+                    BusinessName = dbUser.BusinessName,
+                    BeerRatings = dbUser.BeerRatings.Select(rating =>
+                    new
+                    { 
+                    Id = rating.Id,
+                    UserId = rating.UserId,
+                    BeerId = rating.BeerId,
+                    Rating = rating.Rating
+                    }),
+
+
+                };
+                return Ok(loggedInUser);
             }
             return Ok(new User());
 

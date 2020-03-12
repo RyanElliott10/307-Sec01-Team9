@@ -6,15 +6,16 @@ import { Redirect } from "react-router-dom";
 import NetClient from "../Utils/NetClient";
 import UserController from "../Controllers/UserController";
 
-// FOR POST:
-//  BeerName, StyleId
-
 export class Account extends Component {
   constructor(props) {
     super(props);
     this.state = {
       addBeerName: "",
       addBeerData: {
+        label: "",
+        value: null
+      },
+      removeBeerData: {
         label: "",
         value: null
       }
@@ -25,6 +26,7 @@ export class Account extends Component {
     this.setState({
       allStyles: [{ value: 0, label: "test" }]
     });
+
     NetClient.get("https://localhost:44300/api/BeerStyles").then(data => {
       const styles = data.map(d => {
         return {
@@ -37,6 +39,24 @@ export class Account extends Component {
       this.setState({
         allStyles: styles
       });
+    });
+
+    this.fetchRemoveBeers();
+  }
+
+  fetchRemoveBeers() {
+    NetClient.get(`https://localhost:44300/api/BeersByBusiness/${UserController.userId}`).then(data => {
+      const businessBeers = data.map(d => {
+        return {
+          value: d.Id,
+          label: d.BeerName
+        };
+      });
+
+      console.log("BUSINESS BEERS:", businessBeers);
+      this.setState({
+        businessBeers: businessBeers
+      }, () => console.log("UPDATED STATE AFTER FETCHING REMOVE BEERS:", this.state));
     });
   }
 
@@ -55,10 +75,16 @@ export class Account extends Component {
   _handleAddBeerSubmit = async event => {
     event.preventDefault();
     NetClient.post("https://localhost:44300/api/Beers", {
+<<<<<<< HEAD
       StyleId: this.state.addBeerData.selectedStyle,
       BeerName: this.state.addBeerData.name, 
+=======
+      BeerName: this.state.addBeerName,
+      StyleId: this.addBeerValue,
+>>>>>>> 98cb12efa741e88f94a8ab30ba51a190e0bfb944
       UserId: UserController.userId
     });
+
     this.setState(
       {
         addBeerName: "",
@@ -69,10 +95,18 @@ export class Account extends Component {
       },
       () => (this.addBeerFormRef.value = this.state.addBeerName)
     );
+
+    setTimeout(() => this.fetchRemoveBeers(), 400);
   };
 
   _handleRemoveBeerSubmit = async event => {
     event.preventDefault();
+    console.log("DELETING A BEER:", this.state.removeBeerData.value);
+    NetClient.delete(`https://localhost:44300/api/beers/${this.state.removeBeerData.value}`)
+
+    setTimeout(() => this.fetchRemoveBeers(), 400);
+    console.log(this.removeBeerForm);
+    this.removeBeerForm.value = null;
   };
 
   _renderControl(type, value, isDisabled, onChange = () => {}) {
@@ -159,17 +193,21 @@ export class Account extends Component {
           <Form.Label>Style</Form.Label>
         </Form>
         <Select
+          ref={form => (this.removeBeerForm = form)}
           options={this.state.allStyles}
           value={this.state.addBeerData}
           onChange={event => {
+            this.addBeerLabel = event.label;
+            this.addBeerValue = event.value;
+
             this.setState({
               addBeerData: {
                 label: event.label,
                 value: event.value
               }
-            });
+            }, console.log("UPDATED STATE ON SELECT TO:", this.state));
           }}
-        />{" "}
+        />
       </>
     );
   }
@@ -205,14 +243,14 @@ export class Account extends Component {
         <hr />
         <Form.Label>Name of Beer</Form.Label>
         <Select
-          options={this.state.allStyles}
+          options={this.state.businessBeers}
           onChange={event =>
             this.setState({
-              addBeerData: {
-                name: this.state.addBeerData.name,
+              removeBeerData: {
+                name: event.label,
                 value: event.value
               }
-            })
+            }, () => console.log("UPDATED STATE:", this.state))
           }
         />
         <hr />
@@ -244,6 +282,14 @@ export class Account extends Component {
     );
   }
 
+  _renderLogout() {
+    return (
+      <Form>
+        {this._renderButton("danger", false, () => UserController.logout(), "Logout")}
+      </Form>
+    );
+  }
+
   render() {
     if (UserController.getCurrentUser()) {
       return (
@@ -252,6 +298,7 @@ export class Account extends Component {
             {this._renderBusinessName()}
             {this._renderCommon()}
             {this._renderAddRemove()}
+            {this._renderLogout()}
           </Form>
         </div>
       );

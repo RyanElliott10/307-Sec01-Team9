@@ -43,6 +43,7 @@ export class LockedRecommended extends Component {
             <Link
               to="/account-entry"
               style={{ color: "blue", marginLeft: "5px" }}
+              id={"go-to-create-account-link"}
             >
               create or sign into an account.
             </Link>

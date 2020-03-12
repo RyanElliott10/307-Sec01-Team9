@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    style={
+      Object {
+        "alignContent": "center",
+        "marginLeft": "200px",
+        "marginRight": "200px",
+        "marginTop": "45px",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "column",
+        }
+      }
+    >
+      <img
+        alt="Logo"
+        src="BeerMe_Logo.png"
+      />
+    </div>
+    <div
+      style={
+        Object {
+          "marginBottom": "40px",
+          "marginLeft": "auto",
+          "marginRight": "auto",
+          "width": "50%",
+        }
+      }
+    >
+      <div
+        className="sc-htpNat dePyzG"
+      >
+        <input
+          className="sc-bdVaJa jwfbbd"
+          onChange={[Function]}
+          placeholder="Search"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      style={
+        Object {
+          "alignItems": "top",
+          "display": "flex",
+          "flex": 1,
+          "flexDirection": "row",
+          "marginLeft": "70px",
+          "marginRight": "70px",
+        }
+      }
+    >
+      <img
+        alt="BOTD_Photo"
+        src="BOTD_photo.png"
+        style={
+          Object {
+            "height": 180,
+            "marginRight": "20px",
+            "width": 110,
+          }
+        }
+      />
+      <div
+        style={
+          Object {
+            "alignItems": "center",
+            "display": "flex",
+            "flex": 1,
+            "flexDirection": "column",
+          }
+        }
+      >
+        <h2>
+          Beer Of The Day
+        </h2>
+        <p>
+          Hive 56 is a dark sour ale aged with honey in an oak foudre for eighteen months. The beer is deep mahogany in color with aromas of strawberries, lemon, and tropical fruit; notes of dark chocolate, raspberries, and figs present themselves upon the first sip, followed by a lingering tartness.
+        </p>
+      </div>
+      <img
+        alt="Separator"
+        src="Sep_Img.png"
+      />
+      <div
+        style={
+          Object {
+            "alignItems": "right",
+            "display": "flex",
+            "flexDirection": "column",
+          }
+        }
+      >
+        <h2>
+          Top Ten Beer Styles
+        </h2>
+      </div>
+    </div>
+  </div>
+</div>
+`;
