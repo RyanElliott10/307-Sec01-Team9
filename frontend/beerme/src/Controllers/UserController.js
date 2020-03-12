@@ -18,13 +18,6 @@ class UserController {
   static cachedBeers = [];
   static beerRatings = [];
 
-  // {
-  //   Id:
-  //   UserId:
-  //   BeerId:
-  //   Rating:
-  // }
-
   static assignLoginData(data) {
     if (data && data.Name) {
       this.userId = data.Id;
