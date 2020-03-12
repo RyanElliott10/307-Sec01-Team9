@@ -31,6 +31,7 @@ exports[`renders correctly 1`] = `
     }
   >
     <h1
+      id="beerme-header-clickable"
       onClick={[Function]}
       onMouseEnter={[Function]}
       onMouseOut={[Function]}
@@ -50,6 +51,7 @@ exports[`renders correctly 1`] = `
     <a
       className="explore_header_link"
       href="/explore"
+      id="explore_header_link"
       onClick={[Function]}
       style={
         Object {
@@ -61,6 +63,7 @@ exports[`renders correctly 1`] = `
       }
     >
       <h6
+        id="explore-header-clickable"
         onClick={[Function]}
         onMouseEnter={[Function]}
         onMouseOut={[Function]}
@@ -82,6 +85,7 @@ exports[`renders correctly 1`] = `
       }
     >
       <h6
+        id="recommended-header-clickable"
         onClick={[Function]}
         onMouseEnter={[Function]}
         onMouseOut={[Function]}
@@ -103,6 +107,7 @@ exports[`renders correctly 1`] = `
       }
     >
       <h6
+        id="account-header-clickable"
         onClick={[Function]}
         onMouseEnter={[Function]}
         onMouseOut={[Function]}
