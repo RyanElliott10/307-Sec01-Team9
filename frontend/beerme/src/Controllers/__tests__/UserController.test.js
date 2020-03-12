@@ -8,7 +8,7 @@ test("invalid email with a valid passowrd to login", async () => {
 
   const success = await UserController.login("wrong-email", "password123");
   expect(success).toBeFalsy();
-  
+
   console.error = originalError;
 });
 
@@ -122,4 +122,22 @@ test("fetchAllBeers should return a list with all the beers", async () => {
   expect(UserController.cachedBeers).toBeTruthy();
 
   console.error = originalError;
+});
+
+// MARK: - Utils
+
+test("assignLoginData should return false with invalid data", async () => {
+  const success = UserController.assignLoginData({});
+  expect(success).toBeFalsy();
+});
+
+test("assignLoginData should return true with invalid data", async () => {
+  const success = UserController.assignLoginData({
+    Id: 0,
+    Name: "First Last",
+    Email: "test@gmail.com",
+    IsBusiness: false,
+    BussinessName: ""
+  });
+  expect(success).toBeTruthy();
 });

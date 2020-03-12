@@ -89,14 +89,31 @@ exports[`renders correctly 1`] = `
         Object {
           "alignItems": "top",
           "justifyContent": "center",
-          "marginTop": "50px",
         }
       }
     >
       <label
         className="form-label"
       >
-        As a business, you may not rate this beer.
+        Please 
+      </label>
+      <a
+        href="/account-entry"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "blue",
+            "marginLeft": "5px",
+            "marginRight": "5px",
+          }
+        }
+      >
+        create an account
+      </a>
+      <label
+        className="form-label"
+      >
+         to rate this beer.
       </label>
     </div>
   </form>
