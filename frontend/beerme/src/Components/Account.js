@@ -13,14 +13,18 @@ export class Account extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      addBeerName: "",
       addBeerData: {
-        name: "",
-        selectedStyle: null
+        label: "",
+        value: null
       }
     };
   }
 
   componentDidMount() {
+    this.setState({
+      allStyles: [{ value: 0, label: "test" }]
+    });
     NetClient.get("https://localhost:44300/api/BeerStyles").then(data => {
       const styles = data.map(d => {
         return {
@@ -38,24 +42,40 @@ export class Account extends Component {
 
   _validateAddBeerForm() {
     return (
-      this.state.addBeerData.name.length > 0 &&
-      this.state.addBeerData.selectedStyle
+      this.state.addBeerData.label.length > 0 &&
+      this.state.addBeerData.value !== null &&
+      this.state.addBeerName.length > 0
     );
   }
 
+  _validateRemoveBeer() {
+    return true;
+  }
 
   _handleAddBeerSubmit = async event => {
     event.preventDefault();
-    //UserController.addBeer(this.state.addBeerData);
     NetClient.post("https://localhost:44300/api/Beers", {
       StyleId: this.state.addBeerData.selectedStyle,
       BeerName: this.state.addBeerData.name, 
       UserId: UserController.userId
     });
-
+    this.setState(
+      {
+        addBeerName: "",
+        addBeerData: {
+          label: "",
+          value: null
+        }
+      },
+      () => (this.addBeerFormRef.value = this.state.addBeerName)
+    );
   };
 
-  _renderControl(type, value, isDisabled, onChange = () => { }) {
+  _handleRemoveBeerSubmit = async event => {
+    event.preventDefault();
+  };
+
+  _renderControl(type, value, isDisabled, onChange = () => {}) {
     return (
       <Form.Control
         disabled={isDisabled}
@@ -99,49 +119,128 @@ export class Account extends Component {
     );
   }
 
+  _renderButton(variant, disabled, onClick, text) {
+    return (
+      <Button
+        type="submit"
+        variant={variant}
+        disabled={disabled}
+        onClick={onClick}
+      >
+        {text}
+      </Button>
+    );
+  }
+
+  _renderAddBeerNameField() {
+    return (
+      <>
+        <Form.Label>Name of Beer</Form.Label>
+        <Form.Control
+          ref={form => (this.addBeerFormRef = form)}
+          disabled={false}
+          type={"name"}
+          placeholder={"Corona"}
+          onChange={e => {
+            const newName = e.target.value;
+            this.setState({
+              addBeerName: newName
+            });
+          }}
+        />
+      </>
+    );
+  }
+
+  _renderAddBeerDropdown() {
+    return (
+      <>
+        <Form>
+          <Form.Label>Style</Form.Label>
+        </Form>
+        <Select
+          options={this.state.allStyles}
+          value={this.state.addBeerData}
+          onChange={event => {
+            this.setState({
+              addBeerData: {
+                label: event.label,
+                value: event.value
+              }
+            });
+          }}
+        />{" "}
+      </>
+    );
+  }
+
   _renderAddBeer() {
+    return (
+      <Form.Group as={Col} controlId="formGridFirstName">
+        <h2>Add a Beer</h2>
+        <hr />
+        <Form.Row>
+          <Form.Group as={Col} controlId="formGridBeerName">
+            {this._renderAddBeerNameField()}
+          </Form.Group>
+        </Form.Row>
+        {this._renderAddBeerDropdown()}
+        <hr />
+        <Form.Row>
+          {this._renderButton(
+            "primary",
+            !this._validateAddBeerForm(),
+            this._handleAddBeerSubmit,
+            "Add Beer"
+          )}
+        </Form.Row>
+      </Form.Group>
+    );
+  }
+
+  _renderRemoveBeer() {
+    return (
+      <Form.Group as={Col} controlId="formGridLastName">
+        <h2>Remove a Beer</h2>
+        <hr />
+        <Form.Label>Name of Beer</Form.Label>
+        <Select
+          options={this.state.allStyles}
+          onChange={event =>
+            this.setState({
+              addBeerData: {
+                name: this.state.addBeerData.name,
+                value: event.value
+              }
+            })
+          }
+        />
+        <hr />
+        {this._renderButton(
+          "danger",
+          !this._validateRemoveBeer(),
+          this._handleRemoveBeerSubmit,
+          "Remove Beer"
+        )}
+      </Form.Group>
+    );
+  }
+
+  _renderAddRemove() {
     if (!UserController.isBusiness) {
       return null;
     }
 
     return (
-      <React.Fragment>
-        <Form as={Col}>
-          <h2>Add a Beer!</h2>
-          <hr></hr>
+      <Form.Group as={Col} controlId="formGridFirstName">
+        <Form onSubmit={this._handleCreateAccountSubmit}>
           <Form.Row>
-            <Form.Group as={Col} controlId="formGridBeerName">
-              <Form.Label>Name of Beer</Form.Label>
-              {this._renderControl("name", "Corona", false, e => {
-                const newBeerData = this.state.addBeerData;
-                newBeerData.name = e.target.value;
-                this.setState({
-                  addBeerData: newBeerData
-                });
-              })}
-            </Form.Group>
+            {this._renderAddBeer()}
+            <div />
+            {this._renderRemoveBeer()}
           </Form.Row>
         </Form>
-        <div style={{ marginLeft: "15px", marginRight: "15px" }}>
-          <Form>
-            <Form.Label>Style</Form.Label>
-          </Form>
-          <Select options={this.state.allStyles} onChange={(event) => this.setState({
-            addBeerData: {
-              name: this.state.addBeerData.name,
-              selectedStyle: event.value
-            }
-          })} />
-          <hr />
-          <Button
-            type="submit"
-            disabled={!this._validateAddBeerForm()}
-            onClick={this._handleAddBeerSubmit}
-          >
-            Add Beer
-          </Button>
-        </div>
-      </React.Fragment>
+      </Form.Group>
     );
   }
 
@@ -152,7 +251,7 @@ export class Account extends Component {
           <Form>
             {this._renderBusinessName()}
             {this._renderCommon()}
-            {this._renderAddBeer()}
+            {this._renderAddRemove()}
           </Form>
         </div>
       );
