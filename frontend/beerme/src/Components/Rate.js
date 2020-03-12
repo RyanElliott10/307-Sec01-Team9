@@ -25,7 +25,7 @@ export default class Rate extends Component {
     });
   }
 
-  changeRating = (newRating, name) => {
+  changeRating = newRating => {
     this.setState({
       rating: newRating
     });
@@ -36,10 +36,16 @@ export default class Rate extends Component {
       Rating: newRating
     };
 
-    NetClient.post(
-      "https://localhost:44300/api/beerratings",
-      rateData
-    ).then(data => console.log(data));
+    NetClient.post("https://localhost:44300/api/beerratings", rateData).then(
+      data => {
+        console.log(data);
+        UserController.addToRatedBeers({
+          BeerId: UserController.currBeerId,
+          UserId: UserController.userId,
+          Rating: newRating
+        });
+      }
+    );
   };
 
   renderBody() {
