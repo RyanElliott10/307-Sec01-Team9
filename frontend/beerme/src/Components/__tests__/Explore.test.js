@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import { BrowserRouter } from "react-router-dom";
 
 import Explore from "../Explore";
@@ -10,6 +10,20 @@ it("renders correctly", () => {
     .create(
       <BrowserRouter>
         <Explore />
+      </BrowserRouter>
+    )
+    .toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it("renders correctly with props", () => {
+  const tree = renderer
+    .create(
+      <BrowserRouter>
+        <Explore
+          recommendedStyle={{ name: "Test", id: 0 }}
+          currentPageIndex={2}
+        />
       </BrowserRouter>
     )
     .toJSON();
@@ -32,4 +46,14 @@ it("renders correctly with state", () => {
   };
 
   expect(ref.state).toEqual(expectedState);
+});
+
+it("renders correctly with clicks", () => {
+  const ref = mount(
+    <BrowserRouter>
+      <Explore />
+    </BrowserRouter>
+  );
+
+  ref.find("#submit-button").at(0).simulate('click');
 });
