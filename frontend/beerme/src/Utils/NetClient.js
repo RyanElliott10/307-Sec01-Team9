@@ -1,5 +1,6 @@
 class NetClient {
   static async get(url) {
+    console.log("FETCHING FROM", url);
     return await fetch(url).then(res => res.json());
   }
 
