@@ -64,6 +64,7 @@ exports[`renders correctly 1`] = `
         </label>
         <a
           href="/account-entry"
+          id="go-to-create-account-link"
           onClick={[Function]}
           style={
             Object {
@@ -77,5 +78,61 @@ exports[`renders correctly 1`] = `
       </div>
     </form>
   </div>
+</div>
+`;
+
+exports[`renders correctly with a user 1`] = `
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "marginLeft": "200px",
+      "marginRight": "200px",
+    }
+  }
+>
+  <h1>
+    Recommended For You
+  </h1>
+  <h5>
+    Here is our personalized recommendation for new beer styles!
+  </h5>
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "row",
+        "marginTop": "50px",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`renders correctly with fromExplore prop 1`] = `
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "marginLeft": "200px",
+      "marginRight": "200px",
+    }
+  }
+>
+  <h1>
+    Recommended For You
+  </h1>
+  <h5 />
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "row",
+        "marginTop": "50px",
+      }
+    }
+  />
 </div>
 `;
