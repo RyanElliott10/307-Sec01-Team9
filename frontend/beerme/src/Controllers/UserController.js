@@ -88,6 +88,23 @@ class UserController {
       this.cachedBeers = data;
     });
   }
+
+  static logout() {
+    this.firstName = "";
+    this.lastName = "";
+    this.email = "";
+    this.password = "";
+    this.isBusiness = false;
+    this.businessName = "";
+    this.currBeer = "";
+    this.currABV = "";
+    this.currIBU = "";
+    this.currStyle = "";
+    this.currBeerId = 0;
+    this.userId = 0;
+  
+    this.isLoggedIn = false;
+  }
 }
 
 export default UserController;

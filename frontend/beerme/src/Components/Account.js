@@ -280,6 +280,14 @@ export class Account extends Component {
     );
   }
 
+  _renderLogout() {
+    return (
+      <Form>
+        {this._renderButton("danger", false, () => UserController.logout(), "Logout")}
+      </Form>
+    );
+  }
+
   render() {
     if (UserController.getCurrentUser()) {
       return (
@@ -288,6 +296,7 @@ export class Account extends Component {
             {this._renderBusinessName()}
             {this._renderCommon()}
             {this._renderAddRemove()}
+            {this._renderLogout()}
           </Form>
         </div>
       );
