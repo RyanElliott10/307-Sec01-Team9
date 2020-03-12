@@ -6,9 +6,6 @@ import { Redirect } from "react-router-dom";
 import NetClient from "../Utils/NetClient";
 import UserController from "../Controllers/UserController";
 
-// FOR POST:
-//  BeerName, StyleId
-
 export class Account extends Component {
   constructor(props) {
     super(props);

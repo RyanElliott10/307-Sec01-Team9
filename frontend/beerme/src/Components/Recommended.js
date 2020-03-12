@@ -23,7 +23,7 @@ export class Recommended extends Component {
     this.state = {
       mainDesc: this.props.mainDesc,
       photos: this.props.photos,
-      recBeers: this.props.recBeers,
+      recBeers: this.props.recBeers
     };
   }
 
@@ -102,13 +102,18 @@ export class Recommended extends Component {
     );
   }
 
-
   _renderBody() {
     if (this.props.fromExplore) {
       return (
         <div style={styles.inRowStyle}>
           {this.state.photos ? this.renderPhotos() : null}
           {this.state.recBeers ? this.renderRecBeers() : null}
+        </div>
+      );
+    } else if (!this.state.recBeers) {
+      return (
+        <div style={styles.inRowStyle}>
+          You must rate at least 1 beer before we are able to recommend you any!
         </div>
       );
     } else if (UserController.getCurrentUser()) {
@@ -140,7 +145,7 @@ const styles = {
     flexDirection: "column",
     justifyContent: "space-around",
     paddingBottom: "20px",
-    marginRight: "40px", 
+    marginRight: "40px",
     marginLeft: "100px"
   },
   inTitleStyle: {
