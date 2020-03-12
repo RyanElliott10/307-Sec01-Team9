@@ -9,20 +9,20 @@ URL = 'http://localhost:3007/'
 
 driver = webdriver.Chrome(os.getcwd()+"\\chromedriver.exe")
 driver.set_page_load_timeout(10)
+
 BeerMeDriver = BeerMeSurfingCommandsUsingSelenium(driver)
 
 BeerMeDriver.openHomepage(URL)
 time.sleep(1)
 
-BeerMeDriver.searchFirstBeerStartingWith("B")
+BeerMeDriver.login("testUser@gmail.com","test123")
+time.sleep(1)
+
+BeerMeDriver.getRecommendations()
 time.sleep(1)
 
 try:
-    starComponent = driver.find_element_by_class_name("star")
+    error  = driver.find_element_by_class_name("form-label")
     print("Test unsuccessful")
-except selenium.common.exceptions.NoSuchElementException:
+except:
     print("Test successful")
-
-
-
-

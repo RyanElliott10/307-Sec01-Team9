@@ -3,16 +3,18 @@ import os
 from selenium import webdriver
 import selenium
 
+from automation_tests.BeerMeSurfingCommandsUsingSelenium import BeerMeSurfingCommandsUsingSelenium
 
-URL = 'http://localhost:3000/'
+URL = 'http://localhost:3007/'
 
 driver = webdriver.Chrome(os.getcwd()+"\\chromedriver.exe")
 driver.set_page_load_timeout(10)
-driver.get(URL)
+BeerMeDriver = BeerMeSurfingCommandsUsingSelenium(driver)
 
-time.sleep(2)
+BeerMeDriver.openHomepage(URL)
+time.sleep(1)
 
-driver.find_element_by_class_name("recommended_header_link").click()
+BeerMeDriver.getRecommendations()
 
 try:
     error  = driver.find_element_by_class_name("form-label")
