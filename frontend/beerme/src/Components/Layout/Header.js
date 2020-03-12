@@ -39,7 +39,7 @@ export function Header() {
 
   return (
     <div style={headerStyle}>
-      <Link to="/" style={titleStyle} className="beerme-homepage-clickable">
+      <Link to="/" style={titleStyle} className="beerme-homepage-clickable" id="beerme-homepage-clickable">
         <h1
           onClick={onTitleClick}
           onMouseEnter={event => onMouseOver(event)}
