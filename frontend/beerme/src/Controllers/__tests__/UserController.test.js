@@ -141,3 +141,9 @@ test("assignLoginData should return true with invalid data", async () => {
   });
   expect(success).toBeTruthy();
 });
+
+test("logout should logout the use and reset all fields", () => {
+  UserController.userId = 1;
+  UserController.logout();
+  expect(UserController.userId).toEqual(0);
+})

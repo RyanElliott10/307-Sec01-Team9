@@ -66,7 +66,6 @@ export class Recommended extends Component {
         }
       });
     }
-
   }
 
   renderPhotos() {

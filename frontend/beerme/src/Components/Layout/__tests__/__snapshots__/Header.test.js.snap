@@ -17,6 +17,7 @@ exports[`renders correctly 1`] = `
   }
 >
   <a
+    className="beerme-homepage-clickable"
     href="/"
     onClick={[Function]}
     style={
