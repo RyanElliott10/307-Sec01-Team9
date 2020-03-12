@@ -115,7 +115,7 @@ class UserController {
   }
 
   static addToRatedBeers(data) {
-    this.beerRatings.push(data);
+    this.beerRatings?.push(data);
   }
 }
 

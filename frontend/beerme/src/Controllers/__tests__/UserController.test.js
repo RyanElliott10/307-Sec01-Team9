@@ -146,4 +146,15 @@ test("logout should logout the use and reset all fields", () => {
   UserController.userId = 1;
   UserController.logout();
   expect(UserController.userId).toEqual(0);
-})
+});
+
+test("add ratedBeer should add a rated beer", () => {
+  UserController.addToRatedBeers({ name: "test" });
+  const beerRatingsLength = UserController.beerRatings?.length;
+
+  if (beerRatingsLength) {
+    expect(beerRatingsLength).toEqual(0);
+  } else {
+    expect(beerRatingsLength).toBeFalsy();
+  }
+});

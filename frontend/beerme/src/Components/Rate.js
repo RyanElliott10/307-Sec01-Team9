@@ -27,7 +27,7 @@ export default class Rate extends Component {
       if (ratedBeer.length > 0) {
         this.hasUserRated = true;
         this.setState({
-          rating = ratedBeer.Rating
+          rating: ratedBeer.Rating
         });
       }
     });
