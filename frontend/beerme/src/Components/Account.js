@@ -26,6 +26,7 @@ export class Account extends Component {
         return {
           value: d.Id,
           label: d.Style
+
         };
       });
 
@@ -48,7 +49,8 @@ export class Account extends Component {
     //UserController.addBeer(this.state.addBeerData);
     NetClient.post("https://localhost:44300/api/Beers", {
       StyleId: this.state.addBeerData.selectedStyle,
-      BeerName: this.state.addBeerData.name
+      BeerName: this.state.addBeerData.name, 
+      UserId: UserController.userId
     });
 
   };
