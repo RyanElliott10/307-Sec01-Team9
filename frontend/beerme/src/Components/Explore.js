@@ -266,7 +266,7 @@ export class Explore extends Component {
       <Recommended
         mainTitle={"Recommendations From Explore Choices"}
         mainDesc={"Here is our personalized recommendation for new beer styles!"}
-        photos={RecImages.getImages(9)}
+        photos={RecImages.getImages(this.state.recommendedStyle.length)}
         recBeers={this.state.recommendedStyle.slice(0, 9)}
         fromExplore={true}
       />
