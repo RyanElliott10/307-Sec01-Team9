@@ -74,19 +74,27 @@ exports[`renders correctly 1`] = `
       <div
         style={
           Object {
-            "alignItems": "center",
-            "display": "flex",
-            "flex": 1,
-            "flexDirection": "column",
+            "flex": 2,
           }
         }
       >
-        <h2>
-          Beer Of The Day
-        </h2>
-        <p>
-          Hive 56 is a dark sour ale aged with honey in an oak foudre for eighteen months. The beer is deep mahogany in color with aromas of strawberries, lemon, and tropical fruit; notes of dark chocolate, raspberries, and figs present themselves upon the first sip, followed by a lingering tartness.
-        </p>
+        <div
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+              "flexDirection": "column",
+            }
+          }
+        >
+          <h2>
+            Beer Of The Day
+          </h2>
+          <p>
+            Hive 56 is a dark sour ale aged with honey in an oak foudre for eighteen months. The beer is deep mahogany in color with aromas of strawberries, lemon, and tropical fruit; notes of dark chocolate, raspberries, and figs present themselves upon the first sip, followed by a lingering tartness.
+          </p>
+        </div>
       </div>
       <img
         alt="Separator"
@@ -95,45 +103,61 @@ exports[`renders correctly 1`] = `
       <div
         style={
           Object {
-            "alignItems": "right",
-            "display": "flex",
-            "flexDirection": "column",
+            "flex": 3,
           }
         }
       >
-        <h2>
-          Top Ten Beer Styles
-        </h2>
-        <p>
-          1. Hive 56
-        </p>
-        <p>
-          2. Raspberry Eisbok
-        </p>
-        <p>
-          3. Blanc de Blancs
-        </p>
-        <p>
-          4. Hoponius Union
-        </p>
-        <p>
-          5. Nugget Nectar
-        </p>
-        <p>
-          6. Sprang
-        </p>
-        <p>
-          7. Zenne Y Frontera
-        </p>
-        <p>
-          8. Citra Bitter Monk
-        </p>
-        <p>
-          9. Celebrator
-        </p>
-        <p>
-          10. Bracia
-        </p>
+        <div
+          style={
+            Object {
+              "alignItems": "right",
+              "display": "flex",
+              "flexDirection": "column",
+            }
+          }
+        >
+          <h2>
+            Top Ten Beer Styles
+          </h2>
+          <div
+            style={
+              Object {
+                "marginLeft": "60px",
+              }
+            }
+          >
+            <p>
+              1. Hive 56
+            </p>
+            <p>
+              2. Raspberry Eisbok
+            </p>
+            <p>
+              3. Blanc de Blancs
+            </p>
+            <p>
+              4. Hoponius Union
+            </p>
+            <p>
+              5. Nugget Nectar
+            </p>
+            <p>
+              6. Sprang
+            </p>
+            <p>
+              7. Zenne Y Frontera
+            </p>
+            <p>
+              8. Citra Bitter Monk
+            </p>
+            <p>
+              9. Celebrator
+            </p>
+            <p>
+              10. Bracia
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

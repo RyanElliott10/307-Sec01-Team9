@@ -59,6 +59,10 @@ export class AccountEntry extends Component {
         signedIn: true
       });
     }
+    else {
+      <Form>Incorrect username or password.</Form>
+    }
+    
   };
 
   _handleCreateAccountSubmit = async event => {
