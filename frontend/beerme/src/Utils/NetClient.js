@@ -1,11 +1,9 @@
 class NetClient {
   static async get(url) {
-    console.log("FETCHING FROM", url);
     return await fetch(url).then(res => res.json());
   }
 
   static async post(url, data) {
-    console.log("JSON:", JSON.stringify(data));
     return await fetch(url, {
       method: "POST",
       body: JSON.stringify(data),

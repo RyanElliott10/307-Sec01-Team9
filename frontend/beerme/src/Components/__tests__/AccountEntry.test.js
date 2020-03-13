@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 import { BrowserRouter } from "react-router-dom";
 
 import AccountEntry from "../AccountEntry";
@@ -64,4 +64,58 @@ it("_handleSignInSubmit does not sign in with invalid information", () => {
 
   // expect(ref._validateAccountCreationForm()).toBeTruthy();
   expect(ref.state("signedIn")).toBeFalsy();
+});
+
+it("renders correctly with login clicks", () => {
+  const ref = mount(
+    <BrowserRouter>
+      <AccountEntry />
+    </BrowserRouter>
+  );
+
+  ref
+    .find("#switch-to-create-account")
+    .at(0)
+    .simulate("click");
+  ref
+    .find("#switch-to-login")
+    .at(0)
+    .simulate("click");
+  ref
+    .find("#login-button")
+    .at(0)
+    .simulate("click");
+});
+
+it("renders correctly with create account clicks", () => {
+  const ref = mount(
+    <BrowserRouter>
+      <AccountEntry />
+    </BrowserRouter>
+  );
+
+  ref
+    .find("#switch-to-create-account")
+    .at(0)
+    .simulate("click");
+
+  ref.update();
+
+  ref
+    .find("#submit-button")
+    .at(0)
+    .simulate("click");
+});
+
+it("renders handles text input correctly", () => {
+  const ref = mount(
+    <BrowserRouter>
+      <AccountEntry />
+    </BrowserRouter>
+  );
+
+  const inputs = ref.find("#control-input");
+  inputs.forEach(r =>
+    r.simulate("change", { target: { name: "width", value: 50 } })
+  );
 });

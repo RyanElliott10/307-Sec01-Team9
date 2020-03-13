@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 import { BrowserRouter } from "react-router-dom";
 
 import Account from "../Account";
@@ -66,4 +66,67 @@ it("renders correctly with state", () => {
   };
 
   expect(ref.state).toEqual(expectedState);
+});
+
+it("handles clicks correctly", () => {
+  UserController.isLoggedIn = true;
+  UserController.isBusiness = true;
+  const ref = mount(
+    <BrowserRouter>
+      <Account />
+    </BrowserRouter>
+  );
+
+  ref
+    .find("#add-beer-button")
+    .at(0)
+    .simulate("click");
+  ref
+    .find("#remove-beer-button")
+    .at(0)
+    .simulate("click");
+});
+
+it("handles logout correctly", () => {
+  UserController.isLoggedIn = true;
+  const ref = mount(
+    <BrowserRouter>
+      <Account />
+    </BrowserRouter>
+  );
+
+  ref
+    .find("#logout-button")
+    .at(0)
+    .simulate("click");
+});
+
+it("handles selecting beers to add correctly", () => {
+  UserController.isLoggedIn = true;
+  UserController.isBusiness = true;
+  const ref = mount(
+    <BrowserRouter>
+      <Account />
+    </BrowserRouter>
+  );
+
+  ref
+    .find("#add-beer-dropdown")
+    .at(0)
+    .simulate("click");
+});
+
+it("handles selecting beers to remove correctly", () => {
+  UserController.isLoggedIn = true;
+  UserController.isBusiness = true;
+  const ref = mount(
+    <BrowserRouter>
+      <Account />
+    </BrowserRouter>
+  );
+
+  ref
+    .find("#add-beer-dropdown")
+    .at(0)
+    .simulate("click");
 });

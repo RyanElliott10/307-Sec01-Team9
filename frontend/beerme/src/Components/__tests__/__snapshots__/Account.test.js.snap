@@ -141,6 +141,7 @@ exports[`renders correctly with a business 1`] = `
             </form>
             <div
               className=" css-2b097c-container"
+              id="add-beer-dropdown"
               onKeyDown={[Function]}
             >
               <div
@@ -249,6 +250,7 @@ exports[`renders correctly with a business 1`] = `
               <button
                 className="btn btn-primary"
                 disabled={true}
+                id="add-beer-button"
                 onClick={[Function]}
                 type="submit"
               >
@@ -377,6 +379,7 @@ exports[`renders correctly with a business 1`] = `
             <button
               className="btn btn-danger"
               disabled={false}
+              id="remove-beer-button"
               onClick={[Function]}
               type="submit"
             >
@@ -392,6 +395,7 @@ exports[`renders correctly with a business 1`] = `
       <button
         className="btn btn-danger"
         disabled={false}
+        id="logout-button"
         onClick={[Function]}
         type="submit"
       >
@@ -494,6 +498,7 @@ exports[`renders correctly with a user logged in 1`] = `
       <button
         className="btn btn-danger"
         disabled={false}
+        id="logout-button"
         onClick={[Function]}
         type="submit"
       >

@@ -13,7 +13,6 @@ exports[`renders correctly 1`] = `
 >
   <form
     className=""
-    onSubmit={[Function]}
     style={
       Object {
         "justifyContent": "center",
@@ -63,3 +62,5 @@ exports[`renders correctly 1`] = `
   </form>
 </div>
 `;
+
+exports[`renders correctly with redirect prop 1`] = `null`;

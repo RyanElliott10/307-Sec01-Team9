@@ -31,7 +31,7 @@ it("renders correctly with props", () => {
 });
 
 it("renders correctly with state", () => {
-  const ref = shallow(
+  const ref = mount(
     <BrowserRouter>
       <Explore />
     </BrowserRouter>
@@ -55,5 +55,19 @@ it("renders correctly with clicks", () => {
     </BrowserRouter>
   );
 
-  ref.find("#submit-button").at(0).simulate('click');
+  ref
+    .find("#submit-button")
+    .at(0)
+    .simulate("click");
+});
+
+it("handles checkbox selections correctly", () => {
+  const ref = mount(
+    <BrowserRouter>
+      <Explore />
+    </BrowserRouter>
+  );
+
+  const inputs = ref.find("#checkbox-option");
+  inputs.forEach(r => r.simulate("click"));
 });

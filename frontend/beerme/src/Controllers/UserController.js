@@ -92,9 +92,8 @@ class UserController {
   }
 
   static async fetchAllBeers() {
-    NetClient.get("https://localhost:44300/api/beers").then(data => {
-      this.cachedBeers = data;
-    });
+    NetClient.get("https://localhost:44300/api/beers").then(data => (this.cachedBeers = data)
+    );
   }
 
   static logout() {
@@ -117,6 +116,8 @@ class UserController {
   static addToRatedBeers(data) {
     if (this.beerRatings) {
       this.beerRatings.push(data);
+    } else {
+      this.beerRatings = [data];
     }
   }
 }
