@@ -53,6 +53,7 @@ export class Recommended extends Component {
             const filteredBeers = UserController.cachedBeers.filter(
               cachedBeer => data.includes(cachedBeer.Id)
             );
+            console.log(filteredBeers);
             this.setState({
               recBeers: filteredBeers
             });
@@ -61,6 +62,7 @@ export class Recommended extends Component {
           const filteredBeers = UserController.cachedBeers.filter(cachedBeer =>
             data.includes(cachedBeer.Id)
           );
+          console.log(filteredBeers);
           this.setState({
             recBeers: filteredBeers
           });
@@ -106,6 +108,7 @@ export class Recommended extends Component {
 
   _renderBody() {
     if (this.props.fromExplore) {
+      console.log(this.props.recStyles);
       return (
         <div style={styles.inRowStyle}>
           {this.state.photos ? this.renderPhotos() : null}

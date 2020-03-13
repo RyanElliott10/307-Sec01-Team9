@@ -43,16 +43,18 @@ export class Home extends Component {
     return (
       <div style={styles.inListStyle}>
         <h2>Top Ten Beer Styles</h2>
-        <p>1. Hive 56</p>
-        <p>2. Raspberry Eisbok</p>
-        <p>3. Blanc de Blancs</p>
-        <p>4. Hoponius Union</p>
-        <p>5. Nugget Nectar</p>
-        <p>6. Sprang</p>
-        <p>7. Zenne Y Frontera</p>
-        <p>8. Citra Bitter Monk</p>
-        <p>9. Celebrator</p>
-        <p>10. Bracia</p>
+        <div style={{marginLeft: "60px"}}>
+          <p>1. Hive 56</p>
+          <p>2. Raspberry Eisbok</p>
+          <p>3. Blanc de Blancs</p>
+          <p>4. Hoponius Union</p>
+          <p>5. Nugget Nectar</p>
+          <p>6. Sprang</p>
+          <p>7. Zenne Y Frontera</p>
+          <p>8. Citra Bitter Monk</p>
+          <p>9. Celebrator</p>
+          <p>10. Bracia</p>
+        </div>
       </div>
     );
   }
@@ -65,9 +67,13 @@ export class Home extends Component {
           alt="BOTD_Photo"
           style={{ width: 110, height: 180, marginRight: "20px" }}
         />
-        {this.renderBOTD()}
+        <div style={{flex: 2}}>
+          {this.renderBOTD()}
+        </div>
         <img src={Separator} alt="Separator" />
-        {this.renderTopTen()}
+        <div style={{flex: 3}}>
+          {this.renderTopTen()}
+        </div>
       </div>
     );
   }
