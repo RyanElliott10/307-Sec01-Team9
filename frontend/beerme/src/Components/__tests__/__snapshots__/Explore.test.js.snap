@@ -21,6 +21,8 @@ exports[`renders correctly 1`] = `
       Object {
         "background": "#F4F4F4",
         "flexDirection": "row",
+        "height": "400px",
+        "justifyContent": "space-between",
         "marginTop": "15px",
         "paddingBottom": "5px",
       }
@@ -616,6 +618,8 @@ exports[`renders correctly with props 1`] = `
       Object {
         "background": "#F4F4F4",
         "flexDirection": "row",
+        "height": "400px",
+        "justifyContent": "space-between",
         "marginTop": "15px",
         "paddingBottom": "5px",
       }

@@ -20,12 +20,63 @@ exports[`renders correctly 1`] = `
   <div
     style={
       Object {
+        "backgroundColor": "rgb(244, 244, 244)",
         "display": "flex",
-        "flexDirection": "row",
-        "marginTop": "50px",
+        "flex": 1,
+        "justifyContent": "center",
       }
     }
-  />
+  >
+    <form
+      className=""
+      style={
+        Object {
+          "justifyContent": "center",
+        }
+      }
+    >
+      <div
+        className="form-row"
+      >
+        <img
+          alt="Lock"
+          src="lock.png"
+          style={
+            Object {
+              "alignItems": "center",
+              "height": "300px",
+              "marginBottom": "30px",
+              "marginLeft": "50px",
+              "marginTop": "50px",
+              "width": "300px",
+            }
+          }
+        />
+      </div>
+      <div
+        className="form-row"
+      >
+        <label
+          className="form-label"
+        >
+          In order to view recommended, please
+        </label>
+        <a
+          href="/account-entry"
+          id="go-to-create-account-link"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "blue",
+              "marginLeft": "5px",
+            }
+          }
+        >
+          create or sign into an account.
+        </a>
+      </div>
+    </form>
+  </div>
 </div>
 `;
 

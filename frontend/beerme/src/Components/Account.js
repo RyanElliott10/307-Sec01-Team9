@@ -300,10 +300,8 @@ export class Account extends Component {
       return (
         <div className="Login" style={broadStyle}>
           <Form>
-            <Form.Col>
-              {this._renderBusinessName()}
-              {this._renderLogout()}
-            </Form.Col>
+            {this._renderBusinessName()}
+            {this._renderLogout()}
             {this._renderCommon()}
             {this._renderAddRemove()}
           </Form>
