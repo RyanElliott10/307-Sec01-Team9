@@ -145,7 +145,6 @@ export class Recommended extends Component {
   render() {
     return (
       <div style={styles.inTitleStyle}>
-        {/* <h1>Recommended For You</h1> */}
         <h1>{this.props.mainTitle ? this.props.mainTitle : "Recommended For You"}</h1>
         <h5>{this.props.mainDesc}</h5>
         {this._renderBody()}

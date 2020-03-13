@@ -5,7 +5,6 @@ import Dots from "react-carousel-dots";
 import * as Constants from "../Utils/Constants";
 import NetClient from "../Utils/NetClient";
 import Recommended from "./Recommended";
-import BeerColors from "../img/beer_colors.png";
 import ExploreSpoofData from "../data/ExploreSpoofData";
 import RecImages from "../data/RecImages";
 

@@ -3,6 +3,7 @@ import { Button, ButtonToolbar, Form, Col } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 
 import UserController from "../Controllers/UserController";
+import * as Constants from "../Utils/Constants";
 
 export class AccountEntry extends Component {
   constructor(props) {
@@ -56,7 +57,12 @@ export class AccountEntry extends Component {
       )
     ) {
       this.setState({
-        signedIn: true
+        signedIn: true,
+        incorrectLogin: false
+      });
+    } else {
+      this.setState({
+        incorrectLogin: true
       });
     }
   };
@@ -82,7 +88,8 @@ export class AccountEntry extends Component {
       )
     ) {
       this.setState({
-        signedIn: true
+        signedIn: true,
+        incorrectLogin: false
       });
     }
   };
@@ -106,7 +113,12 @@ export class AccountEntry extends Component {
 
   _renderControl(type, placeholder, onChange) {
     return (
-      <Form.Control type={type} placeholder={placeholder} onChange={onChange} id={"control-input"} />
+      <Form.Control
+        type={type}
+        placeholder={placeholder}
+        onChange={onChange}
+        id={"control-input"}
+      />
     );
   }
 
@@ -210,49 +222,63 @@ export class AccountEntry extends Component {
     );
   }
 
+  _renderIncorrectLogin() {
+    if (this.state.incorrectLogin) {
+      return (
+        <p style={{ color: Constants.HOVER_ORANGE_COLOR }}>
+          Incorrect login information!
+        </p>
+      );
+    }
+    return null;
+  }
+
   _renderSignIn() {
     return (
-      <Form onSubmit={this._handleSignInSubmit}>
-        <Form.Group controlId="formGroupEmail">
-          <Form.Label>Email Address</Form.Label>
-          {this._renderControl("email", "Email", e => {
-            const newSignInData = this.state.signInData;
-            newSignInData.email = e.target.value;
-            this.setState({
-              signInData: newSignInData
-            });
-          })}
-        </Form.Group>
+      <React.Fragment>
+        <Form onSubmit={this._handleSignInSubmit}>
+          <Form.Group controlId="formGroupEmail">
+            <Form.Label>Email Address</Form.Label>
+            {this._renderControl("email", "Email", e => {
+              const newSignInData = this.state.signInData;
+              newSignInData.email = e.target.value;
+              this.setState({
+                signInData: newSignInData
+              });
+            })}
+          </Form.Group>
 
-        <Form.Group controlId="formGroupPassword">
-          <Form.Label>Password</Form.Label>
-          {this._renderControl("password", "Password", e => {
-            const newSignInData = this.state.signInData;
-            newSignInData.password = e.target.value;
-            this.setState({
-              signInData: newSignInData
-            });
-          })}
-        </Form.Group>
+          <Form.Group controlId="formGroupPassword">
+            <Form.Label>Password</Form.Label>
+            {this._renderControl("password", "Password", e => {
+              const newSignInData = this.state.signInData;
+              newSignInData.password = e.target.value;
+              this.setState({
+                signInData: newSignInData
+              });
+            })}
+          </Form.Group>
 
-        <ButtonToolbar style={{ justifyContent: "space-between" }}>
-          <Button
-            disabled={!this._validateLoginForm()}
-            type="submit"
-            id={"login-button"}
-          >
-            Login
-          </Button>
-          <Button
-            variant="secondary"
-            type="submit"
-            id={"switch-to-create-account"}
-            onClick={() => this.setState({ isCreateAccount: true })}
-          >
-            Don't have an account? Create one
-          </Button>
-        </ButtonToolbar>
-      </Form>
+          <ButtonToolbar style={{ justifyContent: "space-between" }}>
+            <Button
+              disabled={!this._validateLoginForm()}
+              type="submit"
+              id={"login-button"}
+            >
+              Login
+            </Button>
+            <Button
+              variant="secondary"
+              type="submit"
+              id={"switch-to-create-account"}
+              onClick={() => this.setState({ isCreateAccount: true })}
+            >
+              Don't have an account? Create one
+            </Button>
+          </ButtonToolbar>
+        </Form>
+        {this._renderIncorrectLogin()}
+      </React.Fragment>
     );
   }
 
