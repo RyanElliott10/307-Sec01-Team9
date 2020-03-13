@@ -35,7 +35,6 @@ export class Recommended extends Component {
       NetClient.get("https://jsonplaceholder.typicode.com/photos/").then(
         res => {
           let pics = []
-          console.log(this.props.photos);
           if (this.props.photos) {
             pics = this.props.photos;
           } else {
@@ -62,7 +61,6 @@ export class Recommended extends Component {
             const filteredBeers = UserController.cachedBeers.filter(
               cachedBeer => data.includes(cachedBeer.Id)
             );
-            console.log(filteredBeers);
             this.setState({
               recBeers: filteredBeers
             });
@@ -71,7 +69,6 @@ export class Recommended extends Component {
           const filteredBeers = UserController.cachedBeers.filter(cachedBeer =>
             data.includes(cachedBeer.Id)
           );
-          console.log(filteredBeers);
           this.setState({
             recBeers: filteredBeers
           });
@@ -85,7 +82,6 @@ export class Recommended extends Component {
       return null;
     }
 
-    console.log("IMAGE LENGTH:", this.state.photos);
     return (
       <div>
         {this.state.photos.map(image => (
