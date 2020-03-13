@@ -305,10 +305,16 @@ export class Account extends Component {
       return (
         <div className="Login" style={broadStyle}>
           <Form>
-            {this._renderBusinessName()}
+            <div style={{justifyContent: "right", alignItems: "right", display: "flex", marginLeft: "1225px"}}>
+              {this._renderLogout()}
+            </div>
+            <div style={{marginLeft: "15px"}}>
+              {this._renderBusinessName()}
+            </div>
             {this._renderCommon()}
-            {this._renderAddRemove()}
-            {this._renderLogout()}
+            <div style={{marginTop:"20px"}}>
+              {this._renderAddRemove()}
+            </div>
           </Form>
         </div>
       );
