@@ -75,6 +75,16 @@ export class Explore extends Component {
       "https://localhost:44300/api/ExploreBeerStyles",
       postObj
     ).then(data => {
+      data = data.map(d => {
+        return {
+          Id: d.BeerId,
+          BeerName: d.BeerName,
+          Style: `${d.StyleName} / ${d.StyleCategory}`,
+          ABV: d.ABV,
+          IBU: d.IBU
+        }
+      })
+      console.log(data);
       this.setState({
         recommendedStyle: data
       });
@@ -254,10 +264,10 @@ export class Explore extends Component {
   _renderRecommendations() {
     return (
       <Recommended
-        mainDesc={"Wassup my dude"}
+        mainDesc={"Here is our personalized recommendation for new beer styles!"}
         photos={[""]}
-        recDesc={[{ id: 1, title: "Ryan's Beer" }]}
-        recBeers={[{ id: 1, title: "Ryan's Beer" }]}
+        recBeers={this.state.recommendedStyle}
+        fromExplore={true}
       />
     );
   }
