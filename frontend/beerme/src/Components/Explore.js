@@ -135,7 +135,8 @@ export class Explore extends Component {
       <div style={styles.selectionBoxStyle}>
         {this._renderSelBoxTopText()}
         {this._renderSelections()}
-        <p style={{color: Constants.HOVER_ORANGE_COLOR, alignItems: "center", justifyContent: "center", display: "flex"}}>Please select one option on each page before submitting.</p>
+        <p style={{color: Constants.HOVER_ORANGE_COLOR, alignItems: "center", justifyContent: "center", display: "flex"}}>
+          Please select one option on each page before submitting.</p>
       </div>
     );
   }
