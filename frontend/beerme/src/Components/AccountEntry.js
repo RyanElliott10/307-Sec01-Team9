@@ -108,7 +108,7 @@ export class AccountEntry extends Component {
 
   _renderControl(type, placeholder, onChange) {
     return (
-      <Form.Control type={type} placeholder={placeholder} onChange={onChange} />
+      <Form.Control type={type} placeholder={placeholder} onChange={onChange} id={"control-input"} />
     );
   }
 
@@ -195,6 +195,7 @@ export class AccountEntry extends Component {
             variant="primary"
             type="submit"
             disabled={!this._validateAccountCreationForm()}
+            id={"submit-button"}
           >
             Submit
           </Button>
@@ -202,6 +203,7 @@ export class AccountEntry extends Component {
             variant="secondary"
             type="submit"
             onClick={() => this.setState({ isCreateAccount: false })}
+            id={"switch-to-login"}
           >
             Already have an account? Log in
           </Button>
@@ -236,12 +238,17 @@ export class AccountEntry extends Component {
         </Form.Group>
 
         <ButtonToolbar style={{ justifyContent: "space-between" }}>
-          <Button disabled={!this._validateLoginForm()} type="submit">
+          <Button
+            disabled={!this._validateLoginForm()}
+            type="submit"
+            id={"login-button"}
+          >
             Login
           </Button>
           <Button
             variant="secondary"
             type="submit"
+            id={"switch-to-create-account"}
             onClick={() => this.setState({ isCreateAccount: true })}
           >
             Don't have an account? Create one

@@ -29,7 +29,6 @@ exports[`renders correctly 1`] = `
   >
     <form
       className=""
-      onSubmit={[Function]}
       style={
         Object {
           "justifyContent": "center",
@@ -124,7 +123,9 @@ exports[`renders correctly with fromExplore prop 1`] = `
   <h1>
     Recommended For You
   </h1>
-  <h5 />
+  <h5>
+    true
+  </h5>
   <div
     style={
       Object {
@@ -134,5 +135,36 @@ exports[`renders correctly with fromExplore prop 1`] = `
       }
     }
   />
+</div>
+`;
+
+exports[`renders correctly with noRecs prop 1`] = `
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "marginLeft": "200px",
+      "marginRight": "200px",
+    }
+  }
+>
+  <h1>
+    Recommended For You
+  </h1>
+  <h5>
+    Here is our personalized recommendation for new beer styles!
+  </h5>
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "row",
+        "marginTop": "50px",
+      }
+    }
+  >
+    You must rate at least 1 beer before we are able to recommend you any!
+  </div>
 </div>
 `;

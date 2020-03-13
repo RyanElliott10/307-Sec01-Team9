@@ -87,6 +87,7 @@ export class Recommended extends Component {
         {this.state.recBeers.map(beer => (
           <Link
             to="/search-result"
+            id={"clickable-beer"}
             onClick={() => {
               UserController.currBeer = beer.BeerName;
               UserController.currBeerId = beer.Id;
@@ -110,7 +111,7 @@ export class Recommended extends Component {
           {this.state.recBeers ? this.renderRecBeers() : null}
         </div>
       );
-    } else if (this.state.recBeers && this.state.recBeers.length == 0) {
+    } else if (this.state.recBeers && this.state.recBeers.length == 0 || this.props.noRecs) {
       return (
         <div style={styles.inRowStyle}>
           You must rate at least 1 beer before we are able to recommend you any!

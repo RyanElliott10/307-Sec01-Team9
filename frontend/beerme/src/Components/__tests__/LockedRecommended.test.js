@@ -16,6 +16,17 @@ it("renders correctly", () => {
   expect(tree).toMatchSnapshot();
 });
 
+it("renders correctly with redirect prop", () => {
+  const tree = renderer
+    .create(
+      <Router>
+        <LockedRecommended redirect={true} />
+      </Router>
+    )
+    .toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
 it("renders correctly with clicks", () => {
   const ref = mount(
     <Router>
