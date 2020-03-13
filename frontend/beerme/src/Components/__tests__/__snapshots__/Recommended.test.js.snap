@@ -134,7 +134,28 @@ exports[`renders correctly with fromExplore prop 1`] = `
         "marginTop": "50px",
       }
     }
-  />
+  >
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "space-around",
+          "marginLeft": "100px",
+          "marginRight": "40px",
+          "paddingBottom": "20px",
+        }
+      }
+    >
+      <a
+        href="/search-result"
+        id="clickable-beer"
+        onClick={[Function]}
+      >
+        <p />
+      </a>
+    </div>
+  </div>
 </div>
 `;
 

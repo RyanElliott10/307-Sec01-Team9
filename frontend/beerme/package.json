@@ -43,5 +43,12 @@
   },
   "devDependencies": {
     "react-test-renderer": "^16.13.0"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "frontend/beerme/src/serviceWorker.js",
+      "frontend/beerme/src/index.js",
+      "frontend/beerme/src/App.js"
+    ]
   }
 }

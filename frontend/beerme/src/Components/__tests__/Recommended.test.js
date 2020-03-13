@@ -21,7 +21,7 @@ it("renders correctly with fromExplore prop", () => {
   const tree = renderer
     .create(
       <Router>
-        <Recommended fromExplore={true} mainDesc={"true"} />
+        <Recommended fromExplore={true} mainDesc={"true"} recBeers={["hi"]} />
       </Router>
     )
     .toJSON();
@@ -32,7 +32,7 @@ it("renders correctly with noRecs prop", () => {
   const tree = renderer
     .create(
       <Router>
-        <Recommended noRecs={true} />
+        <Recommended noRecs={true} recBeers={["hi"]} />
       </Router>
     )
     .toJSON();
