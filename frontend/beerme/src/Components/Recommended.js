@@ -130,7 +130,7 @@ export class Recommended extends Component {
           You must rate at least 1 beer before we are able to recommend you any!
         </div>
       );
-    } else if (UserController.getCurrentUser()) {
+    } else if (UserController.getCurrentUser() && !UserController.isBusiness) {
       return (
         <div style={styles.inRowStyle}>
           {this.state.photos ? this.renderPhotos() : null}
