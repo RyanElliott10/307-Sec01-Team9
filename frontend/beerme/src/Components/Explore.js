@@ -201,7 +201,6 @@ export class Explore extends Component {
             checked={value}
             onChange={this._onCheckboxClick.bind(this, data.id)}
             style={this._getBtnStyle()}
-            id={"checkbox-option"}
           />
         </div>
       </Form>
