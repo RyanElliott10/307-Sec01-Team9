@@ -39,11 +39,12 @@ export function Header() {
 
   return (
     <div style={headerStyle}>
-      <Link to="/" style={titleStyle}>
+      <Link to="/" style={titleStyle} className="beerme-homepage-clickable" id="beerme-homepage-clickable">
         <h1
           onClick={onTitleClick}
           onMouseEnter={event => onMouseOver(event)}
           onMouseOut={event => onMouseOut(event, 1)}
+          id={"beerme-header-clickable"}
         >
           BeerMe
         </h1>
@@ -55,11 +56,13 @@ export function Header() {
           to="/explore"
           style={exploreStyle}
           className={"explore_header_link"}
+          id={"explore_header_link"}
         >
           <h6
             onClick={onExploreClick}
             onMouseEnter={event => onMouseOver(event)}
             onMouseOut={event => onMouseOut(event, 2)}
+            id={"explore-header-clickable"}
           >
             Explore
           </h6>
@@ -73,6 +76,7 @@ export function Header() {
             onClick={onRecClick}
             onMouseEnter={event => onMouseOver(event)}
             onMouseOut={event => onMouseOut(event, 2)}
+            id={"recommended-header-clickable"}
           >
             Recommended
           </h6>
@@ -86,6 +90,7 @@ export function Header() {
             onClick={onRecClick}
             onMouseEnter={event => onMouseOver(event)}
             onMouseOut={event => onMouseOut(event, 2)}
+            id={"account-header-clickable"}
           >
             Account
           </h6>

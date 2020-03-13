@@ -10,20 +10,13 @@ export class LockedRecommended extends Component {
     this.state = {};
   }
 
-  _createAccount = event => {
-    event.preventDefault();
-    this.setState({
-      redirect: true
-    });
-  };
-
   render() {
-    if (this.state.redirect) {
+    if (this.state.redirect || this.props.redirect) {
       return <Redirect to="/account-entry" />;
     }
     return (
       <div style={styles.mainContainer}>
-        <Form style={styles.mainForm} onSubmit={this._createAccount}>
+        <Form style={styles.mainForm}>
           <Form.Row>
             <img
               src={Lock}
@@ -43,6 +36,7 @@ export class LockedRecommended extends Component {
             <Link
               to="/account-entry"
               style={{ color: "blue", marginLeft: "5px" }}
+              id={"go-to-create-account-link"}
             >
               create or sign into an account.
             </Link>

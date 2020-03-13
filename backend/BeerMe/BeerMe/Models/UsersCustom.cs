@@ -9,25 +9,26 @@ namespace BeerMe.Models
     {
         private static BeerMeEntities db = new BeerMeEntities();
 
-        public List<int> findRecommendedBeers()
+        public List<int> FindRecommendedBeers()
         {
-            var userBeerRatings = db.BeerRatings.Where(ratings => ratings.UserId == this.Id && ratings.Rating >= 3).ToList();
+            var userBeerRatings = db.BeerRatings.Where(ratings => ratings.UserId == this.Id).ToList();
             this.BeerRatings = userBeerRatings;
-            List<int> beersRatedByUser = this.BeerRatings.Select(beerRating => beerRating.BeerId).ToList();
+            List<int> beersRatedByUser = this.BeerRatings.Select(beerRating => beerRating.Beer.StyleId).ToList();
             if (beersRatedByUser.Count == 0)
             {
                 return new List<int>();
             }
-            int averageBeersId = (int)beersRatedByUser.Average();
+            
+            int averageBeersId = (int)(userBeerRatings.Where(ratings => ratings.Rating >= 3).Select(beerRating => beerRating.Beer.StyleId).Average());
             int beerStartIndex = 1;
             int beerEndIndex = 111;
             int currentBeerForwardIndex = averageBeersId + 1;
             int currentBeerBackwardIndex = averageBeersId - 1;
-            List<int> reccomendedBeerIds = new List<int>();
+            List<int> reccomendedBeerStyleIds = new List<int>();
             int noOfReccomendedBeers;
             if (!beersRatedByUser.Contains(averageBeersId))
             {
-                reccomendedBeerIds.Add(averageBeersId);
+                reccomendedBeerStyleIds.Add(averageBeersId);
                 noOfReccomendedBeers = 1;
             }
             else
@@ -39,7 +40,7 @@ namespace BeerMe.Models
             {
                 if (!beersRatedByUser.Contains(currentBeerForwardIndex))
                 {
-                    reccomendedBeerIds.Add(currentBeerForwardIndex);
+                    reccomendedBeerStyleIds.Add(currentBeerForwardIndex);
                     noOfReccomendedBeers += 1;
                 }
                 if(noOfReccomendedBeers >= 5)
@@ -48,7 +49,7 @@ namespace BeerMe.Models
                 }
                 if (!beersRatedByUser.Contains(currentBeerBackwardIndex))
                 {
-                    reccomendedBeerIds.Add(currentBeerBackwardIndex);
+                    reccomendedBeerStyleIds.Add(currentBeerBackwardIndex);
                     noOfReccomendedBeers += 1;
                 }
 
@@ -56,6 +57,15 @@ namespace BeerMe.Models
                 currentBeerBackwardIndex -= 1;
 
 
+            }
+
+            List <int>reccomendedBeerIds = new List<int>();
+            foreach(int styleId in reccomendedBeerStyleIds)
+            {
+                List<int> beerIdsByStyle = db.Beers.Where(beer => beer.StyleId == styleId).Select(beer => beer.Id).Take(2).ToList();
+                foreach (int beerId in beerIdsByStyle) {
+                    reccomendedBeerIds.Add(beerId);
+                }
             }
 
             return reccomendedBeerIds;

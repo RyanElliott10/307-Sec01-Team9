@@ -13,7 +13,6 @@ exports[`renders correctly 1`] = `
 >
   <form
     className=""
-    onSubmit={[Function]}
     style={
       Object {
         "justifyContent": "center",
@@ -48,6 +47,7 @@ exports[`renders correctly 1`] = `
       </label>
       <a
         href="/account-entry"
+        id="go-to-create-account-link"
         onClick={[Function]}
         style={
           Object {
@@ -62,3 +62,5 @@ exports[`renders correctly 1`] = `
   </form>
 </div>
 `;
+
+exports[`renders correctly with redirect prop 1`] = `null`;

@@ -43,9 +43,16 @@ export class Home extends Component {
     return (
       <div style={styles.inListStyle}>
         <h2>Top Ten Beer Styles</h2>
-        {this.state.topTen.map(beer => (
-          <p key={beer.id}>{beer.title}</p>
-        ))}
+        <p>1. Hive 56</p>
+        <p>2. Raspberry Eisbok</p>
+        <p>3. Blanc de Blancs</p>
+        <p>4. Hoponius Union</p>
+        <p>5. Nugget Nectar</p>
+        <p>6. Sprang</p>
+        <p>7. Zenne Y Frontera</p>
+        <p>8. Citra Bitter Monk</p>
+        <p>9. Celebrator</p>
+        <p>10. Bracia</p>
       </div>
     );
   }
@@ -102,6 +109,7 @@ export class Home extends Component {
           render={({ history }) => (
             <ReactSearchBox
               placeholder="Search"
+              id={"react-search-box"}
               data={this.state.allBeers}
               onSelect={record => {
                 UserController.currBeer = record.value;
@@ -131,7 +139,7 @@ export class Home extends Component {
         >
           {this.renderLogo()}
           {this.renderSearchBox()}
-          {this.state.topTen ? this.renderBody() : null}
+          {this.renderBody()}
         </div>
       </div>
     );
