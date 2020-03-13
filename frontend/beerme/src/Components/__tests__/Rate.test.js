@@ -28,9 +28,9 @@ it("renders correctly for businesses", () => {
   expect(tree).toMatchSnapshot();
 });
 
-it("renders correctly for businesses", () => {
+it("renders correctly for logged in user", () => {
   UserController.isBusiness = false;
-  UserController.isLoggedIn = false;
+  UserController.isLoggedIn = true;
   const tree = renderer
     .create(
       <BrowserRouter>

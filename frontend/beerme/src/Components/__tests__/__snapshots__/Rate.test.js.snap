@@ -223,7 +223,7 @@ exports[`renders correctly for businesses 1`] = `
 </div>
 `;
 
-exports[`renders correctly for businesses 2`] = `
+exports[`renders correctly for logged in user 1`] = `
 <div
   style={
     Object {
@@ -303,42 +303,295 @@ exports[`renders correctly for businesses 2`] = `
       </div>
     </div>
   </div>
-  <form
-    className=""
+  <div
+    style={
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "flexDirection": "column",
+        "justifyContent": "space-around",
+        "marginRight": "30px",
+      }
+    }
   >
+    <h5>
+      Rate this beer!
+    </h5>
     <div
-      className="form-row"
+      className="star-ratings"
       style={
         Object {
-          "alignItems": "top",
-          "justifyContent": "center",
+          "boxSizing": "border-box",
+          "display": "inline-block",
+          "position": "relative",
         }
       }
+      title="0 Stars"
     >
-      <label
-        className="form-label"
-      >
-        Please 
-      </label>
-      <a
-        href="/account-entry"
-        onClick={[Function]}
+      <svg
+        className="star-grad"
         style={
           Object {
-            "color": "blue",
-            "marginLeft": "5px",
-            "marginRight": "5px",
+            "height": "0",
+            "position": "absolute",
+            "visibility": "hidden",
+            "width": "0",
+            "zIndex": "0",
           }
         }
       >
-        create an account
-      </a>
-      <label
-        className="form-label"
+        <defs>
+          <linearGradient
+            id="starGrad009495770154341"
+            x1="0%"
+            x2="100%"
+            y1="0%"
+            y2="0%"
+          >
+            <stop
+              className="stop-color-first"
+              offset="0%"
+              style={
+                Object {
+                  "stopColor": "#CC752A",
+                  "stopOpacity": "1",
+                }
+              }
+            />
+            <stop
+              className="stop-color-first"
+              offset="0%"
+              style={
+                Object {
+                  "stopColor": "#CC752A",
+                  "stopOpacity": "1",
+                }
+              }
+            />
+            <stop
+              className="stop-color-final"
+              offset="0%"
+              style={
+                Object {
+                  "stopColor": "rgb(203, 211, 227)",
+                  "stopOpacity": "1",
+                }
+              }
+            />
+            <stop
+              className="stop-color-final"
+              offset="100%"
+              style={
+                Object {
+                  "stopColor": "rgb(203, 211, 227)",
+                  "stopOpacity": "1",
+                }
+              }
+            />
+          </linearGradient>
+        </defs>
+      </svg>
+      <div
+        className="star-container"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+            "display": "inline-block",
+            "paddingLeft": undefined,
+            "paddingRight": "15px",
+            "position": "relative",
+            "verticalAlign": "middle",
+          }
+        }
       >
-         to rate this beer.
-      </label>
+        <svg
+          className="widget-svg"
+          style={
+            Object {
+              "height": "50px",
+              "transform": undefined,
+              "transition": "transform .2s ease-in-out",
+              "width": "50px",
+            }
+          }
+          viewBox="0 0 51 48"
+        >
+          <path
+            className="star"
+            d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"
+            style={
+              Object {
+                "fill": "rgb(203, 211, 227)",
+                "transition": "fill .2s ease-in-out",
+              }
+            }
+          />
+        </svg>
+      </div>
+      <div
+        className="star-container"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+            "display": "inline-block",
+            "paddingLeft": "15px",
+            "paddingRight": "15px",
+            "position": "relative",
+            "verticalAlign": "middle",
+          }
+        }
+      >
+        <svg
+          className="widget-svg"
+          style={
+            Object {
+              "height": "50px",
+              "transform": undefined,
+              "transition": "transform .2s ease-in-out",
+              "width": "50px",
+            }
+          }
+          viewBox="0 0 51 48"
+        >
+          <path
+            className="star"
+            d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"
+            style={
+              Object {
+                "fill": "rgb(203, 211, 227)",
+                "transition": "fill .2s ease-in-out",
+              }
+            }
+          />
+        </svg>
+      </div>
+      <div
+        className="star-container"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+            "display": "inline-block",
+            "paddingLeft": "15px",
+            "paddingRight": "15px",
+            "position": "relative",
+            "verticalAlign": "middle",
+          }
+        }
+      >
+        <svg
+          className="widget-svg"
+          style={
+            Object {
+              "height": "50px",
+              "transform": undefined,
+              "transition": "transform .2s ease-in-out",
+              "width": "50px",
+            }
+          }
+          viewBox="0 0 51 48"
+        >
+          <path
+            className="star"
+            d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"
+            style={
+              Object {
+                "fill": "rgb(203, 211, 227)",
+                "transition": "fill .2s ease-in-out",
+              }
+            }
+          />
+        </svg>
+      </div>
+      <div
+        className="star-container"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+            "display": "inline-block",
+            "paddingLeft": "15px",
+            "paddingRight": "15px",
+            "position": "relative",
+            "verticalAlign": "middle",
+          }
+        }
+      >
+        <svg
+          className="widget-svg"
+          style={
+            Object {
+              "height": "50px",
+              "transform": undefined,
+              "transition": "transform .2s ease-in-out",
+              "width": "50px",
+            }
+          }
+          viewBox="0 0 51 48"
+        >
+          <path
+            className="star"
+            d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"
+            style={
+              Object {
+                "fill": "rgb(203, 211, 227)",
+                "transition": "fill .2s ease-in-out",
+              }
+            }
+          />
+        </svg>
+      </div>
+      <div
+        className="star-container"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+            "display": "inline-block",
+            "paddingLeft": "15px",
+            "paddingRight": undefined,
+            "position": "relative",
+            "verticalAlign": "middle",
+          }
+        }
+      >
+        <svg
+          className="widget-svg"
+          style={
+            Object {
+              "height": "50px",
+              "transform": undefined,
+              "transition": "transform .2s ease-in-out",
+              "width": "50px",
+            }
+          }
+          viewBox="0 0 51 48"
+        >
+          <path
+            className="star"
+            d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"
+            style={
+              Object {
+                "fill": "rgb(203, 211, 227)",
+                "transition": "fill .2s ease-in-out",
+              }
+            }
+          />
+        </svg>
+      </div>
     </div>
-  </form>
+  </div>
 </div>
 `;

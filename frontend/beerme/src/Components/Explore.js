@@ -150,19 +150,6 @@ export class Explore extends Component {
     );
   }
 
-  _renderColorImg() {
-    return (
-      <img
-        style={{
-          width: "1000px",
-          height: "150px"
-        }}
-        src={BeerColors}
-        alt="BeerColors"
-      />
-    );
-  }
-
   _renderSelections() {
     let firstHalf = this.pages[this.state.currentPageIndex].checkboxes;
     let secondHalf = null;
@@ -212,6 +199,7 @@ export class Explore extends Component {
             checked={value}
             onChange={this._onCheckboxClick.bind(this, data.id)}
             style={this._getBtnStyle()}
+            id={"checkbox-option"}
           />
         </div>
       </Form>

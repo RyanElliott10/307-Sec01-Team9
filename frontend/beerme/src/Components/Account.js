@@ -32,7 +32,6 @@ export class Account extends Component {
         return {
           value: d.Id,
           label: d.Style
-
         };
       });
 
@@ -45,7 +44,9 @@ export class Account extends Component {
   }
 
   fetchRemoveBeers() {
-    NetClient.get(`https://localhost:44300/api/BeersByBusiness/${UserController.userId}`).then(data => {
+    NetClient.get(
+      `https://localhost:44300/api/BeersByBusiness/${UserController.userId}`
+    ).then(data => {
       const businessBeers = data.map(d => {
         return {
           value: d.Id,
@@ -54,9 +55,13 @@ export class Account extends Component {
       });
 
       console.log("BUSINESS BEERS:", businessBeers);
-      this.setState({
-        businessBeers: businessBeers
-      }, () => console.log("UPDATED STATE AFTER FETCHING REMOVE BEERS:", this.state));
+      this.setState(
+        {
+          businessBeers: businessBeers
+        },
+        () =>
+          console.log("UPDATED STATE AFTER FETCHING REMOVE BEERS:", this.state)
+      );
     });
   }
 
@@ -96,11 +101,11 @@ export class Account extends Component {
 
   _handleRemoveBeerSubmit = async event => {
     event.preventDefault();
-    console.log("DELETING A BEER:", this.state.removeBeerData.value);
-    NetClient.delete(`https://localhost:44300/api/beers/${this.state.removeBeerData.value}`)
+    NetClient.delete(
+      `https://localhost:44300/api/beers/${this.state.removeBeerData.value}`
+    );
 
     setTimeout(() => this.fetchRemoveBeers(), 400);
-    console.log(this.removeBeerForm);
     this.removeBeerForm.value = null;
   };
 
@@ -148,13 +153,14 @@ export class Account extends Component {
     );
   }
 
-  _renderButton(variant, disabled, onClick, text) {
+  _renderButton(variant, disabled, onClick, text, id) {
     return (
       <Button
         type="submit"
         variant={variant}
         disabled={disabled}
         onClick={onClick}
+        id={id}
       >
         {text}
       </Button>
@@ -191,6 +197,7 @@ export class Account extends Component {
           ref={form => (this.removeBeerForm = form)}
           options={this.state.allStyles}
           value={this.state.addBeerData}
+          id={"add-beer-dropdown"}
           onChange={event => {
             this.addBeerLabel = event.label;
             this.addBeerValue = event.value;
@@ -200,7 +207,7 @@ export class Account extends Component {
                 label: event.label,
                 value: event.value
               }
-            }, console.log("UPDATED STATE ON SELECT TO:", this.state));
+            });
           }}
         />
       </>
@@ -224,7 +231,8 @@ export class Account extends Component {
             "primary",
             !this._validateAddBeerForm(),
             this._handleAddBeerSubmit,
-            "Add Beer"
+            "Add Beer",
+            "add-beer-button"
           )}
         </Form.Row>
       </Form.Group>
@@ -245,7 +253,7 @@ export class Account extends Component {
                 name: event.label,
                 value: event.value
               }
-            }, () => console.log("UPDATED STATE:", this.state))
+            })
           }
         />
         <hr />
@@ -253,7 +261,8 @@ export class Account extends Component {
           "danger",
           !this._validateRemoveBeer(),
           this._handleRemoveBeerSubmit,
-          "Remove Beer"
+          "Remove Beer",
+          "remove-beer-button"
         )}
       </Form.Group>
     );
@@ -280,7 +289,13 @@ export class Account extends Component {
   _renderLogout() {
     return (
       <Form>
-        {this._renderButton("danger", false, () => UserController.logout(), "Logout")}
+        {this._renderButton(
+          "danger",
+          false,
+          () => UserController.logout(),
+          "Logout",
+          "logout-button"
+        )}
       </Form>
     );
   }
