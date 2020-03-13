@@ -212,7 +212,7 @@ export class AccountEntry extends Component {
           <Button
             variant="secondary"
             type="submit"
-            onClick={() => this.setState({ isCreateAccount: false })}
+            onClick={() => this.setState({ isCreateAccount: false, incorrectLogin: false })}
             id={"switch-to-login"}
           >
             Already have an account? Log in
