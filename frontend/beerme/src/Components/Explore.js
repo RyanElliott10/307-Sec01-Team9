@@ -7,6 +7,7 @@ import NetClient from "../Utils/NetClient";
 import Recommended from "./Recommended";
 import BeerColors from "../img/beer_colors.png";
 import ExploreSpoofData from "../data/ExploreSpoofData";
+import RecImages from "../data/RecImages";
 
 export class Explore extends Component {
   constructor(props) {
@@ -264,9 +265,10 @@ export class Explore extends Component {
   _renderRecommendations() {
     return (
       <Recommended
+        mainTitle={"Recommendations From Explore Choices"}
         mainDesc={"Here is our personalized recommendation for new beer styles!"}
-        photos={[""]}
-        recBeers={this.state.recommendedStyle}
+        photos={RecImages.getImages(9)}
+        recBeers={this.state.recommendedStyle.slice(0, 9)}
         fromExplore={true}
       />
     );

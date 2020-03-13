@@ -9,6 +9,7 @@ import RecImages from "../data/RecImages";
 
 export class Recommended extends Component {
   static propTypes = {
+    mainTitle: PropTypes.string,
     mainDesc: PropTypes.string,
     photos: PropTypes.arrayOf(PropTypes.string),
     recBeers: PropTypes.arrayOf(PropTypes.object),
@@ -32,7 +33,14 @@ export class Recommended extends Component {
     if (!this.props.photos) {
       NetClient.get("https://jsonplaceholder.typicode.com/photos/").then(
         res => {
-          const pics = RecImages.getImages().slice(0, 5);
+          let pics = []
+          console.log(this.props.photos);
+          if (this.props.photos) {
+            pics = this.props.photos;
+          } else {
+            pics = RecImages.getImages().slice(0, this.props.recStyles ? this.props.recStyles.length : 5);
+          }
+
           this.setState({
             photos: pics,
             loading: false,
@@ -75,6 +83,8 @@ export class Recommended extends Component {
     if (this.state.photos === null) {
       return null;
     }
+
+    console.log("IMAGE LENGTH:", this.state.photos);
     return (
       <div>
         {this.state.photos.map(image => (
@@ -108,7 +118,6 @@ export class Recommended extends Component {
 
   _renderBody() {
     if (this.props.fromExplore) {
-      console.log(this.props.recStyles);
       return (
         <div style={styles.inRowStyle}>
           {this.state.photos ? this.renderPhotos() : null}
@@ -136,7 +145,8 @@ export class Recommended extends Component {
   render() {
     return (
       <div style={styles.inTitleStyle}>
-        <h1>Recommended For You</h1>
+        {/* <h1>Recommended For You</h1> */}
+        <h1>{this.props.mainTitle ? this.props.mainTitle : "Recommended For You"}</h1>
         <h5>{this.props.mainDesc}</h5>
         {this._renderBody()}
       </div>

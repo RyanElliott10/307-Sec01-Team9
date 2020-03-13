@@ -12,7 +12,7 @@ export default class RecImages {
     return result;
   }
   
-  static getImages() {
+  static getImages(num = 5) {
     const urls = [
       "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.BoJrw7ZTsn_RivOHS5aHhQHaKX%26pid%3DApi&f=1",
       "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F48tk9j3a74jb133e1k2fzz2s-wpengine.netdna-ssl.com%2Fwp-content%2Fuploads%2F2015%2F11%2FKuhnhenn-Raspberry-Eisbock-2014-bottle.jpg&f=1&nofb=1",
@@ -25,6 +25,6 @@ export default class RecImages {
       "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.justwineapp.com%2Fassets%2Farticle%2F2018%2F03%2Fsteel-oak-brewing-co-roggen-weizen_1476892885.png&f=1&nofb=1"
     ];
 
-    return this.getRandom(urls, 5);
+    return this.getRandom(urls, num);
   }
 }
