@@ -342,7 +342,7 @@ exports[`renders correctly for logged in user 1`] = `
       >
         <defs>
           <linearGradient
-            id="starGrad154393610539038"
+            id="starGrad254292075494384"
             x1="0%"
             x2="100%"
             y1="0%"

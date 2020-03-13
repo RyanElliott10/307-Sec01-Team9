@@ -135,6 +135,7 @@ export class Explore extends Component {
       <div style={styles.selectionBoxStyle}>
         {this._renderSelBoxTopText()}
         {this._renderSelections()}
+        <p style={{color: Constants.HOVER_ORANGE_COLOR, alignItems: "center", justifyContent: "center", display: "flex"}}>Please select one option on each page before submitting.</p>
       </div>
     );
   }
@@ -283,7 +284,8 @@ const styles = {
   selectionBoxStyle: {
     background: "#F4F4F4",
     flexDirection: "row",
-    marginTop: "15px"
+    marginTop: "15px",
+    paddingBottom: "5px"
   },
   selectionBoxTopTextStyle: {
     display: "flex",

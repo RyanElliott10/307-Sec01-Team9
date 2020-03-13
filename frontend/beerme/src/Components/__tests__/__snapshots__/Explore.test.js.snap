@@ -22,6 +22,7 @@ exports[`renders correctly 1`] = `
         "background": "#F4F4F4",
         "flexDirection": "row",
         "marginTop": "15px",
+        "paddingBottom": "5px",
       }
     }
   >
@@ -489,6 +490,18 @@ exports[`renders correctly 1`] = `
         </form>
       </div>
     </div>
+    <p
+      style={
+        Object {
+          "alignItems": "center",
+          "color": "#d1823d",
+          "display": "flex",
+          "justifyContent": "center",
+        }
+      }
+    >
+      Please select one option on each page before submitting.
+    </p>
   </div>
   <div
     className="btn-toolbar"
@@ -604,6 +617,7 @@ exports[`renders correctly with props 1`] = `
         "background": "#F4F4F4",
         "flexDirection": "row",
         "marginTop": "15px",
+        "paddingBottom": "5px",
       }
     }
   >
@@ -1071,6 +1085,18 @@ exports[`renders correctly with props 1`] = `
         </form>
       </div>
     </div>
+    <p
+      style={
+        Object {
+          "alignItems": "center",
+          "color": "#d1823d",
+          "display": "flex",
+          "justifyContent": "center",
+        }
+      }
+    >
+      Please select one option on each page before submitting.
+    </p>
   </div>
   <div
     className="btn-toolbar"

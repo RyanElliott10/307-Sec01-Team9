@@ -115,12 +115,11 @@ export default class Rate extends Component {
           <StarRatings
             rating={this.state.rating}
             starRatedColor={Constants.ORANGE_COLOR}
-            starHoverColor="grey"
-            changeRating={this.changeRating}
+            starHoverColor={"grey"}
+            changeRating={this.hasUserRated ? null : this.changeRating}
             numberOfStars={5}
             name="rating"
             starSpacing="15px"
-            isSelectable={!this.hasUserRated}
           />
         </div>
       );
