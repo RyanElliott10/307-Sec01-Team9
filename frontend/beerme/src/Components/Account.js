@@ -75,13 +75,8 @@ export class Account extends Component {
   _handleAddBeerSubmit = async event => {
     event.preventDefault();
     NetClient.post("https://localhost:44300/api/Beers", {
-<<<<<<< HEAD
-      StyleId: this.state.addBeerData.selectedStyle,
-      BeerName: this.state.addBeerData.name, 
-=======
       BeerName: this.state.addBeerName,
       StyleId: this.addBeerValue,
->>>>>>> 98cb12efa741e88f94a8ab30ba51a190e0bfb944
       UserId: UserController.userId
     });
 
