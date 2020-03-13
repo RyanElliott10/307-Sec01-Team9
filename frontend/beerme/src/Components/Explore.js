@@ -182,7 +182,7 @@ export class Explore extends Component {
     ) {
       return { paddingLeft: "200px" };
     }
-    return { paddingLeft: "50px" };
+    return { paddingLeft: "330px" };
   }
 
   _renderChecboxOption(data) {
