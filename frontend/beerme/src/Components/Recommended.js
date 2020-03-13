@@ -6,6 +6,7 @@ import NetClient from "../Utils/NetClient";
 import PropTypes from "prop-types";
 import UserController from "../Controllers/UserController";
 import RecImages from "../data/RecImages";
+import * as Constants from "../Utils/Constants";
 
 export class Recommended extends Component {
   static propTypes = {
@@ -118,6 +119,11 @@ export class Recommended extends Component {
 
   _renderBody() {
     if (this.props.fromExplore) {
+      if (this.props.recBeers.length === 0) {
+        return (
+          <p style={{color: Constants.HOVER_ORANGE_COLOR}}>Sorry, we weren't able to make any recommendations for you based on your selections.</p>
+        );
+      }
       return (
         <div style={styles.inRowStyle}>
           {this.state.photos ? this.renderPhotos() : null}

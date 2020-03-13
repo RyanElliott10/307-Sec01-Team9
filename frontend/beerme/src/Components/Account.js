@@ -96,12 +96,17 @@ export class Account extends Component {
 
   _handleRemoveBeerSubmit = async event => {
     event.preventDefault();
-    NetClient.delete(
-      `https://localhost:44300/api/beers/${this.state.removeBeerData.value}`
-    );
+    if (this.state.removeBeerData) {
+      NetClient.delete(
+        `https://localhost:44300/api/beers/${this.state.removeBeerData.value}`
+      );
 
-    setTimeout(() => this.fetchRemoveBeers(), 400);
-    this.removeBeerForm.value = null;
+      setTimeout(() => this.fetchRemoveBeers(), 400);
+      this.removeBeerForm.value = null;
+      this.setState({
+        removeBeerData: null
+      });
+    }
   };
 
   _renderControl(type, value, isDisabled, onChange = () => {}) {
