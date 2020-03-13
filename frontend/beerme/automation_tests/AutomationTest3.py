@@ -33,11 +33,3 @@ except selenium.common.exceptions.NoSuchElementException:
 
 
 
-try:
-    error  = driver.find_element_by_class_name("form-label")
-    if(error.text == "In order to view recommended, please"):
-        print("Test successful")
-    else:
-        print("Test unsuccessful")
-except:
-    print("Test unsuccessful")
