@@ -32,7 +32,6 @@ export class Recommended extends Component {
     if (!this.props.photos) {
       NetClient.get("https://jsonplaceholder.typicode.com/photos/").then(
         res => {
-          // const pics = res.slice(0, 5).map(data => data.thumbnailUrl);
           const pics = RecImages.getImages().slice(0, 5);
           this.setState({
             photos: pics,
