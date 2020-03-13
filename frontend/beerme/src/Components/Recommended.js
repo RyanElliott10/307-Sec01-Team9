@@ -5,6 +5,7 @@ import LockedRecommended from "./LockedRecommended";
 import NetClient from "../Utils/NetClient";
 import PropTypes from "prop-types";
 import UserController from "../Controllers/UserController";
+import RecImages from "../data/RecImages";
 
 export class Recommended extends Component {
   static propTypes = {
@@ -31,7 +32,7 @@ export class Recommended extends Component {
     if (!this.props.photos) {
       NetClient.get("https://jsonplaceholder.typicode.com/photos/").then(
         res => {
-          const pics = res.slice(0, 5).map(data => data.thumbnailUrl);
+          const pics = RecImages.getImages().slice(0, 5);
           this.setState({
             photos: pics,
             loading: false,
@@ -75,7 +76,7 @@ export class Recommended extends Component {
     return (
       <div>
         {this.state.photos.map(image => (
-          <img src={image} key={image} style={styles.inColStyle} />
+          <img src={image} key={image} style={styles.imgStyle} />
         ))}
       </div>
     );
@@ -148,6 +149,16 @@ const styles = {
     paddingBottom: "20px",
     marginRight: "40px",
     marginLeft: "100px"
+  },
+  imgStyle: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    paddingBottom: "20px",
+    marginRight: "40px",
+    marginLeft: "100px",
+    width: "110px",
+    height: "180px"
   },
   inTitleStyle: {
     display: "flex",

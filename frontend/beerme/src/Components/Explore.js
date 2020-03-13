@@ -200,7 +200,6 @@ export class Explore extends Component {
             checked={value}
             onChange={this._onCheckboxClick.bind(this, data.id)}
             style={this._getBtnStyle()}
-            id={"checkbox-option"}
           />
         </div>
       </Form>
@@ -283,10 +282,13 @@ const styles = {
     paddingBottom: "150px"
   },
   selectionBoxStyle: {
+    flexDirection: "column",
+    justifyContent: "space-between",
     background: "#F4F4F4",
     flexDirection: "row",
     marginTop: "15px",
-    paddingBottom: "5px"
+    paddingBottom: "5px",
+    height: "400px"
   },
   selectionBoxTopTextStyle: {
     display: "flex",

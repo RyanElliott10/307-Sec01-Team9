@@ -49,7 +49,6 @@ export class AccountEntry extends Component {
 
   _handleSignInSubmit = async event => {
     event.preventDefault();
-    console.log(this.state);
     if (
       await UserController.login(
         this.state.signInData.email,
@@ -64,7 +63,6 @@ export class AccountEntry extends Component {
 
   _handleCreateAccountSubmit = async event => {
     event.preventDefault();
-    console.log(this.state);
     if (
       this.state.createAccountData.password !==
       this.state.createAccountData.confirmPassword

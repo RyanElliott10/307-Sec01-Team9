@@ -54,14 +54,9 @@ export class Account extends Component {
         };
       });
 
-      console.log("BUSINESS BEERS:", businessBeers);
-      this.setState(
-        {
-          businessBeers: businessBeers
-        },
-        () =>
-          console.log("UPDATED STATE AFTER FETCHING REMOVE BEERS:", this.state)
-      );
+      this.setState({
+        businessBeers: businessBeers
+      });
     });
   }
 
@@ -306,9 +301,9 @@ export class Account extends Component {
         <div className="Login" style={broadStyle}>
           <Form>
             {this._renderBusinessName()}
+            {this._renderLogout()}
             {this._renderCommon()}
             {this._renderAddRemove()}
-            {this._renderLogout()}
           </Form>
         </div>
       );
