@@ -293,10 +293,13 @@ const styles = {
     paddingBottom: "150px"
   },
   selectionBoxStyle: {
+    flexDirection: "column",
+    justifyContent: "space-between",
     background: "#F4F4F4",
     flexDirection: "row",
     marginTop: "15px",
-    paddingBottom: "5px"
+    paddingBottom: "5px",
+    height: "400px"
   },
   selectionBoxTopTextStyle: {
     display: "flex",

@@ -21,6 +21,19 @@ exports[`renders correctly with a business 1`] = `
     <h2>
       Test Business
     </h2>
+    <form
+      className=""
+    >
+      <button
+        className="btn btn-danger"
+        disabled={false}
+        id="logout-button"
+        onClick={[Function]}
+        type="submit"
+      >
+        Logout
+      </button>
+    </form>
     <div
       className="form-group col"
     >
@@ -389,19 +402,6 @@ exports[`renders correctly with a business 1`] = `
         </div>
       </form>
     </div>
-    <form
-      className=""
-    >
-      <button
-        className="btn btn-danger"
-        disabled={false}
-        id="logout-button"
-        onClick={[Function]}
-        type="submit"
-      >
-        Logout
-      </button>
-    </form>
   </form>
 </div>
 `;
@@ -422,6 +422,19 @@ exports[`renders correctly with a user logged in 1`] = `
   <form
     className=""
   >
+    <form
+      className=""
+    >
+      <button
+        className="btn btn-danger"
+        disabled={false}
+        id="logout-button"
+        onClick={[Function]}
+        type="submit"
+      >
+        Logout
+      </button>
+    </form>
     <div
       className="form-group col"
     >
@@ -492,19 +505,6 @@ exports[`renders correctly with a user logged in 1`] = `
         </div>
       </form>
     </div>
-    <form
-      className=""
-    >
-      <button
-        className="btn btn-danger"
-        disabled={false}
-        id="logout-button"
-        onClick={[Function]}
-        type="submit"
-      >
-        Logout
-      </button>
-    </form>
   </form>
 </div>
 `;

@@ -129,7 +129,6 @@
     <Compile Include="Controllers\BeerStylesController.cs" />
     <Compile Include="Controllers\ExploreBeerStylesController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -186,6 +185,7 @@
     <Content Include="Models\BeerMeModel.edmx.diagram">
       <DependentUpon>BeerMeModel.edmx</DependentUpon>
     </Content>
+    <Content Include="UMLDiagram.cd" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

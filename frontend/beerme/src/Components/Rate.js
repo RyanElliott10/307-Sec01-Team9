@@ -18,7 +18,6 @@ export default class Rate extends Component {
     NetClient.get(
       `https://localhost:44300/api/beerratings/${UserController.currBeerId}`
     ).then(data => {
-      console.log(data);
       this.setState({
         currentBeerRating: data
       }, () => {
@@ -47,7 +46,6 @@ export default class Rate extends Component {
 
     NetClient.post("https://localhost:44300/api/beerratings", rateData).then(
       data => {
-        console.log(data);
         UserController.addToRatedBeers({
           BeerId: UserController.currBeerId,
           UserId: UserController.userId,
