@@ -49,7 +49,6 @@ export class AccountEntry extends Component {
 
   _handleSignInSubmit = async event => {
     event.preventDefault();
-    console.log(this.state);
     if (
       await UserController.login(
         this.state.signInData.email,
@@ -64,7 +63,6 @@ export class AccountEntry extends Component {
 
   _handleCreateAccountSubmit = async event => {
     event.preventDefault();
-    console.log(this.state);
     if (
       this.state.createAccountData.password !==
       this.state.createAccountData.confirmPassword
@@ -83,7 +81,6 @@ export class AccountEntry extends Component {
         this.state.createAccountData.businessName
       )
     ) {
-      console.log("LOGGED IN");
       this.setState({
         signedIn: true
       });
@@ -109,7 +106,7 @@ export class AccountEntry extends Component {
 
   _renderControl(type, placeholder, onChange) {
     return (
-      <Form.Control type={type} placeholder={placeholder} onChange={onChange} />
+      <Form.Control type={type} placeholder={placeholder} onChange={onChange} id={"control-input"} />
     );
   }
 
@@ -196,6 +193,7 @@ export class AccountEntry extends Component {
             variant="primary"
             type="submit"
             disabled={!this._validateAccountCreationForm()}
+            id={"submit-button"}
           >
             Submit
           </Button>
@@ -203,6 +201,7 @@ export class AccountEntry extends Component {
             variant="secondary"
             type="submit"
             onClick={() => this.setState({ isCreateAccount: false })}
+            id={"switch-to-login"}
           >
             Already have an account? Log in
           </Button>
@@ -237,12 +236,17 @@ export class AccountEntry extends Component {
         </Form.Group>
 
         <ButtonToolbar style={{ justifyContent: "space-between" }}>
-          <Button disabled={!this._validateLoginForm()} type="submit">
+          <Button
+            disabled={!this._validateLoginForm()}
+            type="submit"
+            id={"login-button"}
+          >
             Login
           </Button>
           <Button
             variant="secondary"
             type="submit"
+            id={"switch-to-create-account"}
             onClick={() => this.setState({ isCreateAccount: true })}
           >
             Don't have an account? Create one

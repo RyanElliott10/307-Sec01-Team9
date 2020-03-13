@@ -6,15 +6,16 @@ import { Redirect } from "react-router-dom";
 import NetClient from "../Utils/NetClient";
 import UserController from "../Controllers/UserController";
 
-// FOR POST:
-//  BeerName, StyleId
-
 export class Account extends Component {
   constructor(props) {
     super(props);
     this.state = {
       addBeerName: "",
       addBeerData: {
+        label: "",
+        value: null
+      },
+      removeBeerData: {
         label: "",
         value: null
       }
@@ -25,16 +26,36 @@ export class Account extends Component {
     this.setState({
       allStyles: [{ value: 0, label: "test" }]
     });
+
     NetClient.get("https://localhost:44300/api/BeerStyles").then(data => {
       const styles = data.map(d => {
         return {
-          label: d.Style,
-          value: d.Id
+          value: d.Id,
+          label: d.Style
         };
       });
 
       this.setState({
         allStyles: styles
+      });
+    });
+
+    this.fetchRemoveBeers();
+  }
+
+  fetchRemoveBeers() {
+    NetClient.get(
+      `https://localhost:44300/api/BeersByBusiness/${UserController.userId}`
+    ).then(data => {
+      const businessBeers = data.map(d => {
+        return {
+          value: d.Id,
+          label: d.BeerName
+        };
+      });
+
+      this.setState({
+        businessBeers: businessBeers
       });
     });
   }
@@ -55,8 +76,10 @@ export class Account extends Component {
     event.preventDefault();
     NetClient.post("https://localhost:44300/api/Beers", {
       BeerName: this.state.addBeerName,
-      StyleId: this.state.addBeerData.value
+      StyleId: this.addBeerValue,
+      UserId: UserController.userId
     });
+
     this.setState(
       {
         addBeerName: "",
@@ -67,10 +90,18 @@ export class Account extends Component {
       },
       () => (this.addBeerFormRef.value = this.state.addBeerName)
     );
+
+    setTimeout(() => this.fetchRemoveBeers(), 400);
   };
 
   _handleRemoveBeerSubmit = async event => {
     event.preventDefault();
+    NetClient.delete(
+      `https://localhost:44300/api/beers/${this.state.removeBeerData.value}`
+    );
+
+    setTimeout(() => this.fetchRemoveBeers(), 400);
+    this.removeBeerForm.value = null;
   };
 
   _renderControl(type, value, isDisabled, onChange = () => {}) {
@@ -117,13 +148,14 @@ export class Account extends Component {
     );
   }
 
-  _renderButton(variant, disabled, onClick, text) {
+  _renderButton(variant, disabled, onClick, text, id) {
     return (
       <Button
         type="submit"
         variant={variant}
         disabled={disabled}
         onClick={onClick}
+        id={id}
       >
         {text}
       </Button>
@@ -157,9 +189,14 @@ export class Account extends Component {
           <Form.Label>Style</Form.Label>
         </Form>
         <Select
+          ref={form => (this.removeBeerForm = form)}
           options={this.state.allStyles}
           value={this.state.addBeerData}
+          id={"add-beer-dropdown"}
           onChange={event => {
+            this.addBeerLabel = event.label;
+            this.addBeerValue = event.value;
+
             this.setState({
               addBeerData: {
                 label: event.label,
@@ -167,7 +204,7 @@ export class Account extends Component {
               }
             });
           }}
-        />{" "}
+        />
       </>
     );
   }
@@ -189,7 +226,8 @@ export class Account extends Component {
             "primary",
             !this._validateAddBeerForm(),
             this._handleAddBeerSubmit,
-            "Add Beer"
+            "Add Beer",
+            "add-beer-button"
           )}
         </Form.Row>
       </Form.Group>
@@ -203,11 +241,11 @@ export class Account extends Component {
         <hr />
         <Form.Label>Name of Beer</Form.Label>
         <Select
-          options={this.state.allStyles}
+          options={this.state.businessBeers}
           onChange={event =>
             this.setState({
-              addBeerData: {
-                name: this.state.addBeerData.name,
+              removeBeerData: {
+                name: event.label,
                 value: event.value
               }
             })
@@ -218,7 +256,8 @@ export class Account extends Component {
           "danger",
           !this._validateRemoveBeer(),
           this._handleRemoveBeerSubmit,
-          "Remove Beer"
+          "Remove Beer",
+          "remove-beer-button"
         )}
       </Form.Group>
     );
@@ -242,12 +281,27 @@ export class Account extends Component {
     );
   }
 
+  _renderLogout() {
+    return (
+      <Form>
+        {this._renderButton(
+          "danger",
+          false,
+          () => UserController.logout(),
+          "Logout",
+          "logout-button"
+        )}
+      </Form>
+    );
+  }
+
   render() {
     if (UserController.getCurrentUser()) {
       return (
         <div className="Login" style={broadStyle}>
           <Form>
             {this._renderBusinessName()}
+            {this._renderLogout()}
             {this._renderCommon()}
             {this._renderAddRemove()}
           </Form>

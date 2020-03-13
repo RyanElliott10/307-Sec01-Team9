@@ -5,6 +5,7 @@ import LockedRecommended from "./LockedRecommended";
 import NetClient from "../Utils/NetClient";
 import PropTypes from "prop-types";
 import UserController from "../Controllers/UserController";
+import RecImages from "../data/RecImages";
 
 export class Recommended extends Component {
   static propTypes = {
@@ -23,7 +24,7 @@ export class Recommended extends Component {
     this.state = {
       mainDesc: this.props.mainDesc,
       photos: this.props.photos,
-      recBeers: this.props.recBeers,
+      recBeers: this.props.recBeers
     };
   }
 
@@ -31,7 +32,7 @@ export class Recommended extends Component {
     if (!this.props.photos) {
       NetClient.get("https://jsonplaceholder.typicode.com/photos/").then(
         res => {
-          const pics = res.slice(0, 5).map(data => data.thumbnailUrl);
+          const pics = RecImages.getImages().slice(0, 5);
           this.setState({
             photos: pics,
             loading: false,
@@ -66,7 +67,6 @@ export class Recommended extends Component {
         }
       });
     }
-
   }
 
   renderPhotos() {
@@ -76,7 +76,7 @@ export class Recommended extends Component {
     return (
       <div>
         {this.state.photos.map(image => (
-          <img src={image} key={image} style={styles.inColStyle} />
+          <img src={image} key={image} style={styles.imgStyle} />
         ))}
       </div>
     );
@@ -88,6 +88,7 @@ export class Recommended extends Component {
         {this.state.recBeers.map(beer => (
           <Link
             to="/search-result"
+            id={"clickable-beer"}
             onClick={() => {
               UserController.currBeer = beer.BeerName;
               UserController.currBeerId = beer.Id;
@@ -103,13 +104,18 @@ export class Recommended extends Component {
     );
   }
 
-
   _renderBody() {
     if (this.props.fromExplore) {
       return (
         <div style={styles.inRowStyle}>
           {this.state.photos ? this.renderPhotos() : null}
           {this.state.recBeers ? this.renderRecBeers() : null}
+        </div>
+      );
+    } else if (this.state.recBeers && this.state.recBeers.length == 0 || this.props.noRecs) {
+      return (
+        <div style={styles.inRowStyle}>
+          You must rate at least 1 beer before we are able to recommend you any!
         </div>
       );
     } else if (UserController.getCurrentUser()) {
@@ -141,8 +147,18 @@ const styles = {
     flexDirection: "column",
     justifyContent: "space-around",
     paddingBottom: "20px",
-    marginRight: "40px", 
+    marginRight: "40px",
     marginLeft: "100px"
+  },
+  imgStyle: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    paddingBottom: "20px",
+    marginRight: "40px",
+    marginLeft: "100px",
+    width: "110px",
+    height: "180px"
   },
   inTitleStyle: {
     display: "flex",

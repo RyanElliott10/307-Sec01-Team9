@@ -28,7 +28,7 @@ exports[`renders correctly 1`] = `
       </label>
       <input
         className="form-control"
-        id="formGroupEmail"
+        id="control-input"
         onChange={[Function]}
         placeholder="Email"
         type="email"
@@ -45,7 +45,7 @@ exports[`renders correctly 1`] = `
       </label>
       <input
         className="form-control"
-        id="formGroupPassword"
+        id="control-input"
         onChange={[Function]}
         placeholder="Password"
         type="password"
@@ -63,6 +63,7 @@ exports[`renders correctly 1`] = `
       <button
         className="btn btn-primary"
         disabled={true}
+        id="login-button"
         type="submit"
       >
         Login
@@ -70,6 +71,7 @@ exports[`renders correctly 1`] = `
       <button
         className="btn btn-secondary"
         disabled={false}
+        id="switch-to-create-account"
         onClick={[Function]}
         type="submit"
       >
@@ -79,3 +81,5 @@ exports[`renders correctly 1`] = `
   </form>
 </div>
 `;
+
+exports[`renders correctly with a current user 1`] = `null`;

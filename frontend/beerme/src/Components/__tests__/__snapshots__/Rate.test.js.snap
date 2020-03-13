@@ -89,6 +89,126 @@ exports[`renders correctly 1`] = `
         Object {
           "alignItems": "top",
           "justifyContent": "center",
+        }
+      }
+    >
+      <label
+        className="form-label"
+      >
+        Please 
+      </label>
+      <a
+        href="/account-entry"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "blue",
+            "marginLeft": "5px",
+            "marginRight": "5px",
+          }
+        }
+      >
+        create an account
+      </a>
+      <label
+        className="form-label"
+      >
+         to rate this beer.
+      </label>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`renders correctly for businesses 1`] = `
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "marginBottom": "100px",
+      "marginLeft": "200px",
+      "marginRight": "200px",
+    }
+  }
+>
+  <h1>
+    
+  </h1>
+  <h5
+    style={
+      Object {
+        "alignItems": "right",
+      }
+    }
+  >
+    Average Rating: Not yet rated
+  </h5>
+  <div
+    style={
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "flexDirection": "column",
+        "justifyContent": "space-around",
+        "marginRight": "30px",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexDirection": "row",
+          "marginTop": "50px",
+        }
+      }
+    >
+      <img
+        alt="Photo"
+        src="BOTD_photo.png"
+        style={
+          Object {
+            "height": 180,
+            "marginRight": "20px",
+            "width": 110,
+          }
+        }
+      />
+      <div
+        style={
+          Object {
+            "alignItems": "left",
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "space-around",
+            "marginBottom": "90px",
+            "marginLeft": "30px",
+            "marginTop": "60px",
+          }
+        }
+      >
+        <h5>
+          Style: 
+        </h5>
+        <h5>
+          Alcohol Per Volume: 
+        </h5>
+        <h5>
+          International Bittering Unit: 
+        </h5>
+      </div>
+    </div>
+  </div>
+  <form
+    className=""
+  >
+    <div
+      className="form-row"
+      style={
+        Object {
+          "alignItems": "top",
+          "justifyContent": "center",
           "marginTop": "50px",
         }
       }
@@ -100,5 +220,378 @@ exports[`renders correctly 1`] = `
       </label>
     </div>
   </form>
+</div>
+`;
+
+exports[`renders correctly for logged in user 1`] = `
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+      "marginBottom": "100px",
+      "marginLeft": "200px",
+      "marginRight": "200px",
+    }
+  }
+>
+  <h1>
+    
+  </h1>
+  <h5
+    style={
+      Object {
+        "alignItems": "right",
+      }
+    }
+  >
+    Average Rating: Not yet rated
+  </h5>
+  <div
+    style={
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "flexDirection": "column",
+        "justifyContent": "space-around",
+        "marginRight": "30px",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexDirection": "row",
+          "marginTop": "50px",
+        }
+      }
+    >
+      <img
+        alt="Photo"
+        src="BOTD_photo.png"
+        style={
+          Object {
+            "height": 180,
+            "marginRight": "20px",
+            "width": 110,
+          }
+        }
+      />
+      <div
+        style={
+          Object {
+            "alignItems": "left",
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "space-around",
+            "marginBottom": "90px",
+            "marginLeft": "30px",
+            "marginTop": "60px",
+          }
+        }
+      >
+        <h5>
+          Style: 
+        </h5>
+        <h5>
+          Alcohol Per Volume: 
+        </h5>
+        <h5>
+          International Bittering Unit: 
+        </h5>
+      </div>
+    </div>
+  </div>
+  <div
+    style={
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "flexDirection": "column",
+        "justifyContent": "space-around",
+        "marginRight": "30px",
+      }
+    }
+  >
+    <h5>
+      Rate this beer!
+    </h5>
+    <div
+      className="star-ratings"
+      style={
+        Object {
+          "boxSizing": "border-box",
+          "display": "inline-block",
+          "position": "relative",
+        }
+      }
+      title="0 Stars"
+    >
+      <svg
+        className="star-grad"
+        style={
+          Object {
+            "height": "0",
+            "position": "absolute",
+            "visibility": "hidden",
+            "width": "0",
+            "zIndex": "0",
+          }
+        }
+      >
+        <defs>
+          <linearGradient
+            id="starGrad789014827622014"
+            x1="0%"
+            x2="100%"
+            y1="0%"
+            y2="0%"
+          >
+            <stop
+              className="stop-color-first"
+              offset="0%"
+              style={
+                Object {
+                  "stopColor": "#CC752A",
+                  "stopOpacity": "1",
+                }
+              }
+            />
+            <stop
+              className="stop-color-first"
+              offset="0%"
+              style={
+                Object {
+                  "stopColor": "#CC752A",
+                  "stopOpacity": "1",
+                }
+              }
+            />
+            <stop
+              className="stop-color-final"
+              offset="0%"
+              style={
+                Object {
+                  "stopColor": "rgb(203, 211, 227)",
+                  "stopOpacity": "1",
+                }
+              }
+            />
+            <stop
+              className="stop-color-final"
+              offset="100%"
+              style={
+                Object {
+                  "stopColor": "rgb(203, 211, 227)",
+                  "stopOpacity": "1",
+                }
+              }
+            />
+          </linearGradient>
+        </defs>
+      </svg>
+      <div
+        className="star-container"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+            "display": "inline-block",
+            "paddingLeft": undefined,
+            "paddingRight": "15px",
+            "position": "relative",
+            "verticalAlign": "middle",
+          }
+        }
+      >
+        <svg
+          className="widget-svg"
+          style={
+            Object {
+              "height": "50px",
+              "transform": undefined,
+              "transition": "transform .2s ease-in-out",
+              "width": "50px",
+            }
+          }
+          viewBox="0 0 51 48"
+        >
+          <path
+            className="star"
+            d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"
+            style={
+              Object {
+                "fill": "rgb(203, 211, 227)",
+                "transition": "fill .2s ease-in-out",
+              }
+            }
+          />
+        </svg>
+      </div>
+      <div
+        className="star-container"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+            "display": "inline-block",
+            "paddingLeft": "15px",
+            "paddingRight": "15px",
+            "position": "relative",
+            "verticalAlign": "middle",
+          }
+        }
+      >
+        <svg
+          className="widget-svg"
+          style={
+            Object {
+              "height": "50px",
+              "transform": undefined,
+              "transition": "transform .2s ease-in-out",
+              "width": "50px",
+            }
+          }
+          viewBox="0 0 51 48"
+        >
+          <path
+            className="star"
+            d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"
+            style={
+              Object {
+                "fill": "rgb(203, 211, 227)",
+                "transition": "fill .2s ease-in-out",
+              }
+            }
+          />
+        </svg>
+      </div>
+      <div
+        className="star-container"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+            "display": "inline-block",
+            "paddingLeft": "15px",
+            "paddingRight": "15px",
+            "position": "relative",
+            "verticalAlign": "middle",
+          }
+        }
+      >
+        <svg
+          className="widget-svg"
+          style={
+            Object {
+              "height": "50px",
+              "transform": undefined,
+              "transition": "transform .2s ease-in-out",
+              "width": "50px",
+            }
+          }
+          viewBox="0 0 51 48"
+        >
+          <path
+            className="star"
+            d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"
+            style={
+              Object {
+                "fill": "rgb(203, 211, 227)",
+                "transition": "fill .2s ease-in-out",
+              }
+            }
+          />
+        </svg>
+      </div>
+      <div
+        className="star-container"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+            "display": "inline-block",
+            "paddingLeft": "15px",
+            "paddingRight": "15px",
+            "position": "relative",
+            "verticalAlign": "middle",
+          }
+        }
+      >
+        <svg
+          className="widget-svg"
+          style={
+            Object {
+              "height": "50px",
+              "transform": undefined,
+              "transition": "transform .2s ease-in-out",
+              "width": "50px",
+            }
+          }
+          viewBox="0 0 51 48"
+        >
+          <path
+            className="star"
+            d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"
+            style={
+              Object {
+                "fill": "rgb(203, 211, 227)",
+                "transition": "fill .2s ease-in-out",
+              }
+            }
+          />
+        </svg>
+      </div>
+      <div
+        className="star-container"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+            "display": "inline-block",
+            "paddingLeft": "15px",
+            "paddingRight": undefined,
+            "position": "relative",
+            "verticalAlign": "middle",
+          }
+        }
+      >
+        <svg
+          className="widget-svg"
+          style={
+            Object {
+              "height": "50px",
+              "transform": undefined,
+              "transition": "transform .2s ease-in-out",
+              "width": "50px",
+            }
+          }
+          viewBox="0 0 51 48"
+        >
+          <path
+            className="star"
+            d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"
+            style={
+              Object {
+                "fill": "rgb(203, 211, 227)",
+                "transition": "fill .2s ease-in-out",
+              }
+            }
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
 </div>
 `;
