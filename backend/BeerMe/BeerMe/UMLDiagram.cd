@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BeerMe.WebApiConfig" Collapsed="true">
+    <Position X="10.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\WebApiConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeerMe.WebApiApplication" Collapsed="true">
+    <Position X="8.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Global.asax.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeerMe.Controllers.BeerCategoriesController" Collapsed="true">
+    <Position X="10.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAACAQAAAgAAAAAAEAAQAAAAAAAAAAAAAAQAE=</HashCode>
+      <FileName>Controllers\BeerCategoriesController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeerMe.Controllers.BeerRatingsController" Collapsed="true">
+    <Position X="10.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAACAQAAAQAAAAAAQAAAAAAAAAAAAAAgAAAAE=</HashCode>
+      <FileName>Controllers\BeerRatingsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeerMe.Controllers.BeerRecommendationsController" Collapsed="true">
+    <Position X="10.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\BeerReccomendationsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeerMe.Controllers.BeersByBusinessController" Collapsed="true">
+    <Position X="10.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\BeersByBusinessController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeerMe.Controllers.BeersController" Collapsed="true">
+    <Position X="12.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAIACBQAAAAAQAAAAAAAAAAAAAgAAAEAAAAAAA=</HashCode>
+      <FileName>Controllers\BeersController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeerMe.Controllers.BeerStylesController" Collapsed="true">
+    <Position X="10.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAACAQAAAAAAAAAIAgAABAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Controllers\BeerStylesController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeerMe.Controllers.ExploreBeerStylesController" Collapsed="true">
+    <Position X="10.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\ExploreBeerStylesController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeerMe.Controllers.LoginController" Collapsed="true">
+    <Position X="12.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\LoginController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeerMe.Controllers.UsersController" Collapsed="true">
+    <Position X="12.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IgAAAAAAACAQAQAEAAAAAAAAAAAAAAAAMAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\UsersController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeerMe.Models.BeerMeEntities" Collapsed="true">
+    <Position X="12.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAACAAAAAAABAAQAAAAAAAEAQAAAAAAAAEIAAAAEA=</HashCode>
+      <FileName>Models\BeerMeModel.Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeerMe.Models.Beer">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACQgCAAAAAAAAAAAAAAAgAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Models\Beer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeerMe.Models.BeerABV">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Models\BeerABV.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeerMe.Models.BeerCategory">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAACQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\BeerCategory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeerMe.Models.BeerColor">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Models\BeerColor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeerMe.Models.BeerIBU">
+    <Position X="2.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Models\BeerIBU.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeerMe.Models.BeerRating">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAAAAAAAAAAAgIAAAAAAEABAAAAAAAAAA=</HashCode>
+      <FileName>Models\BeerRating.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeerMe.Models.BeerStyle">
+    <Position X="4" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAhAAAAAAAAAAAAAAAAQABAACAAAAAgI=</HashCode>
+      <FileName>Models\BeerStyle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeerMe.Models.User">
+    <Position X="5.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAQAAAQAAAAAAQAABAAAAACAQAUAAAAAAA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeerMe.Models.ExploreFilters">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEBAAAAAAAACAAAAAAAAAAAAAAAAAABAAAAQE=</HashCode>
+      <FileName>Models\ExploreFilters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeerMe.Models.UserLoginDetails">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Models\UserLoginDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
