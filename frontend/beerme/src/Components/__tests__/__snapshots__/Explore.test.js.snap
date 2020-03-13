@@ -72,14 +72,14 @@ exports[`renders correctly 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={1}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={1}
                 title=""
               >
                 Light Yellow
@@ -105,14 +105,14 @@ exports[`renders correctly 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={2}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={2}
                 title=""
               >
                 Straw
@@ -138,14 +138,14 @@ exports[`renders correctly 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={3}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={3}
                 title=""
               >
                 Pale
@@ -171,14 +171,14 @@ exports[`renders correctly 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={4}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={4}
                 title=""
               >
                 Gold
@@ -204,14 +204,14 @@ exports[`renders correctly 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={5}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={5}
                 title=""
               >
                 Light Amber
@@ -237,14 +237,14 @@ exports[`renders correctly 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={6}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={6}
                 title=""
               >
                 Amber
@@ -270,14 +270,14 @@ exports[`renders correctly 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={7}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={7}
                 title=""
               >
                 Medium Amber
@@ -307,14 +307,14 @@ exports[`renders correctly 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={8}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={8}
                 title=""
               >
                 Copper
@@ -340,14 +340,14 @@ exports[`renders correctly 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={9}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={9}
                 title=""
               >
                 Light Brown
@@ -373,14 +373,14 @@ exports[`renders correctly 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={10}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={10}
                 title=""
               >
                 Saddle Brown
@@ -406,14 +406,14 @@ exports[`renders correctly 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={11}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={11}
                 title=""
               >
                 Brown
@@ -439,14 +439,14 @@ exports[`renders correctly 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={12}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={12}
                 title=""
               >
                 Dark Brown
@@ -472,14 +472,14 @@ exports[`renders correctly 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={13}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={13}
                 title=""
               >
                 Black
@@ -654,14 +654,14 @@ exports[`renders correctly with props 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={1}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={1}
                 title=""
               >
                 Light Yellow
@@ -687,14 +687,14 @@ exports[`renders correctly with props 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={2}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={2}
                 title=""
               >
                 Straw
@@ -720,14 +720,14 @@ exports[`renders correctly with props 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={3}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={3}
                 title=""
               >
                 Pale
@@ -753,14 +753,14 @@ exports[`renders correctly with props 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={4}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={4}
                 title=""
               >
                 Gold
@@ -786,14 +786,14 @@ exports[`renders correctly with props 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={5}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={5}
                 title=""
               >
                 Light Amber
@@ -819,14 +819,14 @@ exports[`renders correctly with props 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={6}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={6}
                 title=""
               >
                 Amber
@@ -852,14 +852,14 @@ exports[`renders correctly with props 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={7}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={7}
                 title=""
               >
                 Medium Amber
@@ -889,14 +889,14 @@ exports[`renders correctly with props 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={8}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={8}
                 title=""
               >
                 Copper
@@ -922,14 +922,14 @@ exports[`renders correctly with props 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={9}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={9}
                 title=""
               >
                 Light Brown
@@ -955,14 +955,14 @@ exports[`renders correctly with props 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={10}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={10}
                 title=""
               >
                 Saddle Brown
@@ -988,14 +988,14 @@ exports[`renders correctly with props 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={11}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={11}
                 title=""
               >
                 Brown
@@ -1021,14 +1021,14 @@ exports[`renders correctly with props 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={12}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={12}
                 title=""
               >
                 Dark Brown
@@ -1054,14 +1054,14 @@ exports[`renders correctly with props 1`] = `
                 checked={false}
                 className="custom-control-input"
                 disabled={false}
-                id="checkbox-option"
+                id={13}
                 md="auto"
                 onChange={[Function]}
                 type="checkbox"
               />
               <label
                 className="custom-control-label"
-                htmlFor="checkbox-option"
+                htmlFor={13}
                 title=""
               >
                 Black
