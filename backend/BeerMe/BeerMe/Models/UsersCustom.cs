@@ -9,7 +9,7 @@ namespace BeerMe.Models
     {
         private static BeerMeEntities db = new BeerMeEntities();
 
-        public List<int> findRecommendedBeers()
+        public List<int> FindRecommendedBeers()
         {
             var userBeerRatings = db.BeerRatings.Where(ratings => ratings.UserId == this.Id && ratings.Rating >= 3).ToList();
             this.BeerRatings = userBeerRatings;

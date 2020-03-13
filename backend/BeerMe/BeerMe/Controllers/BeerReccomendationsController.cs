@@ -14,7 +14,7 @@ namespace BeerMe.Controllers
 
         public IHttpActionResult PostUserForBeerReccomendations(User user)
         {
-            return Ok(user.findRecommendedBeers());
+            return Ok(user.FindRecommendedBeers());
         }
 
     }
